@@ -96,6 +96,7 @@ const technologies = [
 const experiences = [
   {
     "title": "Founder & CEO",
+    "icon": getAssetUrl('fmpg'),
     "company_name": "FMPG",
     "date": "", // Date not specified in the resume
     "points": [
@@ -106,6 +107,7 @@ const experiences = [
   },
   {
     "title": "Program Manager Intern",
+    "icon": getAssetUrl('codingbits'),
     "company_name": "Coding Bits",
     "date": "", // Date not specified in the resume
     "points": [
@@ -115,6 +117,7 @@ const experiences = [
   },
   {
     "title": "Campus Ambassador",
+    "icon": getAssetUrl('codingbits'),
     "company_name": "Pregard, Coding Bits & Placify",
     "date": "", // Date not specified in the resume
     "points": [
@@ -125,32 +128,37 @@ const experiences = [
   }
 ]
 
-const testimonials = [
+const certificates = [
   {
-    testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
+    title: "React Developer Certification",
+    issuer: "Meta",
+    date: "June 2023",
+    image: "/react.png",
+    credential_link: "https://example.com/credential1",
   },
   {
-    testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
-    name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+    title: "JavaScript Advanced",
+    issuer: "Coursera",
+    date: "March 2023",
+    image: "/javascript.png",
+    credential_link: "https://example.com/credential2",
   },
   {
-    testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+    title: "Full Stack Development",
+    issuer: "Udemy",
+    date: "January 2023",
+    image: "/nodejs.png",
+    credential_link: "https://example.com/credential3",
+  },
+  {
+    title: "UI/UX Design Fundamentals",
+    issuer: "Google",
+    date: "November 2022",
+    image: "/tailwind.png",
+    credential_link: "https://example.com/credential4",
   },
 ];
+
 
 const projects = [
   {
@@ -170,8 +178,8 @@ const projects = [
         "color": "pink-text-gradient"
       }
     ],
-    "image": "getAssetUrl('roombooking')",
-    "source_code_link": "https://fmpg.in"
+    "image": getAssetUrl('fmpg'),
+    "source_code_link": "https://github.com/Vivekkumarprince1/fmpg1.git"
   },
   {
     "name": "ChitChat",
@@ -181,7 +189,6 @@ const projects = [
         "name": "EJS",
         "color": "blue-text-gradient"
       },
-      
       {
         "name": "JavaScript",
         "color": "green-text-gradient"
@@ -199,8 +206,8 @@ const projects = [
         "color": "pink-text-gradient"
       }
     ],
-    "image": "getAssetUrl('chitchat')",
-    "source_code_link": "https://github.com/"
+    "image": getAssetUrl('chitchat'),
+    "source_code_link": "https://github.com/Vivekkumarprince1/chitchat.git/"
   },
   {
     "name": "ShikshaSetu",
@@ -220,7 +227,7 @@ const projects = [
       }
     ],
     "image": "getAssetUrl('shikshasetu')",
-    "source_code_link": "https://github.com/"
+    "source_code_link": "https://github.com/Vivekkumarprince1/shikshasetu.git"
   },
   {
     "name": "KC Collection E-Commerce Website",
@@ -239,8 +246,8 @@ const projects = [
         "color": "pink-text-gradient"
       }
     ],
-    "image": "getAssetUrl('ecommerce')",
-    "source_code_link": "https://kc-collection.azurewebsites.net"
+    "image": getAssetUrl('kccollections'),
+    "source_code_link": "https://github.com/Vivekkumarprince1/kc-collection.git"
   }
 ]
 
@@ -317,4 +324,4 @@ export const socialLinks = [
   }
 ];
 
-export { services, technologies, experiences, testimonials, projects, sections };
+export { services, technologies, experiences, certificates, projects, sections };

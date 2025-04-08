@@ -3,94 +3,88 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 import { SectionWrapper } from './hoc';
-
-// You'll need to add this to your constants file
-const certificates = [
-  {
-    title: "React Developer Certification",
-    issuer: "Meta",
-    date: "June 2023",
-    image: "/react.png",
-    credential_link: "https://example.com/credential1",
-  },
-  {
-    title: "JavaScript Advanced",
-    issuer: "Coursera",
-    date: "March 2023",
-    image: "/javascript.png",
-    credential_link: "https://example.com/credential2",
-  },
-  {
-    title: "Full Stack Development",
-    issuer: "Udemy",
-    date: "January 2023",
-    image: "/nodejs.png",
-    credential_link: "https://example.com/credential3",
-  },
-  {
-    title: "UI/UX Design Fundamentals",
-    issuer: "Google",
-    date: "November 2022",
-    image: "/tailwind.png",
-    credential_link: "https://example.com/credential4",
-  },
-];
+import { certificates } from '../constants';
+import { getAssetUrl } from '../utils/assetUtils';
+import { Tilt } from 'react-tilt';
 
 const CertificateCard = ({ index, title, issuer, date, image, credential_link }) => {
   const [imageError, setImageError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <motion.div 
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="bg-tertiary h-96 p-5 rounded-2xl sm:w-[360px] w-full shadow-card hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-        <div className="relative w-full h-[200px] bg-tertiary rounded-2xl overflow-hidden">
-          {!imageError ? (
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-cover rounded-2xl"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-800 rounded-2xl">
-              <p className="text-white text-xl font-bold">{title}</p>
-            </div>
-          )}
-          
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(credential_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
+    <Tilt className="w-full h-full">
+      <motion.div 
+        variants={fadeIn("right", "spring", index * 0.15, 0.5)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card h-full"
+      >
+        <div
+          options={{
+            max: 45,
+            scale: 1,
+            speed: 450,
+          }}
+          className="bg-tertiary rounded-[20px] p-5 h-full flex flex-col"
+        >
+          <div className="relative w-full h-[200px] rounded-xl overflow-hidden">
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-tertiary/50">
+                <div className="w-6 h-6 border-3 border-[#915EFF] border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
+            {!imageError ? (
               <img
-                src="/link.png"
-                alt="credential"
-                className="w-1/2 h-1/2 object-contain"
+                src={image}
+                alt={title}
+                className={`w-full h-full object-cover transition-all duration-300 ${
+                  isLoading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+                }`}
+                onError={() => setImageError(true)}
+                onLoad={() => setIsLoading(false)}
               />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-tertiary/50">
+                <p className="text-white text-xl font-bold">{title}</p>
+              </div>
+            )}
+            
+            <motion.div 
+              className="absolute inset-0 flex justify-end m-3"
+              whileHover={{ scale: 1.1 }}
+            >
+              <div
+                onClick={() => window.open(credential_link, "_blank")}
+                className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer shadow-lg"
+              >
+                <img
+                  src={getAssetUrl('link')}
+                  alt="credential"
+                  className="w-1/2 h-1/2 object-contain"
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="mt-4 flex-grow flex flex-col">
+            <h3 className="text-white font-bold text-[20px]">{title}</h3>
+            <div className="mt-2 flex justify-between items-center">
+              <p className="text-secondary text-[16px] font-semibold">
+                {issuer}
+              </p>
+              <p className="text-secondary text-[14px]">{date}</p>
             </div>
           </div>
         </div>
-
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{title}</h3>
-          <div className="mt-2 flex justify-between items-center">
-            <p className="text-secondary text-[16px] font-semibold">
-              {issuer}
-            </p>
-            <p className="text-secondary text-[14px]">{date}</p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Tilt>
   );
 };
 
 const Certificates = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-7">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
       {certificates.map((certificate, index) => (
         <CertificateCard 
           key={`certificate-${index}`} 

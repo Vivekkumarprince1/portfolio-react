@@ -19,11 +19,15 @@ const defaultImages = {
   tesla: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png',
   shopify: 'https://cdn.worldvectorlogo.com/logos/shopify.svg',
   starbucks: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png',
+  codingbits: '/assets/CODINGBITS.jpeg',
   
   // Project images
-  carrent: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80',
-  jobit: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
-  tripguide: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80',
+  chitchat: '/assets/CHITCHAT.png',
+  kccollections: '/assets/KC-COLLECTIONS.png',
+  fmpg: '/assets/FMPG.png',
+  
+  // Background images
+  herobg: '/assets/herobg.png',
   
   // Service icons
   web: 'https://cdn-icons-png.flaticon.com/512/2010/2010989.png',
@@ -38,7 +42,16 @@ const defaultImages = {
 };
 
 export const getAssetUrl = (name) => {
-  const url = defaultImages[name.toLowerCase()];
-  if (!url) return 'https://via.placeholder.com/400'; // fallback
+  const key = name.toLowerCase();
+  const url = defaultImages[key];
+  
+  if (!url) {
+    // Specific fallbacks based on asset type
+    if (key.includes('bg')) {
+      return 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80';
+    }
+    return 'https://placehold.co/400/404040/FFFFFF?text=Image';
+  }
+  
   return url;
 };

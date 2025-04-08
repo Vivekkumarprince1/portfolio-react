@@ -4,7 +4,7 @@ import { siteConfig, skills, socialLinks } from '../constants';
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen mx-auto bg-[#050816] overflow-hidden">
+    <section className="relative w-full h-screen mx-auto bg-hero-pattern bg-cover bg-no-repeat bg-center overflow-hidden">
     
       {/* Main content */}
       <div className="absolute inset-0 top-[120px] mx-auto flex flex-row items-start px-10 max-w-7xl">
