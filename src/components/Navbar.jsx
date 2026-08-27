@@ -1,73 +1,53 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { styles } from '../styles';
-import { navLinks, siteConfig } from '../constants';
+import HoverLinks from "./HoverLinks";
+import "./styles/Navbar.css";
 
 const Navbar = () => {
-  const [active, setActive] = useState('');
-  const [toggle, setToggle] = useState(false);
+  const handleNavClick = (e, targetSelector) => {
+    e.preventDefault();
+    const target = document.querySelector(targetSelector);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
-    <nav 
-      id="home"
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}
-    >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive('');
-            window.scrollTo(0, 0);
-          }}
+    <>
+      <div className="header">
+        <a href="/#" className="navbar-title" data-cursor="disable">
+          VK
+        </a>
+        <a
+          href="mailto:vivekkumarprince@email.com"
+          className="navbar-connect"
+          data-cursor="disable"
         >
-          <p className="text-white text-[18px] font-bold cursor-pointer flex">
-            {siteConfig.name} &nbsp;
-            <span className="sm:block hidden">| {siteConfig.subtitle}</span>
-          </p>
-        </Link>
-        <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((link) => (
-            <li
-              key={link.id}
-              className={`${
-                active === link.title ? 'text-white' : 'text-secondary'
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(link.title)}
-            >
-              <a href={`#${link.id}`}>{link.title}</a>
-            </li>
-          ))}
+          vivekkumarprince@email.com
+        </a>
+        <ul>
+          <li>
+            <a href="#about" onClick={(e) => handleNavClick(e, "#about")} data-cursor="disable">
+              <HoverLinks text="ABOUT" />
+            </a>
+          </li>
+          <li>
+            <a href="#work" onClick={(e) => handleNavClick(e, "#work")} data-cursor="disable">
+              <HoverLinks text="WORK" />
+            </a>
+          </li>
+          <li>
+            <a href="#certificates" onClick={(e) => handleNavClick(e, "#certificates")} data-cursor="disable">
+              <HoverLinks text="CERTIFICATES" />
+            </a>
+          </li>
+          <li>
+            <a href="#contact" onClick={(e) => handleNavClick(e, "#contact")} data-cursor="disable">
+              <HoverLinks text="CONTACT" />
+            </a>
+          </li>
         </ul>
-
-        <div className="sm:hidden flex flex-1 justify-end items-center">
-          <button
-            className="text-white text-2xl"
-            onClick={() => setToggle(!toggle)}
-          >
-            ☰
-          </button>
-          <div className={`${!toggle ? 'hidden' : 'flex'} p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl bg-tertiary`}>
-            <ul className="list-none flex justify-end items-start flex-col gap-4">
-              {navLinks.map((link) => (
-                <li
-                  key={link.id}
-                  className={`${
-                    active === link.title ? 'text-white' : 'text-secondary'
-                  } font-medium cursor-pointer text-[16px]`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(link.title);
-                  }}
-                >
-                  <a href={`#${link.id}`}>{link.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </div>
-    </nav>
+      <div className="nav-fade"></div>
+    </>
   );
 };
 

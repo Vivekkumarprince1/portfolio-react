@@ -1,97 +1,62 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { styles } from '../styles';
-import { fadeIn, textVariant } from '../utils/motion';
-import { SectionWrapper } from './hoc';
-import { certificates } from '../constants';
-import { getAssetUrl } from '../utils/assetUtils';
-import { Tilt } from 'react-tilt';
+import { useState } from "react";
+import { certificates } from "../constants";
+import "./styles/Certificates.css";
+import { FiExternalLink } from "react-icons/fi";
 
-const CertificateCard = ({ index, title, issuer, date, image, credential_link }) => {
-  const [imageError, setImageError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  return (
-    <Tilt className="w-full h-full">
-      <motion.div 
-        variants={fadeIn("right", "spring", index * 0.15, 0.5)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card h-full"
-      >
-        <div
-          options={{
-            max: 45,
-            scale: 1,
-            speed: 450,
-          }}
-          className="bg-tertiary rounded-[20px] p-5 h-full flex flex-col"
-        >
-          <div className="relative w-full h-[200px] rounded-xl overflow-hidden">
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-tertiary/50">
-                <div className="w-6 h-6 border-3 border-[#915EFF] border-t-transparent rounded-full animate-spin" />
-              </div>
-            )}
-            {!imageError ? (
-              <img
-                src={image}
-                alt={title}
-                className={`w-full h-full object-cover transition-all duration-300 ${
-                  isLoading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-                }`}
-                onError={() => setImageError(true)}
-                onLoad={() => setIsLoading(false)}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-tertiary/50">
-                <p className="text-white text-xl font-bold">{title}</p>
-              </div>
-            )}
-            
-            <motion.div 
-              className="absolute inset-0 flex justify-end m-3"
-              whileHover={{ scale: 1.1 }}
-            >
-              <div
-                onClick={() => window.open(credential_link, "_blank")}
-                className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer shadow-lg"
-              >
-                <img
-                  src={getAssetUrl('link')}
-                  alt="credential"
-                  className="w-1/2 h-1/2 object-contain"
-                />
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="mt-4 flex-grow flex flex-col">
-            <h3 className="text-white font-bold text-[20px]">{title}</h3>
-            <div className="mt-2 flex justify-between items-center">
-              <p className="text-secondary text-[16px] font-semibold">
-                {issuer}
-              </p>
-              <p className="text-secondary text-[14px]">{date}</p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </Tilt>
-  );
+const getIconForCert = (title) => {
+  const lowercaseTitle = title.toLowerCase();
+  if (lowercaseTitle.includes("react")) {
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg";
+  }
+  if (lowercaseTitle.includes("javascript") || lowercaseTitle.includes("js")) {
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg";
+  }
+  if (lowercaseTitle.includes("node")) {
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg";
+  }
+  return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg";
 };
 
 const Certificates = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-      {certificates.map((certificate, index) => (
-        <CertificateCard 
-          key={`certificate-${index}`} 
-          index={index} 
-          {...certificate} 
-        />
-      ))}
+    <div className="certificates-section section-container" id="certificates">
+      <h2>
+        My <span>Certifications</span>
+      </h2>
+      <p className="certificates-subtitle">
+        Credentials verifying core capabilities, advanced frameworks, and technical excellence
+      </p>
+
+      <div className="certificates-grid">
+        {certificates.map((cert, index) => (
+          <div className="certificate-card" key={index}>
+            <div className="certificate-icon-wrapper">
+              <img 
+                src={getIconForCert(cert.title)} 
+                alt={cert.title} 
+                className="certificate-icon"
+                loading="lazy"
+              />
+            </div>
+            
+            <div className="certificate-info">
+              <span className="certificate-date">{cert.date}</span>
+              <h3>{cert.title}</h3>
+              <p className="certificate-issuer">Issuer: <span>{cert.issuer}</span></p>
+            </div>
+
+            <a 
+              href={cert.credential_link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="certificate-verify-btn"
+              data-cursor="disable"
+            >
+              Verify Credential <FiExternalLink />
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
