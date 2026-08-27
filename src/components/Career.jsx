@@ -16,27 +16,24 @@ const getDisplayYear = (period) => {
 
 const Career = () => {
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".career-info",
-        start: "top 65%",
-        end: "bottom 75%",
-        scrub: true,
-      }
-    });
-
-    tl.to(".career-timeline", {
-      maxHeight: "100%",
-      ease: "none",
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === ".career-info") {
-          trigger.kill();
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".career-timeline",
+        { maxHeight: "0%" },
+        {
+          maxHeight: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".career-info",
+            start: "top 65%",
+            end: "bottom 65%",
+            scrub: true,
+          },
         }
-      });
-    };
+      );
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
