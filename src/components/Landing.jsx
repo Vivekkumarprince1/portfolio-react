@@ -1,6 +1,7 @@
 import "./styles/Landing.css";
 import { config } from "../config";
 import { Link } from "react-router-dom";
+import FluidAnimation from "react-fluid-animation/dist/index.js";
 
 const Landing = () => {
   const fullName = config.developer.fullName || "VIVEK KUMAR";
