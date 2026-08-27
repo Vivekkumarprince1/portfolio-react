@@ -1,5 +1,7 @@
 .loading-screen {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: var(--vh);
   /* background-image: linear-gradient(#cbb1ff, #d8c4ff); */
@@ -190,6 +192,7 @@
   z-index: 9999999999;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
   padding: 20px 0px;
   left: 50%;
