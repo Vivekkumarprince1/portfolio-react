@@ -2,7 +2,7 @@ import gsap from "gsap";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  
+
   const mainEl = document.getElementsByTagName("main")[0];
   if (mainEl) {
     mainEl.classList.add("main-active");
@@ -44,3 +44,4 @@ export function initialFX() {
     "-=1"
   );
 }
+

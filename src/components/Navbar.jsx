@@ -35,11 +35,6 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#certificates" onClick={(e) => handleNavClick(e, "#certificates")} data-cursor="disable">
-              <HoverLinks text="CERTIFICATES" />
-            </a>
-          </li>
-          <li>
             <a href="#contact" onClick={(e) => handleNavClick(e, "#contact")} data-cursor="disable">
               <HoverLinks text="CONTACT" />
             </a>

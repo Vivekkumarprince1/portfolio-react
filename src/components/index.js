@@ -1,19 +1,29 @@
 import Navbar from './Navbar';
-import Hero from './Hero';
 import About from './About';
-import Experience from './Experience';
-import Tech from './Tech';
-import Works from './Works';
 import Contact from './Contact';
-import { StarsCanvas } from './canvas';
+import Landing from './Landing';
+import WhatIDo from './WhatIDo';
+import Career from './Career';
+import Work from './Work';
+import TechStackNew from './TechStackNew';
+import CallToAction from './CallToAction';
+import Cursor from './Cursor';
+import SocialIcons from './SocialIcons';
+import Loading from './Loading';
+import MainContainer from './MainContainer';
 
 export {
   Navbar,
-  Hero,
   About,
-  Experience,
-  Tech,
-  Works,
   Contact,
-  StarsCanvas,
-}; 
+  Landing,
+  WhatIDo,
+  Career,
+  Work,
+  TechStackNew,
+  CallToAction,
+  Cursor,
+  SocialIcons,
+  Loading,
+  MainContainer,
+};

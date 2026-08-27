@@ -1,54 +1,45 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Suspense, useState, useEffect } from 'react';
-import {
-  Navbar,
-  Hero,
-  About,
-  Works,
-  Contact,
-  StarsCanvas
-} from './components';
-import Welcome from './components/Welcome';
-import CanvasLoader from './components/Loader';
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LoadingProvider } from "./context/LoadingProvider";
+import "./App.css";
+
+const MainContainer = lazy(() => import("./components/MainContainer"));
+const MyWorks = lazy(() => import("./pages/MyWorks"));
+const Play = lazy(() => import("./pages/Play"));
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showWelcome, setShowWelcome] = useState(true);
-
-  useEffect(() => {
-    // Show welcome page for 2 seconds
-    const welcomeTimer = setTimeout(() => setShowWelcome(false), 2000);
-    // Start loading main content after welcome page
-    const loadingTimer = setTimeout(() => setIsLoading(false), 1000);
-    
-    return () => {
-      clearTimeout(welcomeTimer);
-      clearTimeout(loadingTimer);
-    };
-  }, []);
-
-  if (showWelcome) {
-    return <Welcome />;
-  }
-
-  if (isLoading) {
-    return <CanvasLoader />;
-  }
-
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <div className="relative z-0 bg-primary">
-        <Navbar />
-        <Hero />
-        <About />
-        <Works />
-        <div className="relative z-0">
-          <Contact />
-        </div>
-        <StarsCanvas />
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<div className="h-screen w-screen bg-[#0b080c] flex items-center justify-center text-white text-xl">Loading...</div>}>
+              <LoadingProvider>
+                <MainContainer />
+              </LoadingProvider>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/myworks"
+          element={
+            <Suspense fallback={<div className="h-screen w-screen bg-[#0b080c] flex items-center justify-center text-white text-xl">Loading Works...</div>}>
+              <MyWorks />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/play"
+          element={
+            <Suspense fallback={<div className="h-screen w-screen bg-[#0b080c] flex items-center justify-center text-white text-xl">Loading Chessboard...</div>}>
+              <Play />
+            </Suspense>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

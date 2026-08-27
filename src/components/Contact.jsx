@@ -1,128 +1,138 @@
-import { useState, Suspense } from 'react';
-import { motion } from 'framer-motion';
-import { styles } from '../styles';
-import { EarthCanvas } from './canvas';
-import { SectionWrapper } from './hoc';
-import { slideIn } from '../utils/motion';
-import CanvasLoader from './Loader';
+import { MdArrowOutward, MdCopyright } from "react-icons/md";
+import "./styles/Contact.css";
+import { config } from "../config";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const contactTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".contact-section",
+        start: "top 80%",
+        end: "bottom center",
+        toggleActions: "play none none none",
+      },
+    });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint from Formspree
-      const response = await fetch('https://formspree.io/f/myzebvbj', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message
-        }),
-      });
-
-      if (response.ok) {
-        setLoading(false);
-        alert('Thank you. I will get back to you as soon as possible.');
-        
-        // Reset form
-        setForm({
-          name: '',
-          email: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Form submission failed');
+    // Animate title from bottom
+    contactTimeline.fromTo(
+      ".contact-section h3",
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
       }
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
-      alert('Something went wrong. Please try again.');
-    }
-  };
+    );
+
+    // Animate contact boxes with stagger from bottom
+    contactTimeline.fromTo(
+      ".contact-box",
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    );
+
+    // Clean up
+    return () => {
+      contactTimeline.kill();
+    };
+  }, []);
 
   return (
-    <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden">
-      <motion.div
-        variants={slideIn('left', 'tween', 0.2, 1)}
-        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
-      >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
-        >
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Name</span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-              required
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Email</span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your email?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-              required
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Message</span>
-            <textarea
-              rows="7"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="What do you want to say?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-              required
-            />
-          </label>
-          <button
-            type="submit"
-            className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl"
-          >
-            {loading ? 'Sending...' : 'Send'}
-          </button>
-        </form>
-      </motion.div>
-      <motion.div
-        variants={slideIn('right', 'tween', 0.2, 1)}
-        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
-      >
-        <Suspense fallback={<CanvasLoader />}>
-          <EarthCanvas />
-        </Suspense>
-      </motion.div>
+    <div className="contact-section section-container" id="contact">
+      <div className="contact-container">
+        <h3>{config.developer.fullName}</h3>
+        <div className="contact-flex">
+          <div className="contact-box">
+            <h4>Email</h4>
+            <p>
+              <a href={`mailto:${config.contact.email}`} data-cursor="disable">
+                {config.contact.email}
+              </a>
+            </p>
+            <h4>Location</h4>
+            <p>
+              <span>{config.social.location}</span>
+            </p>
+          </div>
+          <div className="contact-box">
+            <h4>Social</h4>
+            <a
+              href={config.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Github <MdArrowOutward />
+            </a>
+            <a
+              href={config.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Linkedin <MdArrowOutward />
+            </a>
+            <a
+              href={config.contact.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Twitter <MdArrowOutward />
+            </a>
+            <a
+              href={config.contact.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Facebook <MdArrowOutward />
+            </a>
+            <a
+              href={config.contact.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Instagram <MdArrowOutward />
+            </a>
+          </div>
+          <div className="contact-box">
+            <h2>
+              Designed and Developed <br /> by <span>{config.developer.fullName}</span>
+            </h2>
+            <h5>
+              <MdCopyright /> {new Date().getFullYear()}
+            </h5>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SectionWrapper(Contact, "contact");
+export default Contact;
