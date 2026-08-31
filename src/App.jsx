@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoadingProvider } from "./context/LoadingProvider";
 import "./App.css";
+import { Agentation } from "agentation";
 
 const MainContainer = lazy(() => import("./components/MainContainer"));
 const MyWorks = lazy(() => import("./pages/MyWorks"));
@@ -38,6 +39,7 @@ const App = () => {
           }
         />
       </Routes>
+      {import.meta.env.DEV && <Agentation />}
     </BrowserRouter>
   );
 };
