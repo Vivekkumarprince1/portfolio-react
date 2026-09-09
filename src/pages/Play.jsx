@@ -53,6 +53,16 @@ Conversation rules:
 7. Use occasional light emoji, but do not overdo it.
 8. If the user sends a greeting, reply in 1-2 short sentences.`;
 
+const PIECE_VALUES = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 };
+
+const QUICK_PROMPTS = [
+  "Projects",
+  "Tech Stack",
+  "ChitChat app",
+  "Chess engine",
+  "Contact"
+];
+
 const Play = () => {
   const [game, setGame] = useState(new Chess());
   const [selectedSquare, setSelectedSquare] = useState(null);
@@ -62,33 +72,87 @@ const Play = () => {
   const [capturedBlack, setCapturedBlack] = useState([]);
   const [boardFlipped, setBoardFlipped] = useState(false);
   const [lastMove, setLastMove] = useState(null);
-  const [gameStatus, setGameStatus] = useState("");
+  const [gameStatus, setGameStatus] = useState("Your turn (White)");
   const [playerColor] = useState("w");
   const [engineThinking, setEngineThinking] = useState(false);
   const redoxchessRef = useRef(null);
 
+  // Audio & Mobile Tab UI state
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [activeMobileTab, setActiveMobileTab] = useState('chat'); // 'chat' | 'moves'
+  const [unreadChat, setUnreadChat] = useState(false);
+  const [copiedFen, setCopiedFen] = useState(false);
+
   // Chat state
   const [chatMessages, setChatMessages] = useState([
-    { role: 'assistant', content: 'Hello there! I am Vivek Kumar 👋 Ask me anything about my work, projects, or let\'s play some chess!' }
+    { role: 'assistant', content: 'Hello there! I am Vivek Kumar 👋 Ask me anything about my work, tech stack, or let\'s play some chess!' }
   ]);
   const [chatInput, setChatInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
+  // Auto-scroll refs
+  const chatBottomRef = useRef(null);
+  const movesBottomRef = useRef(null);
+
   const files = boardFlipped ? ['h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'] : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const ranks = boardFlipped ? ['1', '2', '3', '4', '5', '6', '7', '8'] : ['8', '7', '6', '5', '4', '3', '2', '1'];
 
+  // Sound generator using Web Audio API
+  const playSound = useCallback((type = 'move') => {
+    if (!soundEnabled) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const now = ctx.currentTime;
+      if (type === 'capture') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(360, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'check') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(560, now);
+        osc.frequency.exponentialRampToValueAtTime(420, now + 0.12);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } else {
+        // Normal move
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(240, now + 0.05);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+    } catch {
+      // Audio autoplay policy catch
+    }
+  }, [soundEnabled]);
+
   const updateGameStatus = useCallback((g) => {
     if (g.isCheckmate()) {
-      setGameStatus(g.turn() === 'w' ? 'Checkmate! Black wins!' : 'Checkmate! White wins!');
+      setGameStatus(g.turn() === 'w' ? 'Checkmate! Black wins!' : 'Checkmate! You win! 🎉');
     } else if (g.isDraw()) {
       if (g.isStalemate()) setGameStatus('Draw by stalemate');
       else if (g.isThreefoldRepetition()) setGameStatus('Draw by repetition');
       else if (g.isInsufficientMaterial()) setGameStatus('Draw by insufficient material');
-      else setGameStatus('Draw');
+      else setGameStatus('Game drawn');
     } else if (g.isCheck()) {
-      setGameStatus(g.turn() === 'w' ? 'White is in check!' : 'Black is in check!');
+      setGameStatus(g.turn() === 'w' ? '⚠️ You are in check!' : '🔥 Vivek is in check!');
     } else {
-      setGameStatus(g.turn() === 'w' ? "White's turn" : "Black's turn");
+      setGameStatus(g.turn() === 'w' ? "Your turn (White)" : "Vivek's turn (Black)");
     }
   }, []);
 
@@ -107,68 +171,37 @@ const Play = () => {
     };
   }, []);
 
+  // Auto-scroll chat to bottom
   useEffect(() => {
-    if (game.turn() === 'b' && !game.isGameOver() && redoxchessRef.current) {
-      setEngineThinking(true);
-      redoxchessRef.current.setPosition(game.fen());
-      redoxchessRef.current.getBestMove((move) => {
-        const from = move.substring(0, 2);
-        const to = move.substring(2, 4);
-        makeMove(from, to);
-        setEngineThinking(false);
-      }, 12);
-    }
-  }, [game]);
+    chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, isTyping]);
 
-  const getPieceAt = (square) => {
-    return game.get(square) || null;
-  };
+  // Auto-scroll moves to bottom
+  useEffect(() => {
+    movesBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [moveHistory]);
 
-  const handleSquareClick = (square) => {
-    if (engineThinking || game.turn() !== 'w') return;
-    const piece = getPieceAt(square);
-
-    // If a piece is already selected
-    if (selectedSquare) {
-      // Try to make a move
-      if (possibleMoves.includes(square)) {
-        makeMove(selectedSquare, square);
-      } else if (piece && piece.color === game.turn()) {
-        // Select a different piece of the same color
-        setSelectedSquare(square);
-        const moves = game.moves({ square, verbose: true });
-        setPossibleMoves(moves.map(m => m.to));
-      } else {
-        // Deselect
-        setSelectedSquare(null);
-        setPossibleMoves([]);
-      }
-    } else {
-      // Select a piece if it's the current player's turn
-      if (piece && piece.color === game.turn()) {
-        setSelectedSquare(square);
-        const moves = game.moves({ square, verbose: true });
-        setPossibleMoves(moves.map(m => m.to));
-      }
-    }
-  };
-
-  const makeMove = (from, to) => {
+  const makeMove = useCallback((from, to, promotion = 'q') => {
     try {
       const gameCopy = new Chess(game.fen());
-      const move = gameCopy.move({ from, to, promotion: 'q' }); // Auto-promote to queen
+      const move = gameCopy.move({ from, to, promotion });
 
       if (move) {
-        // Update captured pieces
         if (move.captured) {
           if (move.color === 'w') {
             setCapturedBlack(prev => [...prev, move.captured]);
           } else {
             setCapturedWhite(prev => [...prev, move.captured]);
           }
+          playSound('capture');
+        } else {
+          playSound('move');
         }
 
-        // Update move history
+        if (gameCopy.isCheck()) {
+          playSound('check');
+        }
+
         setMoveHistory(prev => [...prev, {
           from: move.from,
           to: move.to,
@@ -186,6 +219,54 @@ const Play = () => {
       setSelectedSquare(null);
       setPossibleMoves([]);
     }
+  }, [game, playSound]);
+
+  // Trigger engine when it's black's turn
+  useEffect(() => {
+    if (game.turn() === 'b' && !game.isGameOver() && redoxchessRef.current) {
+      setEngineThinking(true);
+      redoxchessRef.current.setPosition(game.fen());
+      redoxchessRef.current.getBestMove((move) => {
+        if (!move) {
+          setEngineThinking(false);
+          return;
+        }
+        const from = move.substring(0, 2);
+        const to = move.substring(2, 4);
+        const promotion = move.length > 4 ? move.substring(4, 5) : 'q';
+        makeMove(from, to, promotion);
+        setEngineThinking(false);
+      }, 12);
+    }
+  }, [game, makeMove]);
+
+  const getPieceAt = (square) => {
+    return game.get(square) || null;
+  };
+
+  const handleSquareClick = (square) => {
+    if (engineThinking || game.turn() !== 'w' || game.isGameOver()) return;
+    const piece = getPieceAt(square);
+
+    // If a piece is already selected
+    if (selectedSquare) {
+      if (possibleMoves.includes(square)) {
+        makeMove(selectedSquare, square);
+      } else if (piece && piece.color === game.turn()) {
+        setSelectedSquare(square);
+        const moves = game.moves({ square, verbose: true });
+        setPossibleMoves(moves.map(m => m.to));
+      } else {
+        setSelectedSquare(null);
+        setPossibleMoves([]);
+      }
+    } else {
+      if (piece && piece.color === game.turn()) {
+        setSelectedSquare(square);
+        const moves = game.moves({ square, verbose: true });
+        setPossibleMoves(moves.map(m => m.to));
+      }
+    }
   };
 
   const resetGame = () => {
@@ -196,25 +277,71 @@ const Play = () => {
     setCapturedWhite([]);
     setCapturedBlack([]);
     setLastMove(null);
-    setGameStatus("White's turn");
-    setBoardFlipped(false);
+    setGameStatus("Your turn (White)");
+  };
+
+  const undoMove = () => {
+    if (engineThinking || moveHistory.length === 0) return;
+    const gameCopy = new Chess(game.fen());
+    // Undo 2 half-moves if it's currently white's turn, so it returns to white
+    const undoCount = gameCopy.turn() === 'w' ? Math.min(2, moveHistory.length) : 1;
+    for (let i = 0; i < undoCount; i++) {
+      gameCopy.undo();
+    }
+
+    const history = gameCopy.history({ verbose: true });
+    const capW = [];
+    const capB = [];
+    history.forEach(m => {
+      if (m.captured) {
+        if (m.color === 'w') capB.push(m.captured);
+        else capW.push(m.captured);
+      }
+    });
+
+    setCapturedWhite(capW);
+    setCapturedBlack(capB);
+    setMoveHistory(history.map(m => ({
+      from: m.from,
+      to: m.to,
+      piece: m.piece,
+      captured: m.captured,
+      san: m.san
+    })));
+
+    if (history.length > 0) {
+      const last = history[history.length - 1];
+      setLastMove({ from: last.from, to: last.to });
+    } else {
+      setLastMove(null);
+    }
+
+    setGame(gameCopy);
+    setSelectedSquare(null);
+    setPossibleMoves([]);
+    playSound('move');
   };
 
   const flipBoard = () => {
-    if (moveHistory.length > 0) {
-      if (window.confirm('Start new game?')) {
-        resetGame();
-        setBoardFlipped(!boardFlipped);
-      }
-      return;
-    }
-    setBoardFlipped(!boardFlipped);
+    setBoardFlipped(prev => !prev);
   };
 
-  const sendMessage = async () => {
-    if (!chatInput.trim()) return;
+  const copyFen = () => {
+    navigator.clipboard.writeText(game.fen());
+    setCopiedFen(true);
+    setTimeout(() => setCopiedFen(false), 2200);
+  };
 
-    const userMessage = { role: 'user', content: chatInput };
+  // Material calculations
+  const whiteMaterial = capturedBlack.reduce((acc, p) => acc + (PIECE_VALUES[p.toLowerCase()] || 0), 0);
+  const blackMaterial = capturedWhite.reduce((acc, p) => acc + (PIECE_VALUES[p.toLowerCase()] || 0), 0);
+  const playerAdvantage = whiteMaterial - blackMaterial;
+
+  const sendMessage = async (textToSend) => {
+    const text = (typeof textToSend === 'string' ? textToSend : chatInput).trim();
+    if (!text) return;
+
+    const userMessage = { role: 'user', content: text };
     setChatMessages(prev => [...prev, userMessage]);
     setChatInput('');
     setIsTyping(true);
@@ -226,19 +353,15 @@ const Play = () => {
           role: m.role,
           content: m.content
         })),
-        { role: 'user', content: chatInput }
+        { role: 'user', content: text }
       ];
 
-      // Since we don't have a backend chat API configured yet, we fall back to a mock AI chat response 
-      // which mimics the API behavior but answers locally using rules, OR calls the actual endpoint if configured.
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          messages: messages,
-        }),
+        body: JSON.stringify({ messages }),
       });
 
       if (!response.ok) {
@@ -253,26 +376,31 @@ const Play = () => {
           content: data.choices[0].message.content
         };
         setChatMessages(prev => [...prev, assistantMessage]);
+        if (activeMobileTab !== 'chat') setUnreadChat(true);
       } else {
         throw new Error('Invalid response');
       }
-    } catch (error) {
-      console.warn('Chat API failed. Using local response fallback:', error);
-
-      // Fallback answers locally
+    } catch {
+      // Graceful local conversational fallback
       setTimeout(() => {
-        let reply = "I would be happy to discuss my work, backend integration, or React developer experience! Ask me anything about room booking or chat websites. 💻";
-        const txt = chatInput.toLowerCase();
-        if (txt.includes("hello") || txt.includes("hi")) {
-          reply = "Hello! I am Vivek. Glad to have you here. Ready for a chess game or want to know about my web developer experience? 😊";
-        } else if (txt.includes("project") || txt.includes("work")) {
-          reply = "I have built Room Booking Service (EJS/Node), ChitChat (Socket.io real-time chat), ShikshaSetu, and KC Collection. You can view all of them on the Works page! 🛠️";
-        } else if (txt.includes("skills") || txt.includes("tech")) {
-          reply = "I specialize in Full-Stack Development using React, JavaScript, Node.js, Express, EJS, Tailwind, and MongoDB. I also deploy to Azure! 🚀";
+        let reply = "I'm always excited to discuss full-stack engineering, clean UI/UX, or chess strategies! Feel free to ask about any specific project or tech. 💻";
+        const txt = text.toLowerCase();
+        if (txt.includes("hello") || txt.includes("hi") || txt.includes("hey")) {
+          reply = "Hello! I'm Vivek Kumar. Great to meet you! Ready to challenge my bot in chess, or want to chat about my work? 😊";
+        } else if (txt.includes("project") || txt.includes("work") || txt.includes("portfolio")) {
+          reply = "I have built Room Booking Service (Node/MongoDB/EJS), ChitChat (Socket.io real-time chat), ShikshaSetu, and KC Collection. Check out my Works page to view them! 🛠️";
+        } else if (txt.includes("skill") || txt.includes("tech") || txt.includes("stack")) {
+          reply = "My primary stack includes React, Node.js, Express, JavaScript, Tailwind CSS, MongoDB, Three.js, and Azure cloud deployment! 🚀";
+        } else if (txt.includes("room booking")) {
+          reply = "Room Booking Service is a full web platform with authentication, real-time room availability, and automated booking workflows built with Node, MongoDB, and Bootstrap! 🏨";
+        } else if (txt.includes("chitchat")) {
+          reply = "ChitChat is a real-time messaging platform using WebSockets (Socket.io) with instant room creation, live typing indicators, and reliable message syncing! 💬";
         } else if (txt.includes("certif")) {
           reply = "I hold Meta React Developer and Coursera Advanced JavaScript certifications! Check my Works section for links. 🎓";
-        } else if (txt.includes("chess") || txt.includes("play")) {
-          reply = "I'm running a Stockfish-powered engine behind the board. Try playing White and see if you can win! ♟️";
+        } else if (txt.includes("chess") || txt.includes("engine") || txt.includes("bot") || txt.includes("stockfish")) {
+          reply = "This board runs a Stockfish/RedoxChess WebAssembly engine compiled into a Web Worker at depth 12 (~2000 ELO). Try controlling the center squares and watch out for tactical forks! ♟️";
+        } else if (txt.includes("hire") || txt.includes("contact") || txt.includes("open to work")) {
+          reply = "Yes, I am actively open to frontend and full-stack software engineering opportunities! Feel free to connect with me via LinkedIn or GitHub. 💼";
         }
 
         setChatMessages(prev => [...prev, {
@@ -280,9 +408,10 @@ const Play = () => {
           content: reply
         }]);
         setIsTyping(false);
-      }, 1000);
+        if (activeMobileTab !== 'chat') setUnreadChat(true);
+      }, 700);
     } finally {
-      if (!isTyping) setIsTyping(false);
+      setIsTyping(false);
     }
   };
 
@@ -303,18 +432,25 @@ const Play = () => {
 
   const isSquareLight = (file, rank) => {
     const fileIndex = 'abcdefgh'.indexOf(file);
-    const rankIndex = parseInt(rank) - 1;
+    const rankIndex = parseInt(rank, 10) - 1;
     return (fileIndex + rankIndex) % 2 === 1;
   };
 
   const renderCapturedPieces = (pieces, color) => {
-    return pieces.map((piece, index) => {
-      const key = `${color}${piece.toUpperCase()}`;
-      const svg = PIECES[key];
-      return (
-        <div key={index} className="captured-piece" dangerouslySetInnerHTML={{ __html: svg || '' }} />
-      );
-    });
+    if (!pieces || pieces.length === 0) return null;
+    const sorted = [...pieces].sort((a, b) => (PIECE_VALUES[b.toLowerCase()] || 0) - (PIECE_VALUES[a.toLowerCase()] || 0));
+
+    return (
+      <div className="captured-pieces-list">
+        {sorted.map((piece, index) => {
+          const key = `${color}${piece.toUpperCase()}`;
+          const svg = PIECES[key];
+          return (
+            <div key={index} className="captured-piece" dangerouslySetInnerHTML={{ __html: svg || '' }} />
+          );
+        })}
+      </div>
+    );
   };
 
   const formatMoveHistory = () => {
@@ -331,70 +467,121 @@ const Play = () => {
 
   return (
     <div className="play-page">
-      {/* Header */}
-      <div className="play-header">
+      {/* Minimal Header */}
+      <header className="play-header">
         <Link to="/" className="back-button" data-cursor="disable">
-          ← Back to Home
+          <span className="back-arrow">←</span>
+          <span className="back-label">Home</span>
         </Link>
-      </div>
+        <div className="header-title">Chess</div>
+        <div className="play-header-actions">
+          <button
+            className={`header-tool-btn ${soundEnabled ? 'active' : 'muted'}`}
+            onClick={() => setSoundEnabled(prev => !prev)}
+            title={soundEnabled ? "Mute sound" : "Unmute sound"}
+            data-cursor="disable"
+            aria-label="Toggle Sound"
+          >
+            {soundEnabled ? "🔊" : "🔇"}
+          </button>
+          <button
+            className="header-tool-btn"
+            onClick={resetGame}
+            title="Reset Game"
+            data-cursor="disable"
+            aria-label="Reset Game"
+          >
+            🔄
+          </button>
+        </div>
+      </header>
 
-      <div className="chess-container">
-        {/* Chat Panel - Left Side */}
-        <div className="chat-panel">
+      <div className="chess-layout">
+        {/* Left Column: Chat with Vivek */}
+        <aside className={`chat-panel ${activeMobileTab === 'chat' ? 'tab-visible' : 'tab-hidden'}`}>
           <div className="chat-header">
-            <span className="chat-title">💬 Talk with Vivek</span>
+            <span className="chat-title-text">Chat with Vivek</span>
           </div>
+
           <div className="chat-messages">
             {chatMessages.map((msg, index) => (
               <div key={index} className={`chat-message ${msg.role}`}>
-                <div className="message-content">{msg.content}</div>
+                <div className="message-bubble">{msg.content}</div>
               </div>
             ))}
             {isTyping && (
               <div className="chat-message assistant">
-                <div className="message-content typing">
+                <div className="message-bubble typing">
                   <span></span><span></span><span></span>
                 </div>
               </div>
             )}
+            <div ref={chatBottomRef} />
           </div>
+
+          {/* Quick Suggested Prompts */}
+          <div className="quick-prompts-scroller">
+            {QUICK_PROMPTS.map((prompt, i) => (
+              <button
+                key={i}
+                className="quick-prompt-chip"
+                onClick={() => sendMessage(prompt)}
+                data-cursor="disable"
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
+
           <div className="chat-input-area">
             <input
               type="text"
               className="chat-input"
-              placeholder="Type a message..."
+              placeholder="Ask anything..."
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               onKeyPress={handleKeyPress}
               data-cursor="disable"
             />
-            <button className="chat-send-btn" onClick={sendMessage} data-cursor="disable">
-              ➤
+            <button
+              className="chat-send-btn"
+              onClick={() => sendMessage()}
+              disabled={!chatInput.trim()}
+              data-cursor="disable"
+              aria-label="Send Message"
+            >
+              ↑
             </button>
           </div>
-        </div>
+        </aside>
 
-        {/* Board Section with Player Labels */}
-        <div className="chess-board-section">
+        {/* Center: Board Section (Always first & prominent on mobile) */}
+        <main className="chess-board-section">
           {/* Opponent Info - Top of Board */}
           <div className="player-bar opponent-bar">
-            <div className="player-info">
-              <div className="player-avatar">
-                <span className="text-xs font-bold text-white">VK</span>
+            <div className="player-meta">
+              <div className={`player-avatar ${engineThinking ? 'thinking' : ''}`}>
+                VK
               </div>
-              <div className="player-details">
-                <span className="player-name">Vivek (AI Bot)</span>
-                <span className="player-rating">{engineThinking ? '🤔 Thinking...' : 'ELO 2000'}</span>
+              <div className="player-identity">
+                <span className="player-name">Vivek</span>
+                <span className="player-rating-text">
+                  {engineThinking ? 'thinking...' : 'AI Bot'}
+                </span>
               </div>
             </div>
-            <div className="captured-pieces">
+
+            <div className="captured-slot">
               {renderCapturedPieces(capturedWhite, 'w')}
+              {playerAdvantage < 0 && (
+                <span className="material-pill">+{Math.abs(playerAdvantage)}</span>
+              )}
             </div>
           </div>
 
           {/* Chess Board */}
           <div className="chess-board-wrapper">
-            <div className="chess-board">
+            <div className="chess-board" role="grid" aria-label="Chessboard">
               {ranks.map((rank) => (
                 files.map((file) => {
                   const square = `${file}${rank}`;
@@ -413,9 +600,10 @@ const Play = () => {
                         ${isLastMoveSquare ? 'last-move' : ''}
                         ${isCheck ? 'in-check' : ''}`}
                       onClick={() => handleSquareClick(square)}
+                      data-square={square}
                       data-cursor="disable"
                     >
-                      {/* Coordinate labels */}
+                      {/* Board Coordinates */}
                       {file === (boardFlipped ? 'h' : 'a') && (
                         <span className="coord-rank">{rank}</span>
                       )}
@@ -426,7 +614,7 @@ const Play = () => {
                       {/* Piece */}
                       {renderPiece(piece)}
 
-                      {/* Possible move indicator */}
+                      {/* Legal Move Indicators */}
                       {isPossibleMove && (
                         <div className={`move-indicator ${piece ? 'capture' : ''}`} />
                       )}
@@ -439,52 +627,130 @@ const Play = () => {
 
           {/* Player Info - Bottom of Board */}
           <div className="player-bar player-bar-bottom">
-            <div className="player-info">
-              <div className="player-avatar">
-                <span>👤</span>
+            <div className="player-meta">
+              <div className="player-avatar human-avatar">
+                You
               </div>
-              <div className="player-details">
+              <div className="player-identity">
                 <span className="player-name">You</span>
-                <span className="player-rating">{playerColor === 'w' ? 'White' : 'Black'}</span>
+                <span className="player-rating-text">
+                  {playerColor === 'w' ? 'White' : 'Black'}
+                </span>
               </div>
             </div>
-            <div className="captured-pieces">
+
+            <div className="captured-slot">
               {renderCapturedPieces(capturedBlack, 'b')}
+              {playerAdvantage > 0 && (
+                <span className="material-pill">+{playerAdvantage}</span>
+              )}
             </div>
           </div>
-        </div>
 
-        {/* Right Panel - Controls & Move History */}
-        <div className="chess-side-panel right-panel">
-          {/* Game Status */}
-          <div className="game-status">
-            <span className={game.isCheck() ? 'check' : ''}>{gameStatus}</span>
+          {/* Board Action Bar: Status & Quick Controls */}
+          <div className="board-controls-bar">
+            <div className={`status-pill ${game.isCheck() ? 'check-active' : ''} ${game.isGameOver() ? 'game-over' : ''}`}>
+              <span className={`status-dot ${engineThinking ? 'pulsing' : ''}`} />
+              <span className="status-text">{gameStatus}</span>
+            </div>
+
+            <div className="quick-actions-row">
+              <button
+                className="game-action-btn"
+                onClick={undoMove}
+                disabled={moveHistory.length === 0 || engineThinking}
+                title="Undo"
+                data-cursor="disable"
+              >
+                Undo
+              </button>
+              <button
+                className="game-action-btn"
+                onClick={flipBoard}
+                title="Flip perspective"
+                data-cursor="disable"
+              >
+                Flip
+              </button>
+              <button
+                className="game-action-btn"
+                onClick={resetGame}
+                title="New game"
+                data-cursor="disable"
+              >
+                New
+              </button>
+            </div>
           </div>
 
-          {/* Move History */}
-          <div className="move-history">
-            <div className="move-history-header">Moves</div>
+          {/* Mobile Tab Switcher (Visible only on screens < 1080px) */}
+          <div className="mobile-tabs-container">
+            <button
+              className={`mobile-tab-trigger ${activeMobileTab === 'chat' ? 'active' : ''}`}
+              onClick={() => { setActiveMobileTab('chat'); setUnreadChat(false); }}
+              data-cursor="disable"
+            >
+              <span>Chat</span>
+              {unreadChat && <span className="tab-unread-dot" />}
+            </button>
+            <button
+              className={`mobile-tab-trigger ${activeMobileTab === 'moves' ? 'active' : ''}`}
+              onClick={() => setActiveMobileTab('moves')}
+              data-cursor="disable"
+            >
+              <span>Moves ({moveHistory.length})</span>
+            </button>
+          </div>
+        </main>
+
+        {/* Right Column: Move History */}
+        <aside className={`chess-side-panel right-panel ${activeMobileTab === 'moves' ? 'tab-visible' : 'tab-hidden'}`}>
+          <div className="move-history-card">
+            <div className="move-history-top">
+              <div className="move-history-heading">Moves ({moveHistory.length})</div>
+              <button
+                className="copy-fen-btn"
+                onClick={copyFen}
+                title="Copy position FEN to clipboard"
+                data-cursor="disable"
+              >
+                {copiedFen ? "Copied" : "Copy FEN"}
+              </button>
+            </div>
             <div className="move-history-list">
-              {formatMoveHistory().map((move, index) => (
-                <div key={index} className="move-row">
-                  <span className="move-num">{move.moveNum}.</span>
-                  <span className="move-white">{move.white}</span>
-                  <span className="move-black">{move.black}</span>
-                </div>
-              ))}
+              {formatMoveHistory().length === 0 ? (
+                <div className="empty-history-note">No moves played yet</div>
+              ) : (
+                formatMoveHistory().map((move, index) => (
+                  <div key={index} className="move-row">
+                    <span className="move-index">{move.moveNum}.</span>
+                    <span className="move-cell move-white">{move.white}</span>
+                    <span className="move-cell move-black">{move.black || ''}</span>
+                  </div>
+                ))
+              )}
+              <div ref={movesBottomRef} />
             </div>
           </div>
 
-          {/* Controls */}
-          <div className="game-controls">
-            <button onClick={resetGame} className="control-btn" data-cursor="disable">
+          {/* Desktop Quick Controls */}
+          <div className="desktop-controls-group">
+            <button onClick={resetGame} className="desktop-btn" data-cursor="disable">
               New Game
             </button>
-            <button onClick={flipBoard} className="control-btn" data-cursor="disable">
+            <button onClick={flipBoard} className="desktop-btn" data-cursor="disable">
               Flip Board
             </button>
+            <button
+              onClick={undoMove}
+              className="desktop-btn"
+              disabled={moveHistory.length === 0 || engineThinking}
+              data-cursor="disable"
+            >
+              Undo Move
+            </button>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
