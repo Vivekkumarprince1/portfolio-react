@@ -207,7 +207,9 @@ const Play = () => {
           to: move.to,
           piece: move.piece,
           captured: move.captured,
-          san: move.san
+          san: move.san,
+          color: move.color,
+          promotion: move.promotion || promotion || 'q'
         }]);
 
         setLastMove({ from, to });
@@ -223,10 +225,12 @@ const Play = () => {
 
   // Trigger engine when it's black's turn
   useEffect(() => {
+    let isCancelled = false;
     if (game.turn() === 'b' && !game.isGameOver() && redoxchessRef.current) {
       setEngineThinking(true);
       redoxchessRef.current.setPosition(game.fen());
       redoxchessRef.current.getBestMove((move) => {
+        if (isCancelled) return;
         if (!move) {
           setEngineThinking(false);
           return;
@@ -238,6 +242,10 @@ const Play = () => {
         setEngineThinking(false);
       }, 12);
     }
+    return () => {
+      isCancelled = true;
+      redoxchessRef.current?.stop();
+    };
   }, [game, makeMove]);
 
   const getPieceAt = (square) => {
@@ -270,6 +278,10 @@ const Play = () => {
   };
 
   const resetGame = () => {
+    if (engineThinking) {
+      redoxchessRef.current?.stop();
+      setEngineThinking(false);
+    }
     setGame(new Chess());
     setSelectedSquare(null);
     setPossibleMoves([]);
@@ -281,18 +293,26 @@ const Play = () => {
   };
 
   const undoMove = () => {
-    if (engineThinking || moveHistory.length === 0) return;
-    const gameCopy = new Chess(game.fen());
-    // Undo 2 half-moves if it's currently white's turn, so it returns to white
-    const undoCount = gameCopy.turn() === 'w' ? Math.min(2, moveHistory.length) : 1;
-    for (let i = 0; i < undoCount; i++) {
-      gameCopy.undo();
+    if (moveHistory.length === 0) return;
+
+    if (engineThinking) {
+      redoxchessRef.current?.stop();
+      setEngineThinking(false);
     }
 
-    const history = gameCopy.history({ verbose: true });
+    // Undo 2 half-moves if it's currently white's turn, so it returns to white.
+    // If it's black's turn (e.g. while engine was thinking), undo 1 move.
+    const undoCount = (game.turn() === 'w' && moveHistory.length >= 2) ? 2 : 1;
+    const remainingMoves = moveHistory.slice(0, -undoCount);
+
+    const newGame = new Chess();
+    for (const m of remainingMoves) {
+      newGame.move({ from: m.from, to: m.to, promotion: m.promotion || 'q' });
+    }
+
     const capW = [];
     const capB = [];
-    history.forEach(m => {
+    remainingMoves.forEach(m => {
       if (m.captured) {
         if (m.color === 'w') capB.push(m.captured);
         else capW.push(m.captured);
@@ -301,22 +321,16 @@ const Play = () => {
 
     setCapturedWhite(capW);
     setCapturedBlack(capB);
-    setMoveHistory(history.map(m => ({
-      from: m.from,
-      to: m.to,
-      piece: m.piece,
-      captured: m.captured,
-      san: m.san
-    })));
+    setMoveHistory(remainingMoves);
 
-    if (history.length > 0) {
-      const last = history[history.length - 1];
+    if (remainingMoves.length > 0) {
+      const last = remainingMoves[remainingMoves.length - 1];
       setLastMove({ from: last.from, to: last.to });
     } else {
       setLastMove(null);
     }
 
-    setGame(gameCopy);
+    setGame(newGame);
     setSelectedSquare(null);
     setPossibleMoves([]);
     playSound('move');
@@ -658,7 +672,7 @@ const Play = () => {
               <button
                 className="game-action-btn"
                 onClick={undoMove}
-                disabled={moveHistory.length === 0 || engineThinking}
+                disabled={moveHistory.length === 0}
                 title="Undo"
                 data-cursor="disable"
               >
@@ -744,7 +758,7 @@ const Play = () => {
             <button
               onClick={undoMove}
               className="desktop-btn"
-              disabled={moveHistory.length === 0 || engineThinking}
+              disabled={moveHistory.length === 0}
               data-cursor="disable"
             >
               Undo Move

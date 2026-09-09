@@ -46,6 +46,7 @@ class RedoxChessEngine {
   }
 
   stop() {
+    this.onMoveCallback = null;
     this.send('stop');
   }
 
