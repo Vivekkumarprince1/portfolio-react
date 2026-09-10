@@ -115,16 +115,19 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-decoration: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
+/* On hover: Card background becomes the original brand color! */
 .techstack-item:hover {
   transform: translateY(-6px) scale(1.06);
-  background: rgba(194, 164, 255, 0.12);
-  border-color: var(--accentColor);
-  box-shadow: 0 12px 32px rgba(194, 164, 255, 0.28);
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+  box-shadow: 0 14px 35px color-mix(in srgb, var(--brand-color) 45%, transparent), 0 0 20px color-mix(in srgb, var(--brand-color) 35%, transparent);
 }
 
 /* Original colors by default */
@@ -134,30 +137,32 @@
   object-fit: contain;
   filter: none;
   opacity: 1;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: filter 0.35s ease, transform 0.35s ease;
 }
 
-/* Invert colors on hover */
+/* On hover: Logo turns into the card's original dark/monochrome surface color */
 .techstack-item:hover img {
-  filter: invert(1);
+  filter: var(--logo-filter, brightness(0));
   transform: scale(1.08);
 }
 
 .techstack-item span {
   font-size: 11px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 6px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 68px;
-  transition: color 0.3s ease;
+  transition: color 0.35s ease, font-weight 0.35s ease;
 }
 
+/* On hover: Text takes the contrast color */
 .techstack-item:hover span {
-  color: #fff;
+  color: var(--brand-text, #ffffff);
+  font-weight: 600;
 }
 
 /* Responsive */
