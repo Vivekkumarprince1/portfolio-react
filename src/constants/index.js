@@ -98,7 +98,7 @@ const experiences = [
     "title": "Software Development Engineer (SDE)",
     "icon": getAssetUrl('web'),
     "company_name": "ConnectSphere",
-    "date": "2025 - Present",
+    "date": "2026 - Present",
     "points": [
       "Architect and develop scalable full-stack web applications and distributed backend microservices.",
       "Implement real-time messaging, audio/video synchronization, and WebSocket communication protocols.",
@@ -107,21 +107,10 @@ const experiences = [
     ]
   },
   {
-    "title": "Founder & CEO",
-    "icon": getAssetUrl('fmpg'),
-    "company_name": "FMPG",
-    "date": "2024 - Present",
-    "points": [
-      "Led business strategy, operations, and growth initiatives.",
-      "Managed product development, technical architecture, and client acquisition processes.",
-      "Drove revenue, operational efficiency, and scalability through strategic execution."
-    ]
-  },
-  {
     "title": "React Developer",
     "icon": getAssetUrl('react'),
     "company_name": "OM Software",
-    "date": "2024 - 2025",
+    "date": "2025",
     "points": [
       "Developed modular, accessible, and high-performance user interfaces using React.js and modern state managers.",
       "Engineered reusable component design systems and integrated complex RESTful API endpoints.",
@@ -130,21 +119,32 @@ const experiences = [
     ]
   },
   {
-    "title": "Web Developer",
+    "title": "Founder & CEO",
+    "icon": getAssetUrl('fmpg'),
+    "company_name": "FMPG",
+    "date": "2024",
+    "points": [
+      "Led business strategy, operations, and growth initiatives.",
+      "Managed product development, technical architecture, and client acquisition processes.",
+      "Drove revenue, operational efficiency, and scalability through strategic execution."
+    ]
+  },
+  {
+    "title": "Web Developer & Campus Ambassador",
     "icon": getAssetUrl('codingbits'),
     "company_name": "Coding Bits",
-    "date": "2023 - 2024",
+    "date": "2024",
     "points": [
-      "Contributed to main web platform development, built interactive UI features, and oversaw development workflows.",
-      "Built and maintained responsive web interfaces using HTML5, CSS3, JavaScript, and Node.js.",
-      "Improved page load performance, visual hierarchy, and cross-browser consistency."
+      "Developed and maintained responsive web interfaces using HTML5, CSS3, JavaScript, and Node.js.",
+      "Organized tech events, developer workshops, and guided students to drive platform adoption.",
+      "Improved website performance, user experience (UX), and cross-browser consistency."
     ]
   },
   {
     "title": "Campus Ambassador",
     "icon": getAssetUrl('codingbits'),
     "company_name": "Pregard, Coding Bits & Placify",
-    "date": "2022 - 2023",
+    "date": "2023",
     "points": [
       "Promoted brand awareness through targeted tech marketing initiatives.",
       "Organized events, hackathons, and built strategic networks to support brand growth.",

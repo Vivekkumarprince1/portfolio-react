@@ -18,7 +18,7 @@ export const config = {
         {
             position: "Software Development Engineer (SDE)",
             company: "ConnectSphere",
-            period: "2025 - Present",
+            period: "2026 - Present",
             location: "India",
             description: "Architecting and developing scalable full-stack web platforms, microservices, and real-time collaboration engines. Designing low-latency RESTful APIs, optimizing MongoDB schemas, and implementing WebSocket systems.",
             responsibilities: [
@@ -30,22 +30,9 @@ export const config = {
             technologies: ["React.js", "Node.js", "Express", "MongoDB", "WebSockets", "REST APIs", "System Design"]
         },
         {
-            position: "Founder & CEO",
-            company: "FMPG",
-            period: "2024 - Present",
-            location: "India",
-            description: "Led business strategy, operations, and growth initiatives. Managed cross-functional product development, client acquisition pipelines, and scalable technical infrastructure.",
-            responsibilities: [
-                "Led business strategy, operations, and growth initiatives.",
-                "Managed product development, technical architecture, and client acquisition processes.",
-                "Drove revenue, operational efficiency, and scalability through strategic execution."
-            ],
-            technologies: ["Management", "Strategy", "Operations", "Full-Stack Development", "Growth"]
-        },
-        {
             position: "React Developer",
             company: "OM Software",
-            period: "2024 - 2025",
+            period: "2025",
             location: "India",
             description: "Engineered modern, responsive web interfaces using React.js, Redux, and modern CSS architecture. Built modular reusable UI component libraries, integrated backend REST APIs, and optimized client rendering speed.",
             responsibilities: [
@@ -57,22 +44,35 @@ export const config = {
             technologies: ["React.js", "Redux", "JavaScript", "Tailwind CSS", "REST APIs", "Git", "HTML5/CSS3"]
         },
         {
-            position: "Web Developer",
-            company: "Coding Bits",
-            period: "2023 - 2024",
+            position: "Founder & CEO",
+            company: "FMPG",
+            period: "2024",
             location: "India",
-            description: "Contributed to main web platform development, built interactive UI features, and oversaw development workflows. Focused on clean frontend architecture, cross-device usability, performance optimization, and project execution.",
+            description: "Led business strategy, operations, and growth initiatives. Managed cross-functional product development, client acquisition pipelines, and scalable technical infrastructure.",
+            responsibilities: [
+                "Led business strategy, operations, and growth initiatives.",
+                "Managed product development, technical architecture, and client acquisition processes.",
+                "Drove revenue, operational efficiency, and scalability through strategic execution."
+            ],
+            technologies: ["Management", "Strategy", "Operations", "Full-Stack Development", "Growth"]
+        },
+        {
+            position: "Web Developer & Campus Ambassador",
+            company: "Coding Bits",
+            period: "2024",
+            location: "India",
+            description: "Developed and maintained responsive web interfaces and core platform features while driving developer community engagement, technical workshops, and developer outreach as Campus Ambassador.",
             responsibilities: [
                 "Developed and maintained responsive web interfaces using HTML5, CSS3, JavaScript, and Node.js.",
-                "Overseeing project execution, developer workflows, and feature testing.",
+                "Organized tech events, developer workshops, and guided students to drive platform adoption.",
                 "Improved website performance, user experience (UX), and cross-browser consistency."
             ],
-            technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "Node.js", "Web Development", "UX Optimization"]
+            technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "Node.js", "Web Development", "Community Building"]
         },
         {
             position: "Campus Ambassador",
             company: "Pregard, Coding Bits & Placify",
-            period: "2022 - 2023",
+            period: "2023",
             location: "India",
             description: "Promoted brand awareness through targeted tech marketing initiatives. Organized developer hackathons and workshops, built student developer networks, and gathered community insights to refine engagement.",
             responsibilities: [
