@@ -18,7 +18,7 @@ export const config = {
         {
             position: "Software Development Engineer (SDE)",
             company: "ConnectSphere",
-            period: "2024 - Present",
+            period: "2025 - Present",
             location: "India",
             description: "Architecting and developing scalable full-stack web platforms, microservices, and real-time collaboration engines. Designing low-latency RESTful APIs, optimizing MongoDB schemas, and implementing WebSocket systems.",
             responsibilities: [
@@ -30,9 +30,22 @@ export const config = {
             technologies: ["React.js", "Node.js", "Express", "MongoDB", "WebSockets", "REST APIs", "System Design"]
         },
         {
+            position: "Founder & CEO",
+            company: "FMPG",
+            period: "2024 - Present",
+            location: "India",
+            description: "Led business strategy, operations, and growth initiatives. Managed cross-functional product development, client acquisition pipelines, and scalable technical infrastructure.",
+            responsibilities: [
+                "Led business strategy, operations, and growth initiatives.",
+                "Managed product development, technical architecture, and client acquisition processes.",
+                "Drove revenue, operational efficiency, and scalability through strategic execution."
+            ],
+            technologies: ["Management", "Strategy", "Operations", "Full-Stack Development", "Growth"]
+        },
+        {
             position: "React Developer",
             company: "OM Software",
-            period: "2023 - 2024",
+            period: "2024 - 2025",
             location: "India",
             description: "Engineered modern, responsive web interfaces using React.js, Redux, and modern CSS architecture. Built modular reusable UI component libraries, integrated backend REST APIs, and optimized client rendering speed.",
             responsibilities: [
@@ -46,15 +59,28 @@ export const config = {
         {
             position: "Web Developer",
             company: "Coding Bits",
-            period: "2022 - 2023",
+            period: "2023 - 2024",
             location: "India",
-            description: "Built interactive web applications, implemented responsive UI components, and streamlined development workflows. Focused on clean frontend architecture, cross-device usability, and user experience optimization.",
+            description: "Contributed to main web platform development, built interactive UI features, and oversaw development workflows. Focused on clean frontend architecture, cross-device usability, performance optimization, and project execution.",
             responsibilities: [
-                "Built and maintained responsive web interfaces using HTML5, CSS3, and modern JavaScript.",
-                "Improved page load performance, visual hierarchy, and cross-browser consistency.",
-                "Collaborated with project leads on development workflows, feature testing, and bug resolution."
+                "Developed and maintained responsive web interfaces using HTML5, CSS3, JavaScript, and Node.js.",
+                "Overseeing project execution, developer workflows, and feature testing.",
+                "Improved website performance, user experience (UX), and cross-browser consistency."
             ],
             technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "Node.js", "Web Development", "UX Optimization"]
+        },
+        {
+            position: "Campus Ambassador",
+            company: "Pregard, Coding Bits & Placify",
+            period: "2022 - 2023",
+            location: "India",
+            description: "Promoted brand awareness through targeted tech marketing initiatives. Organized developer hackathons and workshops, built student developer networks, and gathered community insights to refine engagement.",
+            responsibilities: [
+                "Promoted brand awareness through targeted marketing initiatives.",
+                "Organized events, hackathons, and built strategic networks to support brand growth.",
+                "Gathered insights to refine and enhance community and marketing strategies."
+            ],
+            technologies: ["Community Building", "Event Organizing", "Networking", "Leadership"]
         }
     ],
     projects: [

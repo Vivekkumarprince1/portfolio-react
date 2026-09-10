@@ -6,12 +6,12 @@ import { config } from "../config";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const getDisplayYear = (period) => {
-  if (period.includes("Present")) return "NOW";
+const getDisplayYear = (period, index) => {
+  if (index === 0 && period.includes("Present")) return "NOW";
   if (period.includes(" - ")) {
     return period.split(" - ")[0]; // Show start year for ranges
   }
-  return period; // Single year like "2021"
+  return period;
 };
 
 const Career = () => {
@@ -52,9 +52,12 @@ const Career = () => {
               <div className="career-info-in">
                 <div className="career-role">
                   <h4>{exp.position}</h4>
-                  <h5>{exp.company}</h5>
+                  <h5>
+                    {exp.company}{" "}
+                    <span className="career-period-text">({exp.period})</span>
+                  </h5>
                 </div>
-                <h3>{getDisplayYear(exp.period)}</h3>
+                <h3>{getDisplayYear(exp.period, index)}</h3>
               </div>
               <p>{exp.description}</p>
             </div>
