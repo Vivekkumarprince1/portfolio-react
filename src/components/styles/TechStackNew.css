@@ -111,55 +111,126 @@
   height: 94px;
   padding: 10px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
   text-decoration: none;
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-/* On hover: Card background becomes the original brand color! */
 .techstack-item:hover {
-  transform: translateY(-6px) scale(1.06);
-  background: var(--brand-color);
+  transform: translateY(-8px) scale(1.05);
   border-color: var(--brand-color);
-  box-shadow: 0 14px 35px color-mix(in srgb, var(--brand-color) 45%, transparent), 0 0 20px color-mix(in srgb, var(--brand-color) 35%, transparent);
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--brand-color) 45%, transparent),
+              0 0 20px color-mix(in srgb, var(--brand-color) 25%, transparent);
 }
 
-/* Original colors by default */
+/* Water Fill Layer rising from the bottom */
+.water-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(
+    to top,
+    var(--brand-color) 0%,
+    color-mix(in srgb, var(--brand-color) 82%, #ffffff 18%) 100%
+  );
+  opacity: 0.9;
+  border-radius: inherit;
+  transition: height 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Water wave surface crest ripple */
+.water-wave-top {
+  position: absolute;
+  top: -8px;
+  left: -50%;
+  width: 200%;
+  height: 16px;
+  background: color-mix(in srgb, var(--brand-color) 65%, #ffffff 35%);
+  border-radius: 45% 48% 44% 47%;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
+  transform: rotate(0deg);
+  transition: opacity 0.3s ease;
+}
+
+/* On hover: Water fills to 100%! */
+.techstack-item:hover .water-wave {
+  height: 100%;
+}
+
+.techstack-item:hover .water-wave-top {
+  animation: liquidWaveRipple 1.8s linear infinite;
+}
+
+@keyframes liquidWaveRipple {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card inner content sitting above the water */
+.techstack-item-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.techstack-item:hover .techstack-item-content {
+  transform: translateY(-2px);
+}
+
+/* Logos remain in pristine original colors, floating buoyantly */
 .techstack-item img {
   width: 44px;
   height: 44px;
   object-fit: contain;
-  filter: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
   opacity: 1;
-  transition: filter 0.35s ease, transform 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.4s ease;
 }
 
-/* On hover: Logo turns into the card's original dark/monochrome surface color */
 .techstack-item:hover img {
-  filter: var(--logo-filter, brightness(0));
-  transform: scale(1.08);
+  transform: translateY(-4px) scale(1.12);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
 .techstack-item span {
   font-size: 11px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   margin-top: 6px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 68px;
-  transition: color 0.35s ease, font-weight 0.35s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  transition: color 0.4s ease, font-weight 0.4s ease;
 }
 
-/* On hover: Text takes the contrast color */
+/* On hover: Text takes the readable contrast color */
 .techstack-item:hover span {
   color: var(--brand-text, #ffffff);
   font-weight: 600;
