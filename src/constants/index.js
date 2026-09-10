@@ -95,35 +95,38 @@ const technologies = [
 
 const experiences = [
   {
-    "title": "Founder & CEO",
-    "icon": getAssetUrl('fmpg'),
-    "company_name": "FMPG",
-    "date": "", // Date not specified in the resume
+    "title": "Software Development Engineer (SDE)",
+    "icon": getAssetUrl('web'),
+    "company_name": "ConnectSphere",
+    "date": "2024 - Present",
     "points": [
-      "Led business strategy, operations, and growth initiatives.",
-      "Managed team, product development, and client acquisition processes.",
-      "Drove revenue and scalability through strategic planning and execution."
+      "Architect and develop scalable full-stack web applications and distributed backend microservices.",
+      "Implement real-time messaging, audio/video synchronization, and WebSocket communication protocols.",
+      "Optimize database queries, indexing, and data models to significantly improve latency and system throughput.",
+      "Lead end-to-end feature implementations from technical design through continuous deployment."
     ]
   },
   {
-    "title": "Program Manager Intern",
+    "title": "React Developer",
+    "icon": getAssetUrl('react'),
+    "company_name": "OM Software",
+    "date": "2023 - 2024",
+    "points": [
+      "Developed modular, accessible, and high-performance user interfaces using React.js and modern state managers.",
+      "Engineered reusable component design systems and integrated complex RESTful API endpoints.",
+      "Enhanced web performance, responsiveness, and Core Web Vitals across diverse mobile and desktop devices.",
+      "Collaborated closely with UI/UX designers to translate Figma wireframes into pixel-perfect experiences."
+    ]
+  },
+  {
+    "title": "Web Developer",
     "icon": getAssetUrl('codingbits'),
     "company_name": "Coding Bits",
-    "date": "", // Date not specified in the resume
+    "date": "2022 - 2023",
     "points": [
-      "Contributed to the main website by overseeing project execution and development workflows.",
-      "Improved website performance, user experience (UX), and functionality."
-    ]
-  },
-  {
-    "title": "Campus Ambassador",
-    "icon": getAssetUrl('codingbits'),
-    "company_name": "Pregard, Coding Bits & Placify",
-    "date": "", // Date not specified in the resume
-    "points": [
-      "Promoted brand awareness through targeted marketing initiatives.",
-      "Organized events and built strategic networks to support brand growth.",
-      "Gathered insights to refine and enhance marketing strategies."
+      "Built and maintained responsive web interfaces using HTML5, CSS3, and modern JavaScript.",
+      "Improved page load performance, visual hierarchy, and cross-browser consistency.",
+      "Collaborated with project leads on development workflows, feature testing, and bug resolution."
     ]
   }
 ]
@@ -240,26 +243,6 @@ const projects = [
     ],
     "image": getAssetUrl('chitchat'),
     "source_code_link": "https://github.com/Vivekkumarprince1/chitchat.git/"
-  },
-  {
-    "name": "ShikshaSetu",
-    "description": "An educational support platform with a learning management system, user authentication, and scalable content delivery features.",
-    "tags": [
-      {
-        "name": "React.js",
-        "color": "blue-text-gradient"
-      },
-      {
-        "name": "Node.js",
-        "color": "green-text-gradient"
-      },
-      {
-        "name": "MongoDB",
-        "color": "pink-text-gradient"
-      }
-    ],
-    "image": "getAssetUrl('shikshasetu')",
-    "source_code_link": "https://github.com/Vivekkumarprince1/shikshasetu.git"
   },
   {
     "name": "KC Collection E-Commerce Website",

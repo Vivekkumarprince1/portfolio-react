@@ -1,14 +1,17 @@
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
+import ProjectModal from "./ProjectModal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { config } from "../config";
 import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   useEffect(() => {
     // Disable pinning on mobile to allow scrolling
     if (window.innerWidth <= 768) return;
@@ -66,7 +69,14 @@ const Work = () => {
         </h2>
         <div className="work-flex">
           {config.projects.slice(0, 5).map((project, index) => (
-            <div className="work-box" key={project.id}>
+            <div
+              className="work-box"
+              key={project.id}
+              onClick={() => setSelectedProject(project)}
+              role="button"
+              tabIndex={0}
+              style={{ cursor: "pointer" }}
+            >
               <div className="work-info">
                 <div className="work-title">
                   <h3>0{index + 1}</h3>
@@ -79,7 +89,12 @@ const Work = () => {
                 <h4>Tools and features</h4>
                 <p>{project.technologies}</p>
               </div>
-              <WorkImage image={project.image} alt={project.title} link={project.link} />
+              <WorkImage
+                image={project.image}
+                alt={project.title}
+                link={project.link}
+                onSelect={() => setSelectedProject(project)}
+              />
             </div>
           ))}
           {/* See All Works Button */}
@@ -94,6 +109,12 @@ const Work = () => {
           </div>
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </div>
   );
 };

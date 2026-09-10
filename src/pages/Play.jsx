@@ -35,7 +35,6 @@ Portfolio projects:
 - Vaani: An end-to-end, high-performance real-time communication platform featuring video and audio conferencing, instant messaging, and live multilingual speech-to-speech audio & text translation. (React, Vite, Tailwind CSS, LiveKit SFU, Azure Cognitive Services, Socket.io, Redis, MongoDB)
 - Room Booking Service Website: A responsive web platform for room booking with user authentication, real-time availability tracking, and MongoDB. (EJS, Node.js, MongoDB, Express, Bootstrap)
 - ChitChat: A real-time group chat platform featuring Socket.io and Node.js backend.
-- ShikshaSetu: An educational support platform with a learning management system.
 - KC Collection: A full-featured e-commerce platform with payment integration.
 
 Academic Certifications:
@@ -404,7 +403,7 @@ const Play = () => {
         if (txt.includes("hello") || txt.includes("hi") || txt.includes("hey")) {
           reply = "Hello! I'm Vivek Kumar. Great to meet you! Ready to challenge my bot in chess, or want to chat about my work? 😊";
         } else if (txt.includes("project") || txt.includes("work") || txt.includes("portfolio")) {
-          reply = "I have built Vaani (real-time multilingual conferencing with LiveKit & Azure AI), Room Booking Service (Node/MongoDB/EJS), ChitChat (Socket.io real-time chat), ShikshaSetu, and KC Collection. Check out my Works page to view them! 🛠️";
+          reply = "I have built Vaani (real-time multilingual conferencing with LiveKit & Azure AI), Room Booking Service (Node/MongoDB/EJS), ChitChat (Socket.io real-time chat), and KC Collection (E-Commerce). Check out my Works page to view them! 🛠️";
         } else if (txt.includes("vaani")) {
           reply = "Vaani is an end-to-end real-time communication platform with video/audio conferencing (LiveKit SFU), instant messaging (Socket.io), and live multilingual speech-to-speech audio and text translation using Azure Cognitive Services! 🎙️🌐";
         } else if (txt.includes("skill") || txt.includes("tech") || txt.includes("stack")) {

@@ -2,24 +2,29 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { config } from "../config";
 import { certificates } from "../constants";
+import ProjectModal from "../components/ProjectModal";
 import "./MyWorks.css";
 
 const MyWorks = () => {
   const [filter, setFilter] = useState("all"); // 'all' | 'projects' | 'certificates'
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const displayedItems = [];
 
   if (filter === "all" || filter === "projects") {
-    config.projects.forEach((project, idx) => {
+    config.projects.forEach((project) => {
       displayedItems.push({
         id: `project-${project.id}`,
         type: "project",
         title: project.title,
         category: project.category,
         description: project.description,
+        shortDescription: project.shortDescription,
+        features: project.features,
         technologies: project.technologies,
         image: project.image,
         link: project.link,
+        liveDemo: project.liveDemo,
       });
     });
   }
@@ -116,6 +121,22 @@ const MyWorks = () => {
             </>
           );
 
+          if (item.type === "project") {
+            return (
+              <div
+                className="myworks-card"
+                key={item.id}
+                data-cursor="disable"
+                onClick={() => setSelectedProject(item)}
+                role="button"
+                tabIndex={0}
+                style={{ cursor: "pointer" }}
+              >
+                {cardContent}
+              </div>
+            );
+          }
+
           if (isInternalLink) {
             return (
               <Link
@@ -143,6 +164,12 @@ const MyWorks = () => {
           );
         })}
       </div>
+
+      {/* Project Detail Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </div>
   );
 };

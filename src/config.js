@@ -16,42 +16,45 @@ export const config = {
     },
     experiences: [
         {
-            position: "Founder & CEO",
-            company: "FMPG",
+            position: "Software Development Engineer (SDE)",
+            company: "ConnectSphere",
             period: "2024 - Present",
             location: "India",
-            description: "Led business strategy, operations, and growth initiatives. Managed team, product development, and client acquisition processes. Drove revenue and scalability through strategic planning and execution.",
+            description: "Architecting and developing scalable full-stack web platforms, microservices, and real-time collaboration engines. Designing low-latency RESTful APIs, optimizing MongoDB schemas, and implementing WebSocket systems.",
             responsibilities: [
-                "Led business strategy, operations, and growth initiatives.",
-                "Managed team, product development, and client acquisition processes.",
-                "Drove revenue and scalability through strategic planning and execution."
+                "Architect and develop scalable full-stack web applications and distributed backend microservices.",
+                "Implement real-time messaging, audio/video synchronization, and WebSocket communication protocols.",
+                "Optimize database queries, indexing, and data models to significantly improve latency and system throughput.",
+                "Lead end-to-end feature implementations from technical design through continuous deployment."
             ],
-            technologies: ["Management", "Strategy", "Operations", "Growth"]
+            technologies: ["React.js", "Node.js", "Express", "MongoDB", "WebSockets", "REST APIs", "System Design"]
         },
         {
-            position: "Program Manager Intern",
-            company: "Coding Bits",
+            position: "React Developer",
+            company: "OM Software",
             period: "2023 - 2024",
             location: "India",
-            description: "Contributed to the main website by overseeing project execution and development workflows. Improved website performance, user experience (UX), and functionality.",
+            description: "Engineered modern, responsive web interfaces using React.js, Redux, and modern CSS architecture. Built modular reusable UI component libraries, integrated backend REST APIs, and optimized client rendering speed.",
             responsibilities: [
-                "Overseeing project execution and development workflows.",
-                "Improving website performance, user experience (UX), and functionality."
+                "Developed modular, accessible, and high-performance user interfaces using React.js and modern state managers.",
+                "Engineered reusable component design systems and integrated complex RESTful API endpoints.",
+                "Enhanced web performance, responsiveness, and Core Web Vitals across diverse mobile and desktop devices.",
+                "Collaborated closely with UI/UX designers to translate Figma wireframes into pixel-perfect experiences."
             ],
-            technologies: ["Web Development", "UX Optimization", "Project Management"]
+            technologies: ["React.js", "Redux", "JavaScript", "Tailwind CSS", "REST APIs", "Git", "HTML5/CSS3"]
         },
         {
-            position: "Campus Ambassador",
-            company: "Pregard, Coding Bits & Placify",
+            position: "Web Developer",
+            company: "Coding Bits",
             period: "2022 - 2023",
             location: "India",
-            description: "Promoted brand awareness through targeted marketing initiatives. Organized events and built strategic networks to support brand growth. Gathered insights to refine and enhance marketing strategies.",
+            description: "Built interactive web applications, implemented responsive UI components, and streamlined development workflows. Focused on clean frontend architecture, cross-device usability, and user experience optimization.",
             responsibilities: [
-                "Promoted brand awareness through targeted marketing initiatives.",
-                "Organized events and built strategic networks to support brand growth.",
-                "Gathered insights to refine and enhance marketing strategies."
+                "Built and maintained responsive web interfaces using HTML5, CSS3, and modern JavaScript.",
+                "Improved page load performance, visual hierarchy, and cross-browser consistency.",
+                "Collaborated with project leads on development workflows, feature testing, and bug resolution."
             ],
-            technologies: ["Marketing", "Event Organizing", "Networking"]
+            technologies: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "Node.js", "Web Development", "UX Optimization"]
         }
     ],
     projects: [
@@ -59,45 +62,65 @@ export const config = {
             id: 1,
             title: "Vaani",
             category: "AI & Real-Time Communication",
-            technologies: "React, LiveKit SFU, Azure AI Speech, Socket.IO, Redis, MongoDB",
+            technologies: "React 18, LiveKit SFU, Azure AI Speech, Socket.IO, Redis, MongoDB",
             image: "/assets/VAANI.png",
             description: "An end-to-end real-time communication platform featuring video conferencing, instant messaging, and live multilingual speech-to-speech audio & text translation powered by LiveKit SFU and Azure Cognitive Services.",
-            link: "https://github.com/Vivekkumarprince1/vaani.git"
+            shortDescription: "A modern video conferencing platform featuring live speech-to-speech multilingual translation, instant chat, and ultra-low latency audio/video streaming powered by LiveKit SFU, Azure Cognitive Services, and Redis pub/sub.",
+            features: [
+                "Real-time multilingual speech-to-speech audio & subtitle translation using Azure Cognitive Services",
+                "High-performance video and audio conferencing via LiveKit SFU (Selective Forwarding Unit)",
+                "Instant messaging and room channels with WebSockets (Socket.IO) and Redis pub/sub sync",
+                "JWT authentication, offline caching with IndexedDB, and Cloudinary media handling"
+            ],
+            link: "https://github.com/Vivekkumarprince1/vaani.git",
+            liveDemo: "https://react-vaani-frontend.vercel.app"
         },
         {
             id: 2,
-            title: "Room Booking Service Website",
-            category: "Web Application",
+            title: "Room Booking Service",
+            category: "Full-Stack Web Application",
             technologies: "EJS, Node.js, MongoDB, Express, Bootstrap",
             image: "/assets/FMPG.png",
             description: "A responsive web platform for seamless room booking and management with user authentication, real-time availability tracking, and dynamic backend integration.",
+            shortDescription: "A comprehensive room booking and property management platform with user authentication, live room availability calendars, and automated reservation workflows.",
+            features: [
+                "Secure user authentication, role-based access, and session management",
+                "Real-time room availability scheduling and dynamic reservation processing",
+                "Administrative portal for property listings, booking approvals, and inventory control",
+                "Mobile-first responsive interface built with Bootstrap and modern EJS templates"
+            ],
             link: "https://github.com/Vivekkumarprince1/fmpg1.git"
         },
         {
             id: 3,
             title: "ChitChat",
-            category: "Communication",
-            technologies: "EJS, JavaScript, CSS, Node.js, Socket.io",
+            category: "Real-Time Communication",
+            technologies: "Socket.io, Node.js, Express, JavaScript, CSS3",
             image: "/assets/CHITCHAT.png",
             description: "A real-time group chat platform featuring frontend UI design and WebSocket integration for instant messaging capabilities.",
+            shortDescription: "A lightweight, instant messaging platform featuring dynamic chat rooms, live typing indicators, and WebSocket-driven real-time synchronization.",
+            features: [
+                "Bi-directional real-time communication powered by WebSockets (Socket.io)",
+                "Instant custom room creation and seamless multi-user group chat",
+                "Live user connection tracking, activity indicators, and typing status",
+                "Sleek and responsive chat interface optimized for mobile and desktop"
+            ],
             link: "https://github.com/Vivekkumarprince1/chitchat.git/"
         },
         {
             id: 4,
-            title: "ShikshaSetu",
-            category: "Education",
-            technologies: "React.js, Node.js, MongoDB, Express, Tailwind CSS",
-            image: "https://placehold.co/600x400/151030/FFFFFF?text=ShikshaSetu",
-            description: "An educational support platform with a learning management system, user authentication, and scalable content delivery features.",
-            link: "https://github.com/Vivekkumarprince1/shikshasetu.git"
-        },
-        {
-            id: 5,
-            title: "KC Collection E-Commerce Website",
-            category: "E-Commerce",
-            technologies: "EJS, Express.js, Azure, Node.js, MongoDB",
+            title: "KC Collection E-Commerce",
+            category: "E-Commerce & Cloud Deployment",
+            technologies: "Node.js, Express.js, MongoDB, Azure, EJS",
             image: "/assets/KC-COLLECTIONS.png",
             description: "A full-featured e-commerce platform with secure payment integration, product catalog management, and an intuitive user experience.",
+            shortDescription: "A scalable e-commerce store with dynamic product filtering, cart state management, checkout pipelines, and cloud hosting on Microsoft Azure.",
+            features: [
+                "Dynamic product catalog with category filtering, search, and inventory tracking",
+                "Interactive cart system with real-time price calculations and quantity updates",
+                "Secure customer authentication, order records, and checkout flows",
+                "Cloud infrastructure deployment and scalability on Microsoft Azure"
+            ],
             link: "https://github.com/Vivekkumarprince1/kc-collection.git"
         }
     ],
