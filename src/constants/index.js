@@ -162,6 +162,38 @@ const certificates = [
 
 const projects = [
   {
+    "name": "Vaani",
+    "description": "An end-to-end real-time communication platform featuring video conferencing, instant messaging, and live multilingual speech-to-speech audio & text translation powered by LiveKit SFU and Azure Cognitive Services.",
+    "tags": [
+      {
+        "name": "React.js",
+        "color": "blue-text-gradient"
+      },
+      {
+        "name": "LiveKit SFU",
+        "color": "green-text-gradient"
+      },
+      {
+        "name": "Azure AI",
+        "color": "pink-text-gradient"
+      },
+      {
+        "name": "Socket.io",
+        "color": "blue-text-gradient"
+      },
+      {
+        "name": "Redis",
+        "color": "green-text-gradient"
+      },
+      {
+        "name": "MongoDB",
+        "color": "pink-text-gradient"
+      }
+    ],
+    "image": getAssetUrl('vaani'),
+    "source_code_link": "https://github.com/Vivekkumarprince1/vaani.git"
+  },
+  {
     "name": "Room Booking Service Website",
     "description": "A responsive web platform for seamless room booking and management with user authentication, real-time availability tracking, and dynamic backend integration.",
     "tags": [

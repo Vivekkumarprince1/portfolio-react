@@ -22,6 +22,7 @@ const defaultImages = {
   codingbits: '/assets/CODINGBITS.jpeg',
   
   // Project images
+  vaani: '/assets/VAANI.png',
   chitchat: '/assets/CHITCHAT.png',
   kccollections: '/assets/KC-COLLECTIONS.png',
   fmpg: '/assets/FMPG.png',

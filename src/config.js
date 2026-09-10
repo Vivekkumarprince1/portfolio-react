@@ -57,6 +57,15 @@ export const config = {
     projects: [
         {
             id: 1,
+            title: "Vaani",
+            category: "AI & Real-Time Communication",
+            technologies: "React, LiveKit SFU, Azure AI Speech, Socket.IO, Redis, MongoDB",
+            image: "/assets/VAANI.png",
+            description: "An end-to-end real-time communication platform featuring video conferencing, instant messaging, and live multilingual speech-to-speech audio & text translation powered by LiveKit SFU and Azure Cognitive Services.",
+            link: "https://github.com/Vivekkumarprince1/vaani.git"
+        },
+        {
+            id: 2,
             title: "Room Booking Service Website",
             category: "Web Application",
             technologies: "EJS, Node.js, MongoDB, Express, Bootstrap",
@@ -65,7 +74,7 @@ export const config = {
             link: "https://github.com/Vivekkumarprince1/fmpg1.git"
         },
         {
-            id: 2,
+            id: 3,
             title: "ChitChat",
             category: "Communication",
             technologies: "EJS, JavaScript, CSS, Node.js, Socket.io",
@@ -74,7 +83,7 @@ export const config = {
             link: "https://github.com/Vivekkumarprince1/chitchat.git/"
         },
         {
-            id: 3,
+            id: 4,
             title: "ShikshaSetu",
             category: "Education",
             technologies: "React.js, Node.js, MongoDB, Express, Tailwind CSS",
@@ -83,7 +92,7 @@ export const config = {
             link: "https://github.com/Vivekkumarprince1/shikshasetu.git"
         },
         {
-            id: 4,
+            id: 5,
             title: "KC Collection E-Commerce Website",
             category: "E-Commerce",
             technologies: "EJS, Express.js, Azure, Node.js, MongoDB",
