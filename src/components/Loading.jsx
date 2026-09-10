@@ -12,9 +12,19 @@ const Loading = ({ percent }) => {
     if (percent >= 100) {
       setTimeout(() => {
         setLoaded(true);
-      }, 500);
+      }, 400);
     }
   }, [percent]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        handleEnterClick();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [loaded, clicked]);
 
   const handleEnterClick = () => {
     if (!loaded || clicked) return;
