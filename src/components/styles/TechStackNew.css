@@ -67,7 +67,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -90,66 +90,70 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 /* Each Row */
 .techstack-row {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
-/* Tech Item */
+/* Tech Item - enlarged card */
 .techstack-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 55px;
-  height: 68px;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 78px;
+  height: 94px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-decoration: none;
   cursor: pointer;
 }
 
 .techstack-item:hover {
-  transform: translateY(-6px) scale(1.08);
-  background: rgba(194, 164, 255, 0.1);
+  transform: translateY(-6px) scale(1.06);
+  background: rgba(194, 164, 255, 0.12);
   border-color: var(--accentColor);
-  box-shadow: 0 8px 30px rgba(194, 164, 255, 0.25);
+  box-shadow: 0 12px 32px rgba(194, 164, 255, 0.28);
 }
 
+/* Original colors by default */
 .techstack-item img {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
-  filter: grayscale(100%) contrast(1.2) brightness(1.5);
-  opacity: 0.85;
-  transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-.techstack-item:hover img {
   filter: none;
   opacity: 1;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Invert colors on hover */
+.techstack-item:hover img {
+  filter: invert(1);
+  transform: scale(1.08);
 }
 
 .techstack-item span {
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 6px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 50px;
+  max-width: 68px;
+  transition: color 0.3s ease;
 }
 
 .techstack-item:hover span {
@@ -159,21 +163,32 @@
 /* Responsive */
 @media screen and (max-width: 1200px) {
   .techstack-content {
-    max-width: 900px;
+    max-width: 960px;
   }
   
+  .techstack-pyramid {
+    gap: 12px;
+  }
+
+  .techstack-row {
+    gap: 12px;
+  }
+
   .techstack-item {
-    width: 50px;
-    height: 62px;
+    width: 68px;
+    height: 84px;
+    padding: 8px;
+    border-radius: 12px;
   }
   
   .techstack-item img {
-    width: 26px;
-    height: 26px;
+    width: 38px;
+    height: 38px;
   }
   
   .techstack-item span {
-    font-size: 8px;
+    font-size: 10px;
+    max-width: 60px;
   }
 }
 
@@ -184,58 +199,61 @@
   }
   
   .techstack-pyramid {
-    gap: 8px;
+    gap: 10px;
   }
   
   .techstack-row {
-    gap: 8px;
+    gap: 10px;
   }
   
   .techstack-item {
-    width: 45px;
-    height: 56px;
-    padding: 6px;
+    width: 60px;
+    height: 76px;
+    padding: 7px;
+    border-radius: 11px;
   }
   
   .techstack-item img {
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
   }
   
   .techstack-item span {
-    font-size: 7px;
-    max-width: 42px;
+    font-size: 9px;
+    max-width: 52px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .techstack-content h2 {
     font-size: 36px;
+    margin-bottom: 25px;
   }
   
   .techstack-pyramid {
-    gap: 6px;
+    gap: 8px;
   }
   
   .techstack-row {
-    gap: 6px;
+    gap: 8px;
   }
   
   .techstack-item {
-    width: 40px;
-    height: 50px;
-    padding: 5px;
-    border-radius: 8px;
+    width: 52px;
+    height: 68px;
+    padding: 6px;
+    border-radius: 10px;
   }
   
   .techstack-item img {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
   
   .techstack-item span {
-    font-size: 6px;
-    max-width: 38px;
-    margin-top: 3px;
+    font-size: 8.5px;
+    max-width: 44px;
+    margin-top: 4px;
   }
 }
+
