@@ -168,16 +168,25 @@ const About = () => {
           {/* Card 1: Profile Card */}
           <div className="bento-card rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[300px]">
             <div className="flex items-center gap-5">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-pink-500/30 flex items-center justify-center bg-tertiary shrink-0">
-                <span className="text-2xl md:text-3xl font-black text-white">VK</span>
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-pink-500/40 overflow-hidden flex items-center justify-center bg-tertiary shrink-0 shadow-lg shadow-pink-500/20">
+                <img
+                  src="/images/vivek_profile.jpg"
+                  alt="Vivek Kumar"
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/images/mypic.jpeg";
+                  }}
+                />
               </div>
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">Vivek Kumar</h3>
-                <p className="text-sm text-secondary mt-1">Full-Stack Developer</p>
+                <p className="text-sm text-secondary mt-1 font-medium">Software Development Engineer</p>
+                <span className="inline-block text-[11px] font-semibold text-emerald-400 mt-0.5">@ ConnectSphere</span>
               </div>
             </div>
             <p className="text-secondary text-sm md:text-[15px] leading-relaxed mt-6">
-              I'm a Full-Stack Developer with a passion for building robust, scalable web applications. I specialize in EJS, React, Node.js, and modern web solutions, combining technical expertise with business-driven problem-solving.
+              I'm a Software Development Engineer specializing in distributed microservices, real-time collaboration platforms, and high-performance full-stack web applications. Dedicated to system scalability, low latency, and modern code craft.
             </p>
           </div>
 

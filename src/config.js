@@ -2,8 +2,8 @@ export const config = {
     developer: {
         name: "Vivek",
         fullName: "Vivek Kumar",
-        title: "Full-Stack Developer",
-        description: "Full-Stack Developer with a passion for building robust, scalable web applications. I specialize in EJS, React, Node.js, and modern web solutions, combining technical expertise with business-driven problem-solving."
+        title: "Software Development Engineer (SDE)",
+        description: "Software Development Engineer at ConnectSphere. Architecting high-throughput distributed systems, real-time collaboration platforms, and scalable full-stack web applications."
     },
     social: {
         github: "Vivekkumarprince1",
@@ -12,7 +12,7 @@ export const config = {
     },
     about: {
         title: "About Me",
-        description: "I'm a Full-Stack Developer with a passion for building robust, scalable web applications. I specialize in EJS, React, Node.js, and modern web solutions, combining technical expertise with business-driven problem-solving."
+        description: "Software Development Engineer at ConnectSphere specializing in distributed microservices, real-time engines, and scalable web solutions. Combining system architecture with modern frontend performance."
     },
     experiences: [
         {
