@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ULTRA-SLEEK MINIMALIST HERO SECTION (LINEAR / VERCEL STYLE)
+   CINEMATIC EDITORIAL HERO WITH 3D PORTRAIT PORTAL
    Vivek Kumar Portfolio
    ========================================================================== */
 
@@ -14,48 +14,64 @@
   background-color: transparent;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 100px 24px 60px 24px;
+  padding: 100px 32px 50px 32px;
   z-index: 1;
 }
 
-/* Master Centered Container with generous breathing space */
-.landing-container {
+.landing-stage-wrapper {
   width: 100%;
-  max-width: 960px;
+  max-width: 1220px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  gap: 24px;
 }
 
-/* 1. Sleek Status Tag (Linear / Vercel Style) */
-.hero-status-tag {
+/* 2-Column Balanced Cinematic Grid */
+.hero-cinematic-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px;
+  align-items: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: Editorial Narrative, Typography & Actions
+   ========================================================================== */
+.hero-editorial-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 20px;
+}
+
+/* 1. Status Pill Badge */
+.hero-pill-badge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 7px 18px;
+  padding: 6px 16px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
   user-select: none;
 }
 
-.hero-status-tag:hover {
-  border-color: rgba(194, 164, 255, 0.4);
-  background: rgba(255, 255, 255, 0.055);
+.hero-pill-badge:hover {
+  border-color: rgba(194, 164, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(194, 164, 255, 0.15);
 }
 
-.status-indicator {
+.pill-dot {
   position: relative;
   display: flex;
   align-items: center;
@@ -64,17 +80,17 @@
   height: 8px;
 }
 
-.status-pulse {
+.pill-dot-ping {
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background-color: #10b981;
   opacity: 0.75;
-  animation: heroPulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: heroPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.status-solid {
+.pill-dot-core {
   position: relative;
   width: 6px;
   height: 6px;
@@ -83,55 +99,77 @@
   box-shadow: 0 0 8px #10b981;
 }
 
-@keyframes heroPulsePing {
+@keyframes heroPing {
   70%, 100% {
     transform: scale(2.8);
     opacity: 0;
   }
 }
 
-.status-label {
-  font-size: 13px;
+.pill-label {
+  font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
-  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2px;
 }
 
-.status-company {
-  color: var(--accentColor, #c2a4ff);
+.pill-divider {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+}
+
+.pill-sublabel {
+  font-size: 12px;
   font-weight: 600;
+  color: var(--accentColor, #c2a4ff);
 }
 
-/* 2. Master Headline: Big, razor-sharp, cinematic */
-.hero-main-title {
-  font-size: clamp(40px, 6.2vw, 78px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-  margin: 4px 0 0 0;
-  color: #ffffff;
-  background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-rendering: optimizeLegibility;
+/* 2. Eyebrow Tag */
+.hero-eyebrow-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
 }
 
-.hero-title-accent {
+.eyebrow-accent {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accentColor, #c2a4ff);
+}
+
+.eyebrow-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+/* 3. Grand Title */
+.hero-cinema-title {
+  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin: 0;
   background: linear-gradient(
     135deg,
-    #c2a4ff 0%,
-    #d8b4fe 40%,
-    #f472b6 80%,
-    #c2a4ff 100%
+    #ffffff 0%,
+    #f2efff 30%,
+    #c2a4ff 52%,
+    #ffffff 75%,
+    #e9d5ff 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: accentShimmer 8s ease-in-out infinite;
-  display: inline-block;
+  animation: heroShine 8s ease-in-out infinite;
+  filter: drop-shadow(0 2px 20px rgba(194, 164, 255, 0.25));
 }
 
-@keyframes accentShimmer {
+@keyframes heroShine {
   0% {
     background-position: 0% center;
   }
@@ -143,47 +181,46 @@
   }
 }
 
-/* 3. Typewriter Specialty Line */
-.hero-specialty-line {
+/* 4. Typewriter Specialty Strip */
+.hero-typewriter-strip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  margin-top: 2px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(18, 14, 28, 0.65);
+  border: 1px solid rgba(194, 164, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
-.specialty-label {
+.typewriter-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13.5px;
-  font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
-  letter-spacing: -0.01em;
+  font-weight: 400;
 }
 
-.specialty-typed {
-  font-size: 14px;
+.typewriter-output {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--accentColor, #c2a4ff);
-  letter-spacing: -0.01em;
-  display: inline-flex;
-  align-items: center;
+  text-shadow: 0 0 12px rgba(194, 164, 255, 0.45);
 }
 
-.specialty-caret {
+.typewriter-cursor {
   display: inline-block;
   width: 2px;
-  height: 15px;
+  height: 16px;
   background-color: var(--accentColor, #c2a4ff);
-  margin-left: 3px;
-  animation: heroCaretBlink 0.9s steps(1) infinite;
-  box-shadow: 0 0 6px var(--accentColor, #c2a4ff);
+  margin-left: 2px;
+  animation: heroBlink 0.9s steps(1) infinite;
+  box-shadow: 0 0 8px var(--accentColor, #c2a4ff);
 }
 
-@keyframes heroCaretBlink {
+@keyframes heroBlink {
   0%, 50% {
     opacity: 1;
   }
@@ -192,34 +229,54 @@
   }
 }
 
-/* 4. Focused Mission Description */
-.hero-description-text {
-  font-size: clamp(15.5px, 1.8vw, 18px);
+/* 5. Pitch Paragraph */
+.hero-pitch-paragraph {
+  font-size: 15.5px;
   font-weight: 300;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.68);
-  max-width: 660px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 580px;
   margin: 0;
-  letter-spacing: -0.01em;
 }
 
-.hero-name-token {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-/* 5. Minimalist CTA Button Group */
-.hero-button-row {
+/* 6. Core Tech Cloud */
+.hero-tech-cloud {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-top: 10px;
 }
 
-/* Primary Linear Button */
-.btn-hero-primary {
+.tech-tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(194, 164, 255, 0.12);
+  border-color: rgba(194, 164, 255, 0.35);
+  color: var(--accentColor, #c2a4ff);
+  transform: translateY(-2px);
+}
+
+/* 7. Action CTA Group */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.btn-cinema-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -227,75 +284,60 @@
   font-size: 14.5px;
   font-weight: 600;
   color: #0b080c;
-  background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 100%);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: linear-gradient(135deg, #c2a4ff 0%, #a272ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 9999px;
   text-decoration: none;
-  box-shadow: 0 4px 24px rgba(255, 255, 255, 0.2), 0 0 16px rgba(194, 164, 255, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 22px rgba(194, 164, 255, 0.32);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.btn-hero-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.35), 0 0 24px rgba(194, 164, 255, 0.4);
+.btn-cinema-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 32px rgba(194, 164, 255, 0.5), 0 0 20px rgba(194, 164, 255, 0.3);
   color: #000;
 }
 
-.btn-arrow-icon {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.25s ease;
+.btn-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
 }
 
-.btn-hero-primary:hover .btn-arrow-icon {
-  transform: translateX(3px);
+.btn-cinema-primary:hover .btn-arrow {
+  transform: translateX(4px);
 }
 
-/* Secondary Frosted Glass Button */
-.btn-hero-secondary {
+.btn-cinema-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
-  font-size: 14.5px;
+  padding: 13px 24px;
+  font-size: 14px;
   font-weight: 500;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 9999px;
   text-decoration: none;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.btn-hero-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.08);
+.btn-cinema-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--accentColor, #c2a4ff);
+  color: var(--accentColor, #c2a4ff);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(194, 164, 255, 0.18);
 }
 
-.btn-sub-icon {
-  width: 14px;
-  height: 14px;
-  opacity: 0.75;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.btn-hero-secondary:hover .btn-sub-icon {
-  opacity: 1;
-  transform: translateY(1px);
-}
-
-/* Ghost Button (Play Chess) */
-.btn-hero-ghost {
+.btn-cinema-ghost {
   display: inline-flex;
   align-items: center;
-  padding: 13px 22px;
+  padding: 13px 20px;
   font-size: 14px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
@@ -307,37 +349,197 @@
   cursor: pointer;
 }
 
-.btn-hero-ghost:hover {
+.btn-cinema-ghost:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-1px);
 }
 
-/* 6. Minimalist Scroll Indicator */
-.hero-minimal-scroll {
+/* ==========================================================================
+   RIGHT COLUMN: Modern 3D Glass Portrait Portal
+   ========================================================================== */
+.hero-portrait-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.portrait-portal-card {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Radiant Glow behind Card */
+.portal-glow-aura {
   position: absolute;
-  bottom: -60px;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(194, 164, 255, 0.35) 0%, rgba(138, 43, 226, 0.12) 55%, transparent 75%);
+  filter: blur(45px);
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass Frame with Arched Top */
+.portal-frame {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background: linear-gradient(160deg, rgba(28, 22, 44, 0.75) 0%, rgba(12, 9, 18, 0.9) 100%);
+  border: 1px solid rgba(194, 164, 255, 0.25);
+  border-radius: 28px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(194, 164, 255, 0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+}
+
+.portal-backdrop-glow {
+  position: absolute;
+  top: 15%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(194, 164, 255, 0.3) 0%, rgba(244, 114, 182, 0.15) 50%, transparent 75%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+/* Vivek's Cutout Image standing naturally */
+.portal-cutout-img {
+  width: 90%;
+  height: 94%;
+  object-fit: contain;
+  object-position: bottom center;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6));
+  transition: transform 0.4s ease;
+}
+
+.portrait-portal-card:hover .portal-cutout-img {
+  transform: scale(1.04);
+}
+
+.portal-fallback-monogram {
+  font-size: 72px;
+  font-weight: 900;
+  color: #c2a4ff;
+  margin-bottom: 120px;
+  letter-spacing: 2px;
+}
+
+/* Bottom fade smoothly blending into base */
+.portal-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(180deg, transparent 0%, rgba(12, 9, 18, 0.85) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Floating Glass Tags */
+.portal-floating-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(18, 14, 28, 0.85);
+  border: 1px solid rgba(194, 164, 255, 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  z-index: 5;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tag-top {
+  top: 20px;
+  right: -16px;
+  animation: floatTag1 5s ease-in-out infinite alternate;
+}
+
+.tag-bottom {
+  bottom: 24px;
+  left: -16px;
+  animation: floatTag2 6s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes floatTag1 {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatTag2 {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+.tag-icon {
+  font-size: 13px;
+}
+
+.tag-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   Minimalist Scroll Cue
+   ========================================================================== */
+.hero-scroll-cue {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: 45px;
+  opacity: 0.65;
+  transition: all 0.3s ease;
   user-select: none;
 }
 
-.hero-minimal-scroll:hover {
+.hero-scroll-cue:hover {
   opacity: 1;
   transform: translateY(2px);
 }
 
-.scroll-pill {
+.cue-pill {
   width: 18px;
   height: 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
   display: flex;
   justify-content: center;
   padding-top: 5px;
@@ -345,19 +547,19 @@
   transition: border-color 0.3s ease;
 }
 
-.hero-minimal-scroll:hover .scroll-pill {
+.hero-scroll-cue:hover .cue-pill {
   border-color: var(--accentColor, #c2a4ff);
 }
 
-.scroll-pip {
+.cue-dot {
   width: 3px;
   height: 5px;
-  border-radius: 2px;
   background-color: var(--accentColor, #c2a4ff);
-  animation: heroPipSlide 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  border-radius: 2px;
+  animation: cueDotMove 1.8s ease-in-out infinite;
 }
 
-@keyframes heroPipSlide {
+@keyframes cueDotMove {
   0% {
     transform: translateY(0);
     opacity: 1;
@@ -372,65 +574,125 @@
   }
 }
 
-.scroll-caption {
+.cue-text {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.45);
-  transition: color 0.3s ease;
-}
-
-.hero-minimal-scroll:hover .scroll-caption {
-  color: var(--accentColor, #c2a4ff);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ==========================================================================
-   Responsive Viewport Fine-Tuning
+   Responsive Adaptations
    ========================================================================== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
   .landing-section {
-    padding: 100px 18px 50px 18px;
+    padding: 90px 20px 50px 20px;
+    height: auto;
+    min-height: 100vh;
   }
 
-  .landing-container {
-    gap: 18px;
+  .hero-cinematic-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .hero-status-tag {
-    padding: 6px 14px;
+  .hero-editorial-col {
+    align-items: center;
+    text-align: center;
   }
 
-  .status-label {
-    font-size: 12px;
+  .hero-eyebrow-line {
+    justify-content: center;
   }
 
-  .hero-main-title {
-    font-size: 38px;
-    letter-spacing: -0.03em;
+  .hero-cinema-title {
+    font-size: clamp(38px, 8vw, 54px);
   }
 
-  .hero-description-text {
-    font-size: 14.5px;
-    padding: 0 8px;
+  .hero-pitch-paragraph {
+    max-width: 600px;
   }
 
-  .hero-button-row {
+  .hero-tech-cloud {
+    justify-content: center;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .portrait-portal-card {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .portal-frame {
+    height: 380px;
+  }
+
+  .tag-top {
+    right: 0px;
+  }
+
+  .tag-bottom {
+    left: 0px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .landing-section {
+    padding: 80px 16px 40px 16px;
+  }
+
+  .hero-pill-badge {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 14px;
+  }
+
+  .pill-divider {
+    display: none;
+  }
+
+  .hero-cinema-title {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .hero-typewriter-strip {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 12px;
+  }
+
+  .hero-pitch-paragraph {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-cta-group {
     flex-direction: column;
     width: 100%;
     gap: 12px;
-    padding: 0 10px;
-    box-sizing: border-box;
   }
 
-  .btn-hero-primary,
-  .btn-hero-secondary,
-  .btn-hero-ghost {
+  .btn-cinema-primary,
+  .btn-cinema-secondary,
+  .btn-cinema-ghost {
     width: 100%;
     justify-content: center;
     box-sizing: border-box;
   }
 
-  .hero-minimal-scroll {
+  .portrait-portal-card {
+    max-width: 280px;
+  }
+
+  .portal-frame {
+    height: 330px;
+  }
+
+  .hero-scroll-cue {
     display: none;
   }
 }
