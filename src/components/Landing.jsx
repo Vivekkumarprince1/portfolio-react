@@ -9,48 +9,35 @@ const Landing = () => {
 
   return (
     <div className="landing-section" id="landingDiv">
-      <div className="hero-reference-container">
+      <div className="hero-clean-wrapper">
         
-        {/* Top Capsule Ticker Bar */}
-        <div className="hero-top-capsule">
-          <span>FULL-STACK ARCHITECTURE</span>
-          <span className="capsule-dot">•</span>
-          <span>DISTRIBUTED SYSTEMS</span>
-          <span className="capsule-dot">•</span>
-          <span>REAL-TIME ENGINES</span>
-          <span className="capsule-dot">•</span>
-          <span>CLOUD MICROSERVICES</span>
-          <span className="capsule-dot">•</span>
-          <span>SYSTEM DESIGN</span>
-        </div>
-
-        {/* Top Header Row: Name on Left, Motto on Right */}
-        <div className="hero-header-row">
-          <div className="hero-identity-box">
-            <h2 className="hero-author-name">{fullName.toUpperCase()}</h2>
-            <p className="hero-author-sub">Software Development Engineer • ConnectSphere</p>
+        {/* Top Header Row: Identity Left, Poetic Motto Right */}
+        <div className="hero-top-row">
+          <div className="hero-author-block">
+            <h1 className="hero-clean-name">{fullName.toUpperCase()}</h1>
+            <p className="hero-clean-sub">Software Development Engineer • ConnectSphere</p>
           </div>
 
-          <div className="hero-motto-box">
-            <p className="motto-line">Systems that scale.</p>
-            <p className="motto-line">Craft that speaks.</p>
+          <div className="hero-motto-block">
+            <span>Systems that scale.</span>
+            <span>Craft that speaks.</span>
           </div>
         </div>
 
-        {/* Centerpiece: Depth Stage (Backdrop Word + Foreground Portrait + Callout) */}
-        <div className="hero-depth-stage">
-          {/* Layer 1: Giant Architectural Backdrop Word */}
-          <div className="hero-backdrop-word" aria-hidden="true">
+        {/* Centerpiece: Airy Depth Stage (Backdrop Word + Cutout Portrait + Side Callout) */}
+        <div className="hero-depth-center">
+          {/* Giant subtle background typography */}
+          <div className="hero-giant-word" aria-hidden="true">
             ENGINEER
           </div>
 
-          {/* Layer 2: Center Cutout Portrait Rising in Foreground */}
-          <div className="hero-portrait-frame">
+          {/* Clean Foreground Portrait */}
+          <div className="hero-portrait-wrap">
             {!imgError ? (
               <img
                 src="/images/vivek_cutout.png"
                 alt={fullName}
-                className="hero-natural-cutout"
+                className="hero-clean-cutout"
                 onError={(e) => {
                   if (e.target.src.includes("vivek_cutout.png")) {
                     e.target.src = "/images/mypicnbg.png";
@@ -60,67 +47,46 @@ const Landing = () => {
                 }}
               />
             ) : (
-              <div className="hero-fallback-monogram">VK</div>
+              <div className="hero-fallback-initials">VK</div>
             )}
-            <div className="hero-portrait-fade"></div>
+            <div className="hero-bottom-blend"></div>
           </div>
 
-          {/* Layer 3: Bold Role Callout Accent (Right Side) */}
-          <div className="hero-role-callout">
-            <span className="callout-sub">FULL-STACK</span>
-            <span className="callout-main">SOFTWARE ENGINEER</span>
+          {/* Minimalist Role Callout on Right */}
+          <div className="hero-clean-callout">
+            <span className="callout-tag">FULL-STACK</span>
+            <span className="callout-title">SOFTWARE ENGINEER</span>
           </div>
         </div>
 
-        {/* Bottom Editorial Strip */}
-        <div className="hero-bottom-deck">
-          {/* Social Badges */}
-          <div className="hero-meta-links">
+        {/* Bottom Baseline: Clean Metadata & Elegant 1-line Manifesto */}
+        <div className="hero-bottom-baseline">
+          <div className="hero-social-pills">
             <a
               href="https://github.com/Vivekkumarprince1"
               target="_blank"
               rel="noopener noreferrer"
-              className="meta-badge"
+              className="clean-pill"
               data-cursor="disable"
             >
-              <span className="badge-icon">⌥</span>
-              <span className="badge-text">GitHub</span>
+              <span>⌥ GitHub</span>
             </a>
-
-            <span className="meta-badge">
-              <span className="badge-icon">🚀</span>
-              <span className="badge-text">ConnectSphere SDE</span>
-            </span>
-
-            <Link to="/play" className="meta-badge chess-badge" data-cursor="disable">
-              <span className="badge-icon">♟️</span>
-              <span className="badge-text">Play Chess</span>
-            </Link>
-          </div>
-
-          {/* Editorial Manifesto Quote */}
-          <p className="hero-manifesto-text">
-            "Between system scalability and user-centric craft lies the software I engineer. From designing distributed microservices to deploying ultra-low latency real-time platforms, my focus is on performance, resilient architecture, and relentless engineering execution."
-          </p>
-
-          {/* Action CTAs */}
-          <div className="hero-editorial-actions">
-            <Link to="/myworks" className="btn-editorial-primary" data-cursor="disable">
-              <span>Explore Projects</span>
-              <svg viewBox="0 0 20 20" fill="currentColor" className="btn-arrow">
-                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </Link>
-
             <a
               href="/resume.pdf"
               download="Vivek_Kumar_Resume.pdf"
-              className="btn-editorial-secondary"
+              className="clean-pill"
               data-cursor="disable"
             >
-              <span>CV / Resume 📄</span>
+              <span>📄 Resume</span>
             </a>
+            <Link to="/play" className="clean-pill" data-cursor="disable">
+              <span>♟️ Play Chess</span>
+            </Link>
           </div>
+
+          <p className="hero-clean-manifesto">
+            "Between system scalability and user-centric craft lies the software I engineer. Architecting high-throughput distributed microservices and real-time collaboration engines."
+          </p>
         </div>
 
       </div>

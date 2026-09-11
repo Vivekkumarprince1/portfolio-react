@@ -1,7 +1,6 @@
 /* ==========================================================================
-   CINEMATIC EDITORIAL HERO (REFERENCE DESIGN REPLICATION)
-   Matches the uploaded reference: Top Capsule, Dual Header, Giant Backdrop Word,
-   Natural Portrait Cutout Foreground, Role Callout & Bottom Manifesto.
+   MINIMALIST EDITORIAL HERO (UNCLUTTERED, AIRY & SPACIOUS)
+   Pure Reference Aesthetic: Negative space, clean depth, and zero clutter.
    ========================================================================== */
 
 .landing-section {
@@ -10,193 +9,162 @@
   min-height: 100dvh;
   min-height: var(--vh, 100vh);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   background-color: transparent;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 85px 28px 45px 28px;
+  padding: 80px 48px 32px 48px;
   z-index: 1;
 }
 
-.hero-reference-container {
+.hero-clean-wrapper {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
   box-sizing: border-box;
+  flex-grow: 1;
 }
 
 /* ==========================================================================
-   1. TOP CAPSULE TICKER BAR
+   1. TOP HEADER ROW (Spacious & Refined)
    ========================================================================== */
-.hero-top-capsule {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 7px 24px;
-  border-radius: 9999px;
-  background: rgba(30, 26, 36, 0.55);
-  border: 1px solid rgba(203, 178, 121, 0.32);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #cbb279;
-  text-transform: uppercase;
-  max-width: 100%;
-  flex-wrap: wrap;
-  text-align: center;
-}
-
-.capsule-dot {
-  color: rgba(203, 178, 121, 0.45);
-  font-size: 10px;
-}
-
-/* ==========================================================================
-   2. TOP HEADER ROW (Name Left, Motto Right)
-   ========================================================================== */
-.hero-header-row {
+.hero-top-row {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 18px;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding-top: 8px;
 }
 
-.hero-identity-box {
+.hero-author-block {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   text-align: left;
 }
 
-.hero-author-name {
-  font-size: clamp(24px, 3.2vw, 36px);
-  font-weight: 900;
+.hero-clean-name {
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 800;
   color: #e2c992;
   letter-spacing: 0.5px;
   margin: 0;
   line-height: 1.1;
-  text-shadow: 0 2px 14px rgba(226, 201, 146, 0.25);
+  text-shadow: 0 2px 16px rgba(226, 201, 146, 0.2);
 }
 
-.hero-author-sub {
-  font-size: clamp(12.5px, 1.4vw, 15px);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.72);
-  margin: 0;
-  letter-spacing: 0.3px;
-}
-
-.hero-motto-box {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.motto-line {
-  font-size: clamp(12px, 1.3vw, 14.5px);
+.hero-clean-sub {
+  font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.65);
   margin: 0;
-  line-height: 1.4;
   letter-spacing: 0.3px;
 }
 
+.hero-motto-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 2px;
+}
+
+.hero-motto-block span {
+  font-size: clamp(12px, 1.15vw, 13.5px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.4px;
+}
+
 /* ==========================================================================
-   3. CENTER DEPTH STAGE (Backdrop Word + Foreground Portrait Cutout)
+   2. CENTER DEPTH STAGE (Airy Negative Space & Bold Depth Layering)
    ========================================================================== */
-.hero-depth-stage {
+.hero-depth-center {
   position: relative;
   width: 100%;
-  height: clamp(380px, 48vh, 520px);
+  height: clamp(380px, 52vh, 600px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin: 8px 0;
+  margin: auto 0;
   overflow: visible;
 }
 
-/* Layer 1: Giant Backdrop Word */
-.hero-backdrop-word {
+/* Soft, elegant giant backdrop word */
+.hero-giant-word {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(65px, 14.2vw, 195px);
+  font-size: clamp(70px, 15.5vw, 210px);
   font-weight: 900;
-  letter-spacing: clamp(4px, 1.8vw, 24px);
-  color: rgba(203, 178, 121, 0.65);
+  letter-spacing: clamp(6px, 2vw, 28px);
+  color: rgba(203, 178, 121, 0.38);
   text-transform: uppercase;
   white-space: nowrap;
   user-select: none;
   pointer-events: none;
   z-index: 1;
   line-height: 1;
-  text-shadow: 0 0 50px rgba(203, 178, 121, 0.15);
+  text-shadow: 0 0 60px rgba(203, 178, 121, 0.1);
 }
 
-/* Layer 2: Natural Cutout Portrait */
-.hero-portrait-frame {
+/* Foreground Portrait */
+.hero-portrait-wrap {
   position: relative;
   z-index: 2;
   height: 100%;
-  max-height: 520px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
-.hero-natural-cutout {
+.hero-clean-cutout {
   height: 100%;
   width: auto;
-  max-width: 88vw;
+  max-width: 85vw;
   object-fit: contain;
   object-position: bottom center;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.75));
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
   transition: transform 0.4s ease;
 }
 
-.hero-portrait-frame:hover .hero-natural-cutout {
-  transform: scale(1.02);
+.hero-portrait-wrap:hover .hero-clean-cutout {
+  transform: scale(1.015);
 }
 
-.hero-fallback-monogram {
-  font-size: 90px;
+.hero-fallback-initials {
+  font-size: 84px;
   font-weight: 900;
   color: #e2c992;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
-.hero-portrait-fade {
+.hero-bottom-blend {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 60px;
   background: linear-gradient(180deg, transparent 0%, rgba(11, 8, 12, 0.95) 100%);
   pointer-events: none;
   z-index: 3;
 }
 
-/* Layer 3: Bold Role Callout (Right side of portrait, matching reference) */
-.hero-role-callout {
+/* Minimalist Right Callout */
+.hero-clean-callout {
   position: absolute;
-  right: 6%;
-  bottom: 18%;
+  right: 4%;
+  bottom: 15%;
   z-index: 4;
   display: flex;
   flex-direction: column;
@@ -205,265 +173,165 @@
   pointer-events: none;
 }
 
-.callout-sub {
-  font-size: clamp(11px, 1.2vw, 13px);
+.callout-tag {
+  font-size: clamp(11px, 1.1vw, 12.5px);
   font-weight: 700;
   color: #e2c992;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
 }
 
-.callout-main {
-  font-size: clamp(22px, 3.2vw, 44px);
+.callout-title {
+  font-size: clamp(20px, 3vw, 40px);
   font-weight: 900;
   color: #ffffff;
   letter-spacing: -0.5px;
   line-height: 1.05;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   text-transform: uppercase;
 }
 
 /* ==========================================================================
-   4. BOTTOM SECTION: Social Badges, Manifesto Quote, CTAs
+   3. BOTTOM BASELINE (Lightweight, Subtle & Breathing)
    ========================================================================== */
-.hero-bottom-deck {
+.hero-bottom-baseline {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 30px;
   z-index: 5;
-  text-align: center;
   box-sizing: border-box;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Social Badges */
-.hero-meta-links {
+.hero-social-pills {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.meta-badge {
+.clean-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(203, 178, 121, 0.28);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 11.5px;
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
+  backdrop-filter: blur(10px);
   transition: all 0.25s ease;
 }
 
-.meta-badge:hover {
-  background: rgba(203, 178, 121, 0.15);
-  border-color: rgba(203, 178, 121, 0.6);
-  transform: translateY(-2px);
+.clean-pill:hover {
+  background: rgba(203, 178, 121, 0.12);
+  border-color: rgba(203, 178, 121, 0.4);
   color: #e2c992;
+  transform: translateY(-1px);
 }
 
-.badge-icon {
-  font-size: 12px;
-}
-
-.badge-text {
-  letter-spacing: 0.3px;
-}
-
-/* Editorial Manifesto Quote */
-.hero-manifesto-text {
-  font-size: clamp(12.5px, 1.25vw, 15px);
+.hero-clean-manifesto {
+  font-size: clamp(12px, 1.1vw, 13.5px);
   font-weight: 300;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 980px;
-  margin: 0 auto;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 720px;
+  margin: 0;
+  text-align: right;
   letter-spacing: 0.2px;
 }
 
-/* Editorial Action Buttons */
-.hero-editorial-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-
-.btn-editorial-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #0b080c;
-  background: linear-gradient(135deg, #e2c992 0%, #cbb279 100%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 9999px;
-  text-decoration: none;
-  box-shadow: 0 4px 22px rgba(203, 178, 121, 0.32);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.btn-editorial-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 30px rgba(203, 178, 121, 0.5);
-  color: #000;
-}
-
-.btn-arrow {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.25s ease;
-}
-
-.btn-editorial-primary:hover .btn-arrow {
-  transform: translateX(3px);
-}
-
-.btn-editorial-secondary {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 24px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 9999px;
-  text-decoration: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.btn-editorial-secondary:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: #e2c992;
-  color: #e2c992;
-  transform: translateY(-2px);
-}
-
 /* ==========================================================================
-   RESPONSIVE FINE-TUNING
+   RESPONSIVE DESIGN (Tablets & Mobile)
    ========================================================================== */
-
-/* Tablets (<= 960px) */
 @media screen and (max-width: 960px) {
   .landing-section {
-    padding: 85px 20px 40px 20px;
+    padding: 80px 24px 30px 24px;
+    height: auto;
+    min-height: 100vh;
   }
 
-  .hero-top-capsule {
-    font-size: 10px;
-    gap: 8px;
-    padding: 6px 18px;
+  .hero-depth-center {
+    height: clamp(340px, 45vh, 440px);
+    margin: 20px 0;
   }
 
-  .hero-depth-stage {
-    height: clamp(340px, 44vh, 440px);
-  }
-
-  .hero-role-callout {
-    right: 3%;
-    bottom: 12%;
-  }
-
-  .callout-main {
-    font-size: 26px;
-  }
-}
-
-/* Mobile Devices (<= 680px) */
-@media screen and (max-width: 680px) {
-  .landing-section {
-    padding: 80px 16px 36px 16px;
-  }
-
-  .hero-top-capsule {
-    display: none; /* Hide wide capsule on phone screens to prioritize person and text */
-  }
-
-  .hero-header-row {
+  .hero-bottom-baseline {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 8px;
+    gap: 14px;
+    border-top: none;
   }
 
-  .hero-identity-box {
+  .hero-clean-manifesto {
+    text-align: center;
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .landing-section {
+    padding: 75px 16px 24px 16px;
+  }
+
+  .hero-top-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .hero-author-block {
     align-items: center;
     text-align: center;
   }
 
-  .hero-motto-box {
+  .hero-motto-block {
+    align-items: center;
     text-align: center;
   }
 
-  .hero-depth-stage {
-    height: clamp(280px, 38vh, 340px);
-    margin: 14px 0;
+  .hero-depth-center {
+    height: clamp(290px, 40vh, 360px);
+    margin: 16px 0;
   }
 
-  .hero-backdrop-word {
-    font-size: clamp(52px, 17vw, 85px);
+  .hero-giant-word {
+    font-size: clamp(52px, 18vw, 90px);
     letter-spacing: 4px;
   }
 
-  .hero-role-callout {
+  .hero-clean-callout {
     position: static;
     margin-top: 10px;
     align-items: center;
     text-align: center;
   }
 
-  .callout-main {
-    font-size: 24px;
+  .callout-title {
+    font-size: 22px;
   }
 
-  .hero-manifesto-text {
-    font-size: 13px;
-    line-height: 1.6;
-    padding: 0 6px;
-  }
-
-  .hero-editorial-actions {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .btn-editorial-primary,
-  .btn-editorial-secondary {
-    flex: 1 1 100%;
+  .hero-social-pills {
     justify-content: center;
-    box-sizing: border-box;
-  }
-}
-
-/* Small Phones (<= 400px) */
-@media screen and (max-width: 400px) {
-  .hero-author-name {
-    font-size: 24px;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
-  .hero-backdrop-word {
-    font-size: 48px;
-    letter-spacing: 2px;
+  .clean-pill {
+    padding: 4px 12px;
+    font-size: 11px;
   }
 
-  .callout-main {
-    font-size: 20px;
+  .hero-clean-manifesto {
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 0 4px;
   }
 }
