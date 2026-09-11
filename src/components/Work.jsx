@@ -3,7 +3,7 @@ import WorkImage from "./WorkImage";
 import ProjectModal from "./ProjectModal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { config } from "../config";
 import { Link } from "react-router-dom";
 
@@ -11,63 +11,68 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const workSectionRef = useRef(null);
+  const workFlexRef = useRef(null);
 
   useEffect(() => {
-    // Disable pinning on mobile to allow scrolling
-    if (window.innerWidth <= 768) return;
+    let mm = gsap.matchMedia();
 
-    let translateX = 0;
+    // Desktop (>= 1025px): Horizontal pinning with dynamic scroll distance
+    mm.add("(min-width: 1025px)", () => {
+      const section = workSectionRef.current;
+      const flex = workFlexRef.current;
+      if (!section || !flex) return;
 
-    function setTranslateX() {
-      const box = document.getElementsByClassName("work-box");
-      if (box.length === 0) return;
-      const workContainer = document.querySelector(".work-container");
-      if (!workContainer) return;
-      const rectLeft = workContainer.getBoundingClientRect().left;
-      const rect = box[0].getBoundingClientRect();
-      const parentWidth = box[0].parentElement.getBoundingClientRect().width;
-      let padding = parseInt(window.getComputedStyle(box[0]).padding) / 2;
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-    }
+      const getScrollAmount = () => {
+        return flex.scrollWidth - window.innerWidth + 120;
+      };
 
-    setTranslateX();
+      const tween = gsap.to(flex, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${getScrollAmount()}`,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          id: "work-horizontal",
+        },
+      });
 
-    let timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-section",
-        start: "top top",
-        end: `+=${translateX}`,
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        id: "work",
-        invalidateOnRefresh: true,
-      },
+      ScrollTrigger.refresh();
+
+      return () => {
+        tween.kill();
+      };
     });
 
-    timeline.to(".work-flex", {
-      x: -translateX,
-      ease: "none",
+    // Tablets & Mobile (<= 1024px): Natural vertical stack with 0 pinning
+    mm.add("(max-width: 1024px)", () => {
+      if (workFlexRef.current) {
+        gsap.set(workFlexRef.current, { clearProps: "all" });
+      }
     });
 
-    // Refresh ScrollTrigger after layout settles
-    ScrollTrigger.refresh();
-
-    // Clean up
-    return () => {
-      timeline.kill();
-      ScrollTrigger.getById("work")?.kill();
-    };
+    return () => mm.revert();
   }, []);
 
   return (
-    <div className="work-section" id="work">
-      <div className="work-container section-container">
-        <h2>
-          My <span>Work</span>
-        </h2>
-        <div className="work-flex">
+    <div className="work-section" id="work" ref={workSectionRef}>
+      <div className="work-container">
+        <div className="work-header">
+          <h2>
+            Featured <span>Works</span>
+          </h2>
+          <p className="work-header-subtitle">
+            A curated selection of distributed systems, real-time collaboration engines, and full-stack web platforms.
+          </p>
+        </div>
+
+        <div className="work-flex" ref={workFlexRef}>
           {config.projects.slice(0, 5).map((project, index) => (
             <div
               className="work-box"
@@ -75,20 +80,22 @@ const Work = () => {
               onClick={() => setSelectedProject(project)}
               role="button"
               tabIndex={0}
-              style={{ cursor: "pointer" }}
             >
               <div className="work-info">
                 <div className="work-title">
-                  <h3>0{index + 1}</h3>
-
-                  <div>
+                  <span className="work-index">0{index + 1}</span>
+                  <div className="work-title-text">
                     <h4>{project.title}</h4>
-                    <p>{project.category}</p>
+                    <span className="work-category">{project.category}</span>
                   </div>
                 </div>
-                <h4>Tools and features</h4>
-                <p>{project.technologies}</p>
+
+                <div className="work-tech-section">
+                  <span className="work-tech-label">Technologies</span>
+                  <p className="work-tech-p">{project.technologies}</p>
+                </div>
               </div>
+
               <WorkImage
                 image={project.image}
                 alt={project.title}
@@ -97,13 +104,18 @@ const Work = () => {
               />
             </div>
           ))}
-          {/* See All Works Button */}
+
+          {/* See All Works CTA Box */}
           <div className="work-box work-box-cta">
             <div className="see-all-works">
+              <span className="cta-icon">✦</span>
               <h3>Want to see more?</h3>
-              <p>Explore all of my projects and creations</p>
+              <p>Explore all production deployments, repositories, and real-time systems.</p>
               <Link to="/myworks" className="see-all-btn" data-cursor="disable">
-                See All Works →
+                <span>See All Works</span>
+                <svg viewBox="0 0 20 20" fill="currentColor" className="see-all-arrow">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -120,4 +132,3 @@ const Work = () => {
 };
 
 export default Work;
-
