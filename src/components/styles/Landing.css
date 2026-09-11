@@ -1,6 +1,7 @@
 /* ==========================================================================
-   CINEMATIC EDITORIAL HERO WITH 3D PORTRAIT PORTAL
-   Vivek Kumar Portfolio - Fully Responsive Multi-Device Architecture
+   CINEMATIC EDITORIAL HERO (REFERENCE DESIGN REPLICATION)
+   Matches the uploaded reference: Top Capsule, Dual Header, Giant Backdrop Word,
+   Natural Portrait Cutout Foreground, Role Callout & Bottom Manifesto.
    ========================================================================== */
 
 .landing-section {
@@ -15,13 +16,13 @@
   background-color: transparent;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 100px 32px 50px 32px;
+  padding: 85px 28px 45px 28px;
   z-index: 1;
 }
 
-.landing-stage-wrapper {
+.hero-reference-container {
   width: 100%;
-  max-width: 1220px;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -31,301 +32,311 @@
   box-sizing: border-box;
 }
 
-/* 2-Column Balanced Cinematic Grid */
-.hero-cinematic-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
+/* ==========================================================================
+   1. TOP CAPSULE TICKER BAR
+   ========================================================================== */
+.hero-top-capsule {
+  display: inline-flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  gap: 12px;
+  padding: 7px 24px;
+  border-radius: 9999px;
+  background: rgba(30, 26, 36, 0.55);
+  border: 1px solid rgba(203, 178, 121, 0.32);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #cbb279;
+  text-transform: uppercase;
+  max-width: 100%;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.capsule-dot {
+  color: rgba(203, 178, 121, 0.45);
+  font-size: 10px;
 }
 
 /* ==========================================================================
-   LEFT COLUMN: Editorial Narrative, Typography & Actions
+   2. TOP HEADER ROW (Name Left, Motto Right)
    ========================================================================== */
-.hero-editorial-col {
+.hero-header-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 18px;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.hero-identity-box {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.hero-author-name {
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 900;
+  color: #e2c992;
+  letter-spacing: 0.5px;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 14px rgba(226, 201, 146, 0.25);
+}
+
+.hero-author-sub {
+  font-size: clamp(12.5px, 1.4vw, 15px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.hero-motto-box {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.motto-line {
+  font-size: clamp(12px, 1.3vw, 14.5px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   3. CENTER DEPTH STAGE (Backdrop Word + Foreground Portrait Cutout)
+   ========================================================================== */
+.hero-depth-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 48vh, 520px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 8px 0;
+  overflow: visible;
+}
+
+/* Layer 1: Giant Backdrop Word */
+.hero-backdrop-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(65px, 14.2vw, 195px);
+  font-weight: 900;
+  letter-spacing: clamp(4px, 1.8vw, 24px);
+  color: rgba(203, 178, 121, 0.65);
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 1;
+  text-shadow: 0 0 50px rgba(203, 178, 121, 0.15);
+}
+
+/* Layer 2: Natural Cutout Portrait */
+.hero-portrait-frame {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-natural-cutout {
+  height: 100%;
+  width: auto;
+  max-width: 88vw;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.75));
+  transition: transform 0.4s ease;
+}
+
+.hero-portrait-frame:hover .hero-natural-cutout {
+  transform: scale(1.02);
+}
+
+.hero-fallback-monogram {
+  font-size: 90px;
+  font-weight: 900;
+  color: #e2c992;
+  margin-bottom: 80px;
+}
+
+.hero-portrait-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(180deg, transparent 0%, rgba(11, 8, 12, 0.95) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Layer 3: Bold Role Callout (Right side of portrait, matching reference) */
+.hero-role-callout {
+  position: absolute;
+  right: 6%;
+  bottom: 18%;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 18px;
-  width: 100%;
+  pointer-events: none;
 }
 
-/* 1. Status Pill Badge */
-.hero-pill-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  user-select: none;
-  max-width: 100%;
-  flex-wrap: wrap;
-}
-
-.hero-pill-badge:hover {
-  border-color: rgba(194, 164, 255, 0.45);
-  background: rgba(255, 255, 255, 0.06);
-  transform: translateY(-2px);
-}
-
-.pill-dot {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
-}
-
-.pill-dot-ping {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #10b981;
-  opacity: 0.75;
-  animation: heroPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-.pill-dot-core {
-  position: relative;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #10b981;
-  box-shadow: 0 0 8px #10b981;
-}
-
-@keyframes heroPing {
-  70%, 100% {
-    transform: scale(2.8);
-    opacity: 0;
-  }
-}
-
-.pill-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.2px;
-}
-
-.pill-divider {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 12px;
-}
-
-.pill-sublabel {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accentColor, #c2a4ff);
-}
-
-/* 2. Eyebrow Tag */
-.hero-eyebrow-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 2px;
-}
-
-.eyebrow-accent {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 13px;
+.callout-sub {
+  font-size: clamp(11px, 1.2vw, 13px);
   font-weight: 700;
-  color: var(--accentColor, #c2a4ff);
-}
-
-.eyebrow-text {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #e2c992;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-/* 3. Grand Title */
-.hero-cinema-title {
-  font-size: clamp(38px, 5.5vw, 72px);
+.callout-main {
+  font-size: clamp(22px, 3.2vw, 44px);
   font-weight: 900;
-  line-height: 1.02;
-  letter-spacing: -2px;
-  margin: 0;
-  background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #f2efff 30%,
-    #c2a4ff 52%,
-    #ffffff 75%,
-    #e9d5ff 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: heroShine 8s ease-in-out infinite;
-  filter: drop-shadow(0 2px 20px rgba(194, 164, 255, 0.25));
-  word-break: break-word;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+  text-transform: uppercase;
 }
 
-@keyframes heroShine {
-  0% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-  100% {
-    background-position: 0% center;
-  }
-}
-
-/* 4. Typewriter Specialty Strip */
-.hero-typewriter-strip {
-  display: inline-flex;
+/* ==========================================================================
+   4. BOTTOM SECTION: Social Badges, Manifesto Quote, CTAs
+   ========================================================================== */
+.hero-bottom-deck {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: rgba(18, 14, 28, 0.65);
-  border: 1px solid rgba(194, 164, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  max-width: 100%;
+  gap: 14px;
+  z-index: 5;
+  text-align: center;
   box-sizing: border-box;
 }
 
-.typewriter-tag {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 400;
-  flex-shrink: 0;
-}
-
-.typewriter-output {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--accentColor, #c2a4ff);
-  text-shadow: 0 0 12px rgba(194, 164, 255, 0.45);
-}
-
-.typewriter-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 16px;
-  background-color: var(--accentColor, #c2a4ff);
-  margin-left: 2px;
-  animation: heroBlink 0.9s steps(1) infinite;
-  box-shadow: 0 0 8px var(--accentColor, #c2a4ff);
-  flex-shrink: 0;
-}
-
-@keyframes heroBlink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-/* 5. Pitch Paragraph */
-.hero-pitch-paragraph {
-  font-size: clamp(14.5px, 1.4vw, 16px);
-  font-weight: 300;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 580px;
-  margin: 0;
-}
-
-/* 6. Core Tech Cloud */
-.hero-tech-cloud {
+/* Social Badges */
+.hero-meta-links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.tech-tag {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
+.meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 4px 12px;
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(203, 178, 121, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
   transition: all 0.25s ease;
 }
 
-.tech-tag:hover {
-  background: rgba(194, 164, 255, 0.12);
-  border-color: rgba(194, 164, 255, 0.35);
-  color: var(--accentColor, #c2a4ff);
+.meta-badge:hover {
+  background: rgba(203, 178, 121, 0.15);
+  border-color: rgba(203, 178, 121, 0.6);
   transform: translateY(-2px);
+  color: #e2c992;
 }
 
-/* 7. Action CTA Group */
-.hero-cta-group {
+.badge-icon {
+  font-size: 12px;
+}
+
+.badge-text {
+  letter-spacing: 0.3px;
+}
+
+/* Editorial Manifesto Quote */
+.hero-manifesto-text {
+  font-size: clamp(12.5px, 1.25vw, 15px);
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 980px;
+  margin: 0 auto;
+  letter-spacing: 0.2px;
+}
+
+/* Editorial Action Buttons */
+.hero-editorial-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
-.btn-cinema-primary {
+.btn-editorial-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 28px;
-  font-size: 14.5px;
-  font-weight: 600;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
   color: #0b080c;
-  background: linear-gradient(135deg, #c2a4ff 0%, #a272ff 100%);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(135deg, #e2c992 0%, #cbb279 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 9999px;
   text-decoration: none;
-  box-shadow: 0 4px 22px rgba(194, 164, 255, 0.32);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 22px rgba(203, 178, 121, 0.32);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.btn-cinema-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 32px rgba(194, 164, 255, 0.5), 0 0 20px rgba(194, 164, 255, 0.3);
+.btn-editorial-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(203, 178, 121, 0.5);
   color: #000;
 }
 
 .btn-arrow {
   width: 16px;
   height: 16px;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
-.btn-cinema-primary:hover .btn-arrow {
-  transform: translateX(4px);
+.btn-editorial-primary:hover .btn-arrow {
+  transform: translateX(3px);
 }
 
-.btn-cinema-secondary {
+.btn-editorial-secondary {
   display: inline-flex;
   align-items: center;
-  padding: 13px 24px;
-  font-size: 14px;
+  padding: 12px 24px;
+  font-size: 13.5px;
   font-weight: 500;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.05);
@@ -336,517 +347,123 @@
   -webkit-backdrop-filter: blur(12px);
   transition: all 0.3s ease;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-.btn-cinema-secondary:hover {
+.btn-editorial-secondary:hover {
   background: rgba(255, 255, 255, 0.09);
-  border-color: var(--accentColor, #c2a4ff);
-  color: var(--accentColor, #c2a4ff);
+  border-color: #e2c992;
+  color: #e2c992;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(194, 164, 255, 0.18);
-}
-
-.btn-cinema-ghost {
-  display: inline-flex;
-  align-items: center;
-  padding: 13px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.btn-cinema-ghost:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
 }
 
 /* ==========================================================================
-   RIGHT COLUMN: Modern 3D Glass Portrait Portal
-   ========================================================================== */
-.hero-portrait-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-.portrait-portal-card {
-  width: 100%;
-  max-width: 380px;
-  position: relative;
-  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-/* Radiant Glow behind Card */
-.portal-glow-aura {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.35) 0%, rgba(138, 43, 226, 0.12) 55%, transparent 75%);
-  filter: blur(45px);
-  border-radius: 30px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Glass Frame with Arched Top */
-.portal-frame {
-  position: relative;
-  width: 100%;
-  height: 450px;
-  background: linear-gradient(160deg, rgba(28, 22, 44, 0.75) 0%, rgba(12, 9, 18, 0.9) 100%);
-  border: 1px solid rgba(194, 164, 255, 0.25);
-  border-radius: 28px;
-  overflow: hidden;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.6),
-    inset 0 0 30px rgba(194, 164, 255, 0.08);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  z-index: 2;
-}
-
-.portal-backdrop-glow {
-  position: absolute;
-  top: 15%;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.3) 0%, rgba(244, 114, 182, 0.15) 50%, transparent 75%);
-  filter: blur(25px);
-  pointer-events: none;
-}
-
-/* Vivek's Cutout Image standing naturally */
-.portal-cutout-img {
-  width: 90%;
-  height: 94%;
-  object-fit: contain;
-  object-position: bottom center;
-  position: relative;
-  z-index: 3;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6));
-  transition: transform 0.4s ease;
-}
-
-.portrait-portal-card:hover .portal-cutout-img {
-  transform: scale(1.04);
-}
-
-.portal-fallback-monogram {
-  font-size: 72px;
-  font-weight: 900;
-  color: #c2a4ff;
-  margin-bottom: 120px;
-  letter-spacing: 2px;
-}
-
-/* Bottom fade smoothly blending into base */
-.portal-bottom-fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: linear-gradient(180deg, transparent 0%, rgba(12, 9, 18, 0.85) 100%);
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* Floating Glass Tags */
-.portal-floating-tag {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 12px;
-  background: rgba(18, 14, 28, 0.85);
-  border: 1px solid rgba(194, 164, 255, 0.28);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  z-index: 5;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.tag-top {
-  top: 20px;
-  right: -16px;
-  animation: floatTag1 5s ease-in-out infinite alternate;
-}
-
-.tag-bottom {
-  bottom: 24px;
-  left: -16px;
-  animation: floatTag2 6s ease-in-out infinite alternate 0.5s;
-}
-
-@keyframes floatTag1 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes floatTag2 {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(8px);
-  }
-}
-
-.tag-icon {
-  font-size: 13px;
-}
-
-.tag-text {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.3px;
-}
-
-/* ==========================================================================
-   Minimalist Scroll Cue
-   ========================================================================== */
-.hero-scroll-cue {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  margin-top: 45px;
-  opacity: 0.65;
-  transition: all 0.3s ease;
-  user-select: none;
-}
-
-.hero-scroll-cue:hover {
-  opacity: 1;
-  transform: translateY(2px);
-}
-
-.cue-pill {
-  width: 18px;
-  height: 28px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-.hero-scroll-cue:hover .cue-pill {
-  border-color: var(--accentColor, #c2a4ff);
-}
-
-.cue-dot {
-  width: 3px;
-  height: 5px;
-  background-color: var(--accentColor, #c2a4ff);
-  border-radius: 2px;
-  animation: cueDotMove 1.8s ease-in-out infinite;
-}
-
-@keyframes cueDotMove {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  60% {
-    transform: translateY(8px);
-    opacity: 0.2;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-}
-
-.cue-text {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* ==========================================================================
-   MULTI-DEVICE RESPONSIVE BREAKPOINTS
+   RESPONSIVE FINE-TUNING
    ========================================================================== */
 
-/* 1. Laptops & Small Desktops (<= 1100px) */
-@media screen and (max-width: 1100px) {
-  .hero-cinematic-grid {
-    gap: 36px;
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-
-  .portrait-portal-card {
-    max-width: 340px;
-  }
-
-  .portal-frame {
-    height: 420px;
-  }
-}
-
-/* 2. Tablets & Small Screens (<= 960px) - Stack into balanced column */
+/* Tablets (<= 960px) */
 @media screen and (max-width: 960px) {
   .landing-section {
-    padding: 95px 24px 45px 24px;
-    height: auto;
-    min-height: 100vh;
+    padding: 85px 20px 40px 20px;
   }
 
-  .hero-cinematic-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+  .hero-top-capsule {
+    font-size: 10px;
+    gap: 8px;
+    padding: 6px 18px;
   }
 
-  .hero-editorial-col {
-    align-items: center;
-    text-align: center;
+  .hero-depth-stage {
+    height: clamp(340px, 44vh, 440px);
   }
 
-  .hero-pill-badge {
-    justify-content: center;
+  .hero-role-callout {
+    right: 3%;
+    bottom: 12%;
   }
 
-  .hero-eyebrow-line {
-    justify-content: center;
-  }
-
-  .hero-cinema-title {
-    font-size: clamp(34px, 7.5vw, 54px);
-    letter-spacing: -1.2px;
-  }
-
-  .hero-typewriter-strip {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .hero-pitch-paragraph {
-    max-width: 600px;
-    text-align: center;
-  }
-
-  .hero-tech-cloud {
-    justify-content: center;
-  }
-
-  .hero-cta-group {
-    justify-content: center;
-  }
-
-  .portrait-portal-card {
-    max-width: 320px;
-    margin: 0 auto;
-    transform: none !important; /* Disable 3D tilt on tablets for steady viewing */
-  }
-
-  .portal-frame {
-    height: 380px;
-  }
-
-  /* Keep floating tags securely inside card boundaries to prevent horizontal overflow */
-  .tag-top {
-    right: 12px;
-    top: 14px;
-  }
-
-  .tag-bottom {
-    left: 12px;
-    bottom: 14px;
-  }
-
-  .hero-scroll-cue {
-    margin-top: 30px;
+  .callout-main {
+    font-size: 26px;
   }
 }
 
-/* 3. Phablets & Large Mobile (<= 768px) */
-@media screen and (max-width: 768px) {
-  .landing-section {
-    padding: 85px 18px 40px 18px;
-  }
-
-  .hero-cta-group {
-    width: 100%;
-    max-width: 440px;
-    gap: 10px;
-  }
-
-  .btn-cinema-primary {
-    flex: 1 1 calc(54% - 10px);
-    min-width: 150px;
-    padding: 12px 18px;
-    font-size: 13.5px;
-    justify-content: center;
-  }
-
-  .btn-cinema-secondary {
-    flex: 1 1 calc(46% - 10px);
-    min-width: 130px;
-    padding: 12px 16px;
-    font-size: 13.5px;
-    justify-content: center;
-  }
-
-  .btn-cinema-ghost {
-    flex: 1 1 100%;
-    padding: 10px 16px;
-    font-size: 13px;
-    justify-content: center;
-  }
-
-  .hero-scroll-cue {
-    display: none; /* Hide on mobile to optimize viewport space */
-  }
-}
-
-/* 4. Standard Mobile (<= 600px) */
-@media screen and (max-width: 600px) {
+/* Mobile Devices (<= 680px) */
+@media screen and (max-width: 680px) {
   .landing-section {
     padding: 80px 16px 36px 16px;
   }
 
-  .hero-pill-badge {
-    padding: 5px 14px;
-    gap: 6px;
+  .hero-top-capsule {
+    display: none; /* Hide wide capsule on phone screens to prioritize person and text */
   }
 
-  .pill-label {
-    font-size: 11px;
+  .hero-header-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
   }
 
-  .pill-sublabel {
-    font-size: 11px;
+  .hero-identity-box {
+    align-items: center;
+    text-align: center;
   }
 
-  .hero-cinema-title {
-    font-size: clamp(30px, 8.5vw, 40px);
-    letter-spacing: -0.8px;
+  .hero-motto-box {
+    text-align: center;
   }
 
-  .hero-typewriter-strip {
-    padding: 6px 12px;
-    gap: 5px;
+  .hero-depth-stage {
+    height: clamp(280px, 38vh, 340px);
+    margin: 14px 0;
   }
 
-  .typewriter-tag {
-    font-size: 12px;
+  .hero-backdrop-word {
+    font-size: clamp(52px, 17vw, 85px);
+    letter-spacing: 4px;
   }
 
-  .typewriter-output {
+  .hero-role-callout {
+    position: static;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .callout-main {
+    font-size: 24px;
+  }
+
+  .hero-manifesto-text {
     font-size: 13px;
-  }
-
-  .typewriter-cursor {
-    height: 14px;
-  }
-
-  .hero-pitch-paragraph {
-    font-size: 13.5px;
     line-height: 1.6;
-    padding: 0 4px;
+    padding: 0 6px;
   }
 
-  .hero-tech-cloud {
-    gap: 6px;
+  .hero-editorial-actions {
+    width: 100%;
+    gap: 10px;
   }
 
-  .tech-tag {
-    font-size: 10.5px;
-    padding: 3px 10px;
-    border-radius: 6px;
-  }
-
-  .portrait-portal-card {
-    max-width: 270px;
-  }
-
-  .portal-frame {
-    height: 330px;
-    border-radius: 22px;
-  }
-
-  .portal-floating-tag {
-    padding: 6px 10px;
-    border-radius: 10px;
-  }
-
-  .tag-icon {
-    font-size: 11px;
-  }
-
-  .tag-text {
-    font-size: 10.5px;
+  .btn-editorial-primary,
+  .btn-editorial-secondary {
+    flex: 1 1 100%;
+    justify-content: center;
+    box-sizing: border-box;
   }
 }
 
-/* 5. Small Mobile / iPhone SE (<= 400px) */
+/* Small Phones (<= 400px) */
 @media screen and (max-width: 400px) {
-  .landing-section {
-    padding: 75px 12px 30px 12px;
+  .hero-author-name {
+    font-size: 24px;
   }
 
-  .hero-cinema-title {
-    font-size: 28px;
-    letter-spacing: -0.5px;
+  .hero-backdrop-word {
+    font-size: 48px;
+    letter-spacing: 2px;
   }
 
-  .hero-typewriter-strip {
-    font-size: 11.5px;
-    padding: 5px 10px;
-  }
-
-  .typewriter-tag {
-    font-size: 11px;
-  }
-
-  .typewriter-output {
-    font-size: 11.5px;
-  }
-
-  .btn-cinema-primary,
-  .btn-cinema-secondary,
-  .btn-cinema-ghost {
-    flex: 1 1 100%;
-    width: 100%;
-  }
-
-  .portrait-portal-card {
-    max-width: 235px;
-  }
-
-  .portal-frame {
-    height: 290px;
-    border-radius: 18px;
+  .callout-main {
+    font-size: 20px;
   }
 }

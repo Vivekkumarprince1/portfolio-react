@@ -1,205 +1,122 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import "./styles/Landing.css";
 import { config } from "../config";
 import { Link } from "react-router-dom";
 
-const ROLES = [
-  "Software Development Engineer",
-  "Full-Stack Web Architect",
-  "Real-Time SFU & WebSockets",
-  "Distributed Systems Builder",
-];
-
 const Landing = () => {
   const fullName = config.developer.fullName || "Vivek Kumar";
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
-
-  // Typewriter effect
-  useEffect(() => {
-    const currentRole = ROLES[roleIndex];
-    let timer;
-
-    if (!isDeleting) {
-      if (displayedText.length < currentRole.length) {
-        timer = setTimeout(() => {
-          setDisplayedText(currentRole.slice(0, displayedText.length + 1));
-        }, 60);
-      } else {
-        timer = setTimeout(() => {
-          setIsDeleting(true);
-        }, 2200);
-      }
-    } else {
-      if (displayedText.length > 0) {
-        timer = setTimeout(() => {
-          setDisplayedText(currentRole.slice(0, displayedText.length - 1));
-        }, 30);
-      } else {
-        setIsDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % ROLES.length);
-      }
-    }
-
-    return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, roleIndex]);
-
-  // Smooth 3D tilt on mouse move (desktop only to ensure buttery smooth mobile touch scroll)
-  const handleMouseMove = (e) => {
-    if (!cardRef.current || typeof window === "undefined" || window.innerWidth <= 960) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: x * 10, y: -y * 10 });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-  };
-
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className="landing-section" id="landingDiv">
-      <div className="landing-stage-wrapper">
-        <div className="hero-cinematic-grid">
-          
-          {/* Left Column: Editorial Content & Hierarchy */}
-          <div className="hero-editorial-col">
-            <div className="hero-pill-badge">
-              <span className="pill-dot">
-                <span className="pill-dot-ping"></span>
-                <span className="pill-dot-core"></span>
-              </span>
-              <span className="pill-label">Available for Opportunities</span>
-              <span className="pill-divider">•</span>
-              <span className="pill-sublabel">SDE @ ConnectSphere</span>
-            </div>
+      <div className="hero-reference-container">
+        
+        {/* Top Capsule Ticker Bar */}
+        <div className="hero-top-capsule">
+          <span>FULL-STACK ARCHITECTURE</span>
+          <span className="capsule-dot">•</span>
+          <span>DISTRIBUTED SYSTEMS</span>
+          <span className="capsule-dot">•</span>
+          <span>REAL-TIME ENGINES</span>
+          <span className="capsule-dot">•</span>
+          <span>CLOUD MICROSERVICES</span>
+          <span className="capsule-dot">•</span>
+          <span>SYSTEM DESIGN</span>
+        </div>
 
-            <div className="hero-eyebrow-line">
-              <span className="eyebrow-accent">//</span>
-              <span className="eyebrow-text">FULL-STACK ENGINEER & ARCHITECT</span>
-            </div>
-
-            <h1 className="hero-cinema-title">
-              {fullName.toUpperCase()}
-            </h1>
-
-            <div className="hero-typewriter-strip">
-              <span className="typewriter-tag">&gt; specializing_in:</span>
-              <span className="typewriter-output">{displayedText}</span>
-              <span className="typewriter-cursor"></span>
-            </div>
-
-            <p className="hero-pitch-paragraph">
-              Architecting high-throughput distributed microservices, real-time collaboration platforms, and immersive digital web experiences with relentless focus on craft and performance.
-            </p>
-
-            {/* Core Tech Stack Cloud */}
-            <div className="hero-tech-cloud">
-              <span className="tech-tag">React</span>
-              <span className="tech-tag">Node.js</span>
-              <span className="tech-tag">Express</span>
-              <span className="tech-tag">MongoDB</span>
-              <span className="tech-tag">WebSockets</span>
-              <span className="tech-tag">System Design</span>
-            </div>
-
-            {/* Action CTAs */}
-            <div className="hero-cta-group">
-              <Link to="/myworks" className="btn-cinema-primary" data-cursor="disable">
-                <span>Explore Projects</span>
-                <svg className="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </Link>
-
-              <a
-                href="/resume.pdf"
-                download="Vivek_Kumar_Resume.pdf"
-                className="btn-cinema-secondary"
-                data-cursor="disable"
-              >
-                <span>CV / Resume 📄</span>
-              </a>
-
-              <Link to="/play" className="btn-cinema-ghost" data-cursor="disable">
-                <span>Play Chess ♟️</span>
-              </Link>
-            </div>
+        {/* Top Header Row: Name on Left, Motto on Right */}
+        <div className="hero-header-row">
+          <div className="hero-identity-box">
+            <h2 className="hero-author-name">{fullName.toUpperCase()}</h2>
+            <p className="hero-author-sub">Software Development Engineer • ConnectSphere</p>
           </div>
 
-          {/* Right Column: Modern 3D Glass Portrait Portal */}
-          <div className="hero-portrait-col">
-            <div 
-              className="portrait-portal-card"
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
-              }}
+          <div className="hero-motto-box">
+            <p className="motto-line">Systems that scale.</p>
+            <p className="motto-line">Craft that speaks.</p>
+          </div>
+        </div>
+
+        {/* Centerpiece: Depth Stage (Backdrop Word + Foreground Portrait + Callout) */}
+        <div className="hero-depth-stage">
+          {/* Layer 1: Giant Architectural Backdrop Word */}
+          <div className="hero-backdrop-word" aria-hidden="true">
+            ENGINEER
+          </div>
+
+          {/* Layer 2: Center Cutout Portrait Rising in Foreground */}
+          <div className="hero-portrait-frame">
+            {!imgError ? (
+              <img
+                src="/images/mypicnbg.png"
+                alt={fullName}
+                className="hero-natural-cutout"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className="hero-fallback-monogram">VK</div>
+            )}
+            <div className="hero-portrait-fade"></div>
+          </div>
+
+          {/* Layer 3: Bold Role Callout Accent (Right Side) */}
+          <div className="hero-role-callout">
+            <span className="callout-sub">FULL-STACK</span>
+            <span className="callout-main">SOFTWARE ENGINEER</span>
+          </div>
+        </div>
+
+        {/* Bottom Editorial Strip */}
+        <div className="hero-bottom-deck">
+          {/* Social Badges */}
+          <div className="hero-meta-links">
+            <a
+              href="https://github.com/Vivekkumarprince1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="meta-badge"
+              data-cursor="disable"
             >
-              {/* Ambient Radiant Glow Aura */}
-              <div className="portal-glow-aura"></div>
-              
-              {/* Glass Arch Portal */}
-              <div className="portal-frame">
-                <div className="portal-backdrop-glow"></div>
-                
-                {/* Vivek's Real Transparent Cutout */}
-                {!imgError ? (
-                  <img
-                    src="/images/mypicnbg.png"
-                    alt={fullName}
-                    className="portal-cutout-img"
-                    onError={() => setImgError(true)}
-                  />
-                ) : (
-                  <div className="portal-fallback-monogram">VK</div>
-                )}
+              <span className="badge-icon">⌥</span>
+              <span className="badge-text">GitHub</span>
+            </a>
 
-                {/* Subtle bottom fade to blend with card */}
-                <div className="portal-bottom-fade"></div>
-                
-                {/* Floating Glass Chips */}
-                <div className="portal-floating-tag tag-top">
-                  <span className="tag-icon">🚀</span>
-                  <span className="tag-text">ConnectSphere SDE</span>
-                </div>
+            <span className="meta-badge">
+              <span className="badge-icon">🚀</span>
+              <span className="badge-text">ConnectSphere SDE</span>
+            </span>
 
-                <div className="portal-floating-tag tag-bottom">
-                  <span className="tag-icon">⚡</span>
-                  <span className="tag-text">3+ Yrs Exp • 15+ Apps</span>
-                </div>
-              </div>
-            </div>
+            <Link to="/play" className="meta-badge chess-badge" data-cursor="disable">
+              <span className="badge-icon">♟️</span>
+              <span className="badge-text">Play Chess</span>
+            </Link>
           </div>
 
+          {/* Editorial Manifesto Quote */}
+          <p className="hero-manifesto-text">
+            "Between system scalability and user-centric craft lies the software I engineer. From designing distributed microservices to deploying ultra-low latency real-time platforms, my focus is on performance, resilient architecture, and relentless engineering execution."
+          </p>
+
+          {/* Action CTAs */}
+          <div className="hero-editorial-actions">
+            <Link to="/myworks" className="btn-editorial-primary" data-cursor="disable">
+              <span>Explore Projects</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" className="btn-arrow">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
+
+            <a
+              href="/resume.pdf"
+              download="Vivek_Kumar_Resume.pdf"
+              className="btn-editorial-secondary"
+              data-cursor="disable"
+            >
+              <span>CV / Resume 📄</span>
+            </a>
+          </div>
         </div>
 
-        {/* Minimalist Scroll Cue */}
-        <div 
-          className="hero-scroll-cue" 
-          onClick={scrollToAbout} 
-          role="button" 
-          tabIndex="0" 
-          aria-label="Scroll to About section"
-        >
-          <span className="cue-pill">
-            <span className="cue-dot"></span>
-          </span>
-          <span className="cue-text">SCROLL TO EXPLORE</span>
-        </div>
       </div>
     </div>
   );
