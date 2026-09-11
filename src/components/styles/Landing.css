@@ -1,442 +1,164 @@
 /* ==========================================================================
-   ELEVATED CYBER-AESTHETIC CENTERPIECE HERO SECTION
-   Vivek Kumar Portfolio
+   CINEMATIC EDITORIAL HERO WITH 3D PORTRAIT PORTAL
+   Vivek Kumar Portfolio - Fully Responsive Multi-Device Architecture
    ========================================================================== */
 
 .landing-section {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   min-height: var(--vh, 100vh);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background-color: transparent;
-  overflow: hidden;
+  overflow-x: hidden;
   box-sizing: border-box;
-  padding: 80px 20px 40px 20px;
+  padding: 100px 32px 50px 32px;
   z-index: 1;
 }
 
-/* Ambient Background Glows */
-.landing-bg-glow-1 {
-  position: absolute;
-  top: -8%;
-  left: 12%;
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.25) 0%, rgba(84, 0, 255, 0.08) 60%, transparent 80%);
-  filter: blur(90px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  animation: heroPulseGlow 8s ease-in-out infinite alternate;
-}
-
-.landing-bg-glow-2 {
-  position: absolute;
-  bottom: -8%;
-  right: 12%;
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(251, 141, 255, 0.22) 0%, rgba(138, 43, 226, 0.06) 60%, transparent 80%);
-  filter: blur(100px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  animation: heroPulseGlow 10s ease-in-out infinite alternate-reverse;
-}
-
-/* Cyber dot grid pattern */
-.landing-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 34px 34px;
-  pointer-events: none;
-  opacity: 0.4;
-  z-index: 0;
-  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-}
-
-@keyframes heroPulseGlow {
-  0% {
-    transform: scale(0.92) translate(0, 0);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.1) translate(20px, 15px);
-    opacity: 0.85;
-  }
-}
-
-/* Master Central Hero Container */
-.landing-hero-container {
+.landing-stage-wrapper {
   width: 100%;
-  max-width: 880px;
+  max-width: 1220px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-  gap: 22px;
+  box-sizing: border-box;
 }
 
-/* 1. Status Pill / Availability Badge */
-.hero-status-pill {
+/* 2-Column Balanced Cinematic Grid */
+.hero-cinematic-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: Editorial Narrative, Typography & Actions
+   ========================================================================== */
+.hero-editorial-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 18px;
+  width: 100%;
+}
+
+/* 1. Status Pill Badge */
+.hero-pill-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 18px;
+  gap: 8px;
+  padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(194, 164, 255, 0.25);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(194, 164, 255, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   user-select: none;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
-.hero-status-pill:hover {
-  border-color: rgba(194, 164, 255, 0.55);
-  box-shadow: 0 6px 26px rgba(194, 164, 255, 0.22), inset 0 0 16px rgba(194, 164, 255, 0.12);
+.hero-pill-badge:hover {
+  border-color: rgba(194, 164, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-2px);
 }
 
-.status-dot {
+.pill-dot {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
 }
 
-.status-ping {
+.pill-dot-ping {
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background-color: #10b981;
   opacity: 0.75;
-  animation: pingDot 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: heroPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.status-core {
+.pill-dot-core {
   position: relative;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: #10b981;
   box-shadow: 0 0 8px #10b981;
 }
 
-@keyframes pingDot {
-  75%, 100% {
-    transform: scale(2.6);
+@keyframes heroPing {
+  70%, 100% {
+    transform: scale(2.8);
     opacity: 0;
   }
 }
 
-.status-text {
+.pill-label {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2px;
 }
 
-.status-sep {
+.pill-divider {
   color: rgba(255, 255, 255, 0.3);
-  margin: 0 4px;
+  font-size: 12px;
 }
 
-.status-sparkle {
-  font-size: 11px;
-  color: var(--accentColor, #c2a4ff);
-  animation: spinSparkle 4s linear infinite;
-}
-
-@keyframes spinSparkle {
-  0% {
-    transform: rotate(0deg) scale(0.85);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.15);
-  }
-  100% {
-    transform: rotate(360deg) scale(0.85);
-  }
-}
-
-/* 2. Holographic Centerpiece Avatar */
-.hero-avatar-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: floatAvatar 5.5s ease-in-out infinite;
-  margin: 2px 0;
-}
-
-.hero-avatar-glow {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.28) 0%, rgba(84, 0, 255, 0.08) 55%, transparent 75%);
-  filter: blur(28px);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Conic glowing gradient rotating outer ring */
-.hero-avatar-ring {
-  position: absolute;
-  width: 172px;
-  height: 172px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    #c2a4ff 0deg,
-    #fb8dff 90deg,
-    #00f2fe 180deg,
-    #7928ca 270deg,
-    #c2a4ff 360deg
-  );
-  filter: blur(1.5px);
-  opacity: 0.8;
-  animation: spinRing 8s linear infinite;
-  z-index: 1;
-}
-
-.hero-avatar-subcircle {
-  position: absolute;
-  width: 190px;
-  height: 190px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(194, 164, 255, 0.28);
-  animation: rotateSubcircle 22s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Orbiting Satellite Star */
-.hero-orbit-satellite {
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  border-radius: 50%;
-  animation: orbitSatellite 9s linear infinite;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.satellite-sparkle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 13px;
-  color: #fff;
-  text-shadow: 0 0 10px #c2a4ff, 0 0 20px #fb8dff;
-}
-
-@keyframes orbitSatellite {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Main Inner Glass Avatar Circle */
-.hero-avatar-circle {
-  width: 154px;
-  height: 154px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(20, 16, 35, 0.88) 0%, rgba(11, 8, 12, 0.96) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-  box-shadow: 
-    0 0 45px rgba(194, 164, 255, 0.3),
-    inset 0 0 25px rgba(194, 164, 255, 0.14);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.hero-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 50%;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
-  transition: transform 0.4s ease;
-}
-
-.hero-avatar-circle:hover .hero-avatar-img {
-  transform: scale(1.08);
-}
-
-.hero-avatar-text {
-  font-size: 52px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffffff 20%, #c2a4ff 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 2px;
-  filter: drop-shadow(0 0 20px rgba(194, 164, 255, 0.6));
-}
-
-.avatar-glass-glare {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: 154px 154px 0 0;
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* Floating Micro-Badges around Avatar */
-.hero-floating-badge {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 13px;
-  background: rgba(18, 14, 26, 0.82);
-  border: 1px solid rgba(194, 164, 255, 0.28);
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-  z-index: 5;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.hero-floating-badge .badge-icon {
-  font-size: 13px;
-}
-
-.hero-floating-badge .badge-text {
-  font-size: 11px;
+.pill-sublabel {
+  font-size: 12px;
   font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.3px;
-}
-
-.badge-left {
-  left: -48px;
-  top: 34px;
-  animation: floatBadgeLeft 4.5s ease-in-out infinite alternate;
-}
-
-.badge-right {
-  right: -58px;
-  bottom: 30px;
-  animation: floatBadgeRight 5s ease-in-out infinite alternate 0.4s;
-}
-
-@keyframes floatBadgeLeft {
-  0% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-  100% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-}
-
-@keyframes floatBadgeRight {
-  0% {
-    transform: translateY(0px) rotate(2deg);
-  }
-  100% {
-    transform: translateY(8px) rotate(-1deg);
-  }
-}
-
-@keyframes floatAvatar {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes spinRing {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rotateSubcircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* 3. Hero Content & Typography */
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.hero-greeting-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.greeting-line {
-  width: 36px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--accentColor, #c2a4ff));
-}
-
-.hero-greeting-wrapper .greeting-line:last-child {
-  background: linear-gradient(90deg, var(--accentColor, #c2a4ff), transparent);
-}
-
-.hero-greeting {
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 4px;
   color: var(--accentColor, #c2a4ff);
+}
+
+/* 2. Eyebrow Tag */
+.hero-eyebrow-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.eyebrow-accent {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accentColor, #c2a4ff);
+}
+
+.eyebrow-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
-  margin: 0;
-  text-shadow: 0 0 14px rgba(194, 164, 255, 0.4);
 }
 
-.hero-name {
-  font-size: clamp(44px, 6.8vw, 76px);
+/* 3. Grand Title */
+.hero-cinema-title {
+  font-size: clamp(38px, 5.5vw, 72px);
   font-weight: 900;
+  line-height: 1.02;
   letter-spacing: -2px;
-  line-height: 1.05;
   margin: 0;
   background: linear-gradient(
     135deg,
@@ -449,11 +171,12 @@
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: heroTextShine 7s ease-in-out infinite;
-  filter: drop-shadow(0 2px 24px rgba(194, 164, 255, 0.25));
+  animation: heroShine 8s ease-in-out infinite;
+  filter: drop-shadow(0 2px 20px rgba(194, 164, 255, 0.25));
+  word-break: break-word;
 }
 
-@keyframes heroTextShine {
+@keyframes heroShine {
   0% {
     background-position: 0% center;
   }
@@ -465,46 +188,50 @@
   }
 }
 
-/* Dynamic Typewriter Role Container */
-.hero-typewriter-container {
+/* 4. Typewriter Specialty Strip */
+.hero-typewriter-strip {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-height: 32px;
-  padding: 5px 16px;
+  gap: 8px;
+  padding: 8px 16px;
   border-radius: 10px;
   background: rgba(18, 14, 28, 0.65);
   border: 1px solid rgba(194, 164, 255, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.typewriter-prefix {
-  font-size: 15px;
+.typewriter-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
 }
 
-.typewriter-text {
-  font-size: 16px;
+.typewriter-output {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--accentColor, #c2a4ff);
-  letter-spacing: 0.2px;
-  text-shadow: 0 0 12px rgba(194, 164, 255, 0.4);
+  text-shadow: 0 0 12px rgba(194, 164, 255, 0.45);
 }
 
 .typewriter-cursor {
   display: inline-block;
   width: 2px;
-  height: 17px;
+  height: 16px;
   background-color: var(--accentColor, #c2a4ff);
   margin-left: 2px;
-  animation: blinkCursor 0.9s steps(1) infinite;
+  animation: heroBlink 0.9s steps(1) infinite;
   box-shadow: 0 0 8px var(--accentColor, #c2a4ff);
+  flex-shrink: 0;
 }
 
-@keyframes blinkCursor {
+@keyframes heroBlink {
   0%, 50% {
     opacity: 1;
   }
@@ -513,176 +240,316 @@
   }
 }
 
-.hero-description {
-  font-size: 15.5px;
+/* 5. Pitch Paragraph */
+.hero-pitch-paragraph {
+  font-size: clamp(14.5px, 1.4vw, 16px);
   font-weight: 300;
-  line-height: 1.65;
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.72);
-  max-width: 620px;
-  margin: 2px auto 0 auto;
+  max-width: 580px;
+  margin: 0;
 }
 
-/* 4. Micro-Stats Glass Row */
-.hero-stats-row {
+/* 6. Core Tech Cloud */
+.hero-tech-cloud {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding: 10px 24px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  margin-top: 2px;
-}
-
-.hero-stat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.stat-value {
-  font-size: 16px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #ffffff 0%, var(--accentColor, #c2a4ff) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* 5. CTAs */
-.hero-ctas {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 4px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.cta-btn {
+.tech-tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(194, 164, 255, 0.12);
+  border-color: rgba(194, 164, 255, 0.35);
+  color: var(--accentColor, #c2a4ff);
+  transform: translateY(-2px);
+}
+
+/* 7. Action CTA Group */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.btn-cinema-primary {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 12px 26px;
+  padding: 13px 28px;
   font-size: 14.5px;
-  font-weight: 500;
-  border-radius: 30px;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.primary-cta {
-  background: linear-gradient(135deg, #c2a4ff 0%, #a272ff 100%);
-  color: #0b080c;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 22px rgba(194, 164, 255, 0.32);
   font-weight: 600;
+  color: #0b080c;
+  background: linear-gradient(135deg, #c2a4ff 0%, #a272ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 22px rgba(194, 164, 255, 0.32);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-.primary-cta:hover {
+.btn-cinema-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 32px rgba(194, 164, 255, 0.48), 0 0 20px rgba(194, 164, 255, 0.28);
+  box-shadow: 0 10px 32px rgba(194, 164, 255, 0.5), 0 0 20px rgba(194, 164, 255, 0.3);
   color: #000;
 }
 
-.cta-arrow {
+.btn-arrow {
   width: 16px;
   height: 16px;
   transition: transform 0.3s ease;
 }
 
-.primary-cta:hover .cta-arrow {
+.btn-cinema-primary:hover .btn-arrow {
   transform: translateX(4px);
 }
 
-.secondary-cta {
-  background: rgba(255, 255, 255, 0.05);
+.btn-cinema-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 500;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  text-decoration: none;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-.secondary-cta:hover {
+.btn-cinema-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
   border-color: var(--accentColor, #c2a4ff);
   color: var(--accentColor, #c2a4ff);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(194, 164, 255, 0.22), inset 0 0 12px rgba(194, 164, 255, 0.08);
-}
-
-.glass-cta {
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.glass-cta:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 164, 255, 0.18);
 }
 
-/* 6. Modern Scroll Down Indicator */
-.hero-scroll-indicator {
+.btn-cinema-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-cinema-ghost:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: Modern 3D Glass Portrait Portal
+   ========================================================================== */
+.hero-portrait-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.portrait-portal-card {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Radiant Glow behind Card */
+.portal-glow-aura {
   position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(194, 164, 255, 0.35) 0%, rgba(138, 43, 226, 0.12) 55%, transparent 75%);
+  filter: blur(45px);
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass Frame with Arched Top */
+.portal-frame {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background: linear-gradient(160deg, rgba(28, 22, 44, 0.75) 0%, rgba(12, 9, 18, 0.9) 100%);
+  border: 1px solid rgba(194, 164, 255, 0.25);
+  border-radius: 28px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(194, 164, 255, 0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+}
+
+.portal-backdrop-glow {
+  position: absolute;
+  top: 15%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(194, 164, 255, 0.3) 0%, rgba(244, 114, 182, 0.15) 50%, transparent 75%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+/* Vivek's Cutout Image standing naturally */
+.portal-cutout-img {
+  width: 90%;
+  height: 94%;
+  object-fit: contain;
+  object-position: bottom center;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.6));
+  transition: transform 0.4s ease;
+}
+
+.portrait-portal-card:hover .portal-cutout-img {
+  transform: scale(1.04);
+}
+
+.portal-fallback-monogram {
+  font-size: 72px;
+  font-weight: 900;
+  color: #c2a4ff;
+  margin-bottom: 120px;
+  letter-spacing: 2px;
+}
+
+/* Bottom fade smoothly blending into base */
+.portal-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(180deg, transparent 0%, rgba(12, 9, 18, 0.85) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Floating Glass Tags */
+.portal-floating-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(18, 14, 28, 0.85);
+  border: 1px solid rgba(194, 164, 255, 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  z-index: 5;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tag-top {
+  top: 20px;
+  right: -16px;
+  animation: floatTag1 5s ease-in-out infinite alternate;
+}
+
+.tag-bottom {
+  bottom: 24px;
+  left: -16px;
+  animation: floatTag2 6s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes floatTag1 {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatTag2 {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+.tag-icon {
+  font-size: 13px;
+}
+
+.tag-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   Minimalist Scroll Cue
+   ========================================================================== */
+.hero-scroll-cue {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   cursor: pointer;
-  z-index: 10;
-  opacity: 0.75;
+  margin-top: 45px;
+  opacity: 0.65;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
-.hero-scroll-indicator:hover {
+.hero-scroll-cue:hover {
   opacity: 1;
-  transform: translateX(-50%) translateY(2px);
+  transform: translateY(2px);
 }
 
-.scroll-text {
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease;
-}
-
-.hero-scroll-indicator:hover .scroll-text {
-  color: var(--accentColor, #c2a4ff);
-}
-
-.scroll-mouse {
+.cue-pill {
   width: 18px;
   height: 28px;
   border: 1.5px solid rgba(255, 255, 255, 0.3);
@@ -694,19 +561,19 @@
   transition: border-color 0.3s ease;
 }
 
-.hero-scroll-indicator:hover .scroll-mouse {
+.hero-scroll-cue:hover .cue-pill {
   border-color: var(--accentColor, #c2a4ff);
 }
 
-.scroll-wheel {
+.cue-dot {
   width: 3px;
   height: 5px;
   background-color: var(--accentColor, #c2a4ff);
   border-radius: 2px;
-  animation: mouseWheelMove 1.8s ease-in-out infinite;
+  animation: cueDotMove 1.8s ease-in-out infinite;
 }
 
-@keyframes mouseWheelMove {
+@keyframes cueDotMove {
   0% {
     transform: translateY(0);
     opacity: 1;
@@ -721,126 +588,265 @@
   }
 }
 
-.scroll-chevron {
-  width: 14px;
-  height: 14px;
-  color: rgba(255, 255, 255, 0.4);
-  animation: pulseChevron 1.8s ease-in-out infinite;
+.cue-text {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-@keyframes pulseChevron {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.4;
+/* ==========================================================================
+   MULTI-DEVICE RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* 1. Laptops & Small Desktops (<= 1100px) */
+@media screen and (max-width: 1100px) {
+  .hero-cinematic-grid {
+    gap: 36px;
+    grid-template-columns: 1.1fr 0.9fr;
   }
-  50% {
-    transform: translateY(3px);
-    opacity: 0.85;
+
+  .portrait-portal-card {
+    max-width: 340px;
+  }
+
+  .portal-frame {
+    height: 420px;
   }
 }
 
-/* 7. Viewport Responsiveness */
-@media only screen and (max-width: 768px) {
+/* 2. Tablets & Small Screens (<= 960px) - Stack into balanced column */
+@media screen and (max-width: 960px) {
   .landing-section {
-    padding: 80px 16px 30px 16px;
+    padding: 95px 24px 45px 24px;
     height: auto;
     min-height: 100vh;
   }
 
-  .landing-hero-container {
-    gap: 18px;
+  .hero-cinematic-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
-  .hero-status-pill {
+  .hero-editorial-col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-pill-badge {
+    justify-content: center;
+  }
+
+  .hero-eyebrow-line {
+    justify-content: center;
+  }
+
+  .hero-cinema-title {
+    font-size: clamp(34px, 7.5vw, 54px);
+    letter-spacing: -1.2px;
+  }
+
+  .hero-typewriter-strip {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-pitch-paragraph {
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .hero-tech-cloud {
+    justify-content: center;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .portrait-portal-card {
+    max-width: 320px;
+    margin: 0 auto;
+    transform: none !important; /* Disable 3D tilt on tablets for steady viewing */
+  }
+
+  .portal-frame {
+    height: 380px;
+  }
+
+  /* Keep floating tags securely inside card boundaries to prevent horizontal overflow */
+  .tag-top {
+    right: 12px;
+    top: 14px;
+  }
+
+  .tag-bottom {
+    left: 12px;
+    bottom: 14px;
+  }
+
+  .hero-scroll-cue {
+    margin-top: 30px;
+  }
+}
+
+/* 3. Phablets & Large Mobile (<= 768px) */
+@media screen and (max-width: 768px) {
+  .landing-section {
+    padding: 85px 18px 40px 18px;
+  }
+
+  .hero-cta-group {
+    width: 100%;
+    max-width: 440px;
+    gap: 10px;
+  }
+
+  .btn-cinema-primary {
+    flex: 1 1 calc(54% - 10px);
+    min-width: 150px;
+    padding: 12px 18px;
+    font-size: 13.5px;
+    justify-content: center;
+  }
+
+  .btn-cinema-secondary {
+    flex: 1 1 calc(46% - 10px);
+    min-width: 130px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    justify-content: center;
+  }
+
+  .btn-cinema-ghost {
+    flex: 1 1 100%;
+    padding: 10px 16px;
+    font-size: 13px;
+    justify-content: center;
+  }
+
+  .hero-scroll-cue {
+    display: none; /* Hide on mobile to optimize viewport space */
+  }
+}
+
+/* 4. Standard Mobile (<= 600px) */
+@media screen and (max-width: 600px) {
+  .landing-section {
+    padding: 80px 16px 36px 16px;
+  }
+
+  .hero-pill-badge {
     padding: 5px 14px;
+    gap: 6px;
   }
 
-  .status-text {
+  .pill-label {
     font-size: 11px;
   }
 
-  .hero-avatar-container {
-    width: 160px;
-    height: 160px;
+  .pill-sublabel {
+    font-size: 11px;
   }
 
-  .hero-avatar-circle {
-    width: 124px;
-    height: 124px;
+  .hero-cinema-title {
+    font-size: clamp(30px, 8.5vw, 40px);
+    letter-spacing: -0.8px;
   }
 
-  .hero-avatar-ring {
-    width: 140px;
-    height: 140px;
+  .hero-typewriter-strip {
+    padding: 6px 12px;
+    gap: 5px;
   }
 
-  .hero-avatar-subcircle {
-    width: 154px;
-    height: 154px;
+  .typewriter-tag {
+    font-size: 12px;
   }
 
-  .hero-orbit-satellite {
-    width: 168px;
-    height: 168px;
+  .typewriter-output {
+    font-size: 13px;
   }
 
-  .hero-avatar-text {
-    font-size: 40px;
+  .typewriter-cursor {
+    height: 14px;
   }
 
-  .hero-floating-badge {
-    display: none; /* Hide floating badges on small mobile screens */
+  .hero-pitch-paragraph {
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding: 0 4px;
   }
 
-  .hero-name {
-    font-size: 42px;
+  .hero-tech-cloud {
+    gap: 6px;
+  }
+
+  .tech-tag {
+    font-size: 10.5px;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .portrait-portal-card {
+    max-width: 270px;
+  }
+
+  .portal-frame {
+    height: 330px;
+    border-radius: 22px;
+  }
+
+  .portal-floating-tag {
+    padding: 6px 10px;
+    border-radius: 10px;
+  }
+
+  .tag-icon {
+    font-size: 11px;
+  }
+
+  .tag-text {
+    font-size: 10.5px;
+  }
+}
+
+/* 5. Small Mobile / iPhone SE (<= 400px) */
+@media screen and (max-width: 400px) {
+  .landing-section {
+    padding: 75px 12px 30px 12px;
+  }
+
+  .hero-cinema-title {
+    font-size: 28px;
     letter-spacing: -0.5px;
   }
 
-  .typewriter-prefix {
-    font-size: 13.5px;
+  .hero-typewriter-strip {
+    font-size: 11.5px;
+    padding: 5px 10px;
   }
 
-  .typewriter-text {
-    font-size: 14px;
+  .typewriter-tag {
+    font-size: 11px;
   }
 
-  .hero-description {
-    font-size: 13.5px;
-    max-width: 100%;
-    padding: 0 8px;
+  .typewriter-output {
+    font-size: 11.5px;
   }
 
-  .hero-stats-row {
-    gap: 16px;
-    padding: 8px 16px;
-    width: 92%;
-    box-sizing: border-box;
-  }
-
-  .stat-value {
-    font-size: 14px;
-  }
-
-  .stat-label {
-    font-size: 9.5px;
-  }
-
-  .hero-ctas {
-    flex-direction: column;
+  .btn-cinema-primary,
+  .btn-cinema-secondary,
+  .btn-cinema-ghost {
+    flex: 1 1 100%;
     width: 100%;
-    gap: 12px;
-    padding: 0 16px;
-    box-sizing: border-box;
   }
 
-  .cta-btn {
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
+  .portrait-portal-card {
+    max-width: 235px;
   }
 
-  .hero-scroll-indicator {
-    display: none;
+  .portal-frame {
+    height: 290px;
+    border-radius: 18px;
   }
 }
