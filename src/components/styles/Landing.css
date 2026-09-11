@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FUTURISTIC EDITORIAL HERO SECTION - 2-COLUMN CYBER STUDIO
+   ULTRA-SLEEK MINIMALIST HERO SECTION (LINEAR / VERCEL STYLE)
    Vivek Kumar Portfolio
    ========================================================================== */
 
@@ -14,236 +14,124 @@
   background-color: transparent;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 80px 24px 50px 24px;
+  padding: 100px 24px 60px 24px;
   z-index: 1;
 }
 
-/* Ambient Radial Glow Overlays (Subtle, transparent backdrops) */
-.landing-bg-glow-1 {
-  position: absolute;
-  top: -10%;
-  left: 8%;
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.22) 0%, rgba(84, 0, 255, 0.08) 60%, transparent 80%);
-  filter: blur(100px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  animation: heroPulseGlow 9s ease-in-out infinite alternate;
-}
-
-.landing-bg-glow-2 {
-  position: absolute;
-  bottom: -10%;
-  right: 8%;
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(251, 141, 255, 0.18) 0%, rgba(138, 43, 226, 0.06) 60%, transparent 80%);
-  filter: blur(110px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  animation: heroPulseGlow 12s ease-in-out infinite alternate-reverse;
-}
-
-/* Cyber Matrix Dot Grid Texture */
-.landing-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 34px 34px;
-  pointer-events: none;
-  opacity: 0.45;
-  z-index: 0;
-  mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
-}
-
-@keyframes heroPulseGlow {
-  0% {
-    transform: scale(0.92) translate(0, 0);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.12) translate(25px, 20px);
-    opacity: 0.85;
-  }
-}
-
-/* ==========================================================================
-   Editorial Wrapper & 2-Column Grid
-   ========================================================================== */
-.hero-editorial-wrapper {
+/* Master Centered Container with generous breathing space */
+.landing-container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 960px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 24px;
 }
 
-.hero-editorial-grid {
-  display: grid;
-  grid-template-columns: 1.18fr 0.82fr;
-  gap: 56px;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-/* ==========================================================================
-   LEFT COLUMN: Narrative, Typography, Typewriter & CTAs
-   ========================================================================== */
-.hero-left-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 20px;
-}
-
-/* 1. Meta Strip: Status Pill & Geo Pill */
-.hero-meta-strip {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.hero-status-pill {
+/* 1. Sleek Status Tag (Linear / Vercel Style) */
+.hero-status-tag {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   border-radius: 9999px;
-  background: rgba(18, 14, 28, 0.7);
-  border: 1px solid rgba(194, 164, 255, 0.24);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), inset 0 0 10px rgba(194, 164, 255, 0.05);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
-.hero-status-pill:hover {
-  border-color: rgba(194, 164, 255, 0.5);
-  box-shadow: 0 6px 24px rgba(194, 164, 255, 0.2), inset 0 0 16px rgba(194, 164, 255, 0.12);
+.hero-status-tag:hover {
+  border-color: rgba(194, 164, 255, 0.4);
+  background: rgba(255, 255, 255, 0.055);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(194, 164, 255, 0.15);
 }
 
-.status-dot {
+.status-indicator {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
 }
 
-.status-ping {
+.status-pulse {
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background-color: #10b981;
   opacity: 0.75;
-  animation: pingDot 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: heroPulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.status-core {
+.status-solid {
   position: relative;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: #10b981;
   box-shadow: 0 0 8px #10b981;
 }
 
-@keyframes pingDot {
-  75%, 100% {
-    transform: scale(2.6);
+@keyframes heroPulsePing {
+  70%, 100% {
+    transform: scale(2.8);
     opacity: 0;
   }
 }
 
-.status-text {
-  font-size: 12px;
+.status-label {
+  font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.3px;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: -0.01em;
 }
 
-.hero-geo-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.62);
-  letter-spacing: 0.5px;
-}
-
-/* 2. Eyebrow Code Tag */
-.hero-eyebrow-tag {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.eyebrow-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 12px;
-  font-weight: 700;
+.status-company {
   color: var(--accentColor, #c2a4ff);
-  letter-spacing: 1px;
-}
-
-.eyebrow-divider {
-  width: 32px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--accentColor, #c2a4ff), transparent);
-}
-
-.eyebrow-label {
-  font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
-/* 3. Grand Metallic Architectural Name */
-.hero-grand-name {
-  font-size: clamp(40px, 5.2vw, 68px);
-  font-weight: 900;
-  line-height: 1.02;
-  letter-spacing: -2px;
-  margin: 0;
+/* 2. Master Headline: Big, razor-sharp, cinematic */
+.hero-main-title {
+  font-size: clamp(40px, 6.2vw, 78px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 4px 0 0 0;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+.hero-title-accent {
   background: linear-gradient(
     135deg,
-    #ffffff 0%,
-    #f2efff 30%,
-    #c2a4ff 52%,
-    #ffffff 75%,
-    #e9d5ff 100%
+    #c2a4ff 0%,
+    #d8b4fe 40%,
+    #f472b6 80%,
+    #c2a4ff 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: heroTextShine 7s ease-in-out infinite;
-  filter: drop-shadow(0 2px 24px rgba(194, 164, 255, 0.22));
+  animation: accentShimmer 8s ease-in-out infinite;
+  display: inline-block;
 }
 
-@keyframes heroTextShine {
+@keyframes accentShimmer {
   0% {
     background-position: 0% center;
   }
@@ -255,46 +143,47 @@
   }
 }
 
-/* 4. Terminal Role Switcher */
-.hero-terminal-role {
+/* 3. Typewriter Specialty Line */
+.hero-specialty-line {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background: rgba(18, 14, 28, 0.65);
-  border: 1px solid rgba(194, 164, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-top: 2px;
 }
 
-.terminal-prefix {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.55);
+.specialty-label {
+  font-size: 13.5px;
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.01em;
 }
 
-.terminal-value {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 15px;
+.specialty-typed {
+  font-size: 14px;
   font-weight: 600;
   color: var(--accentColor, #c2a4ff);
-  text-shadow: 0 0 12px rgba(194, 164, 255, 0.4);
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
 }
 
-.terminal-cursor {
+.specialty-caret {
   display: inline-block;
   width: 2px;
-  height: 18px;
+  height: 15px;
   background-color: var(--accentColor, #c2a4ff);
-  margin-left: 2px;
-  animation: heroBlinkCursor 0.9s steps(1) infinite;
-  box-shadow: 0 0 8px var(--accentColor, #c2a4ff);
+  margin-left: 3px;
+  animation: heroCaretBlink 0.9s steps(1) infinite;
+  box-shadow: 0 0 6px var(--accentColor, #c2a4ff);
 }
 
-@keyframes heroBlinkCursor {
+@keyframes heroCaretBlink {
   0%, 50% {
     opacity: 1;
   }
@@ -303,576 +192,152 @@
   }
 }
 
-/* 5. Mission Pitch Narrative */
-.hero-mission-pitch {
-  font-size: 15.5px;
+/* 4. Focused Mission Description */
+.hero-description-text {
+  font-size: clamp(15.5px, 1.8vw, 18px);
   font-weight: 300;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 580px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 660px;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
-/* 6. CTA Cluster */
-.hero-cta-cluster {
+.hero-name-token {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 5. Minimalist CTA Button Group */
+.hero-button-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-top: 4px;
+  margin-top: 10px;
 }
 
-.hero-btn-primary {
+/* Primary Linear Button */
+.btn-hero-primary {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 13px 28px;
   font-size: 14.5px;
   font-weight: 600;
   color: #0b080c;
-  background: linear-gradient(135deg, #c2a4ff 0%, #a272ff 100%);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 9999px;
   text-decoration: none;
-  box-shadow: 0 4px 22px rgba(194, 164, 255, 0.32);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 24px rgba(255, 255, 255, 0.2), 0 0 16px rgba(194, 164, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.hero-btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 32px rgba(194, 164, 255, 0.48), 0 0 20px rgba(194, 164, 255, 0.28);
+.btn-hero-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.35), 0 0 24px rgba(194, 164, 255, 0.4);
   color: #000;
 }
 
-.btn-arrow {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.3s ease;
+.btn-arrow-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s ease;
 }
 
-.hero-btn-primary:hover .btn-arrow {
-  transform: translateX(4px);
+.btn-hero-primary:hover .btn-arrow-icon {
+  transform: translateX(3px);
 }
 
-.hero-btn-secondary {
+/* Secondary Frosted Glass Button */
+.btn-hero-secondary {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   padding: 13px 26px;
   font-size: 14.5px;
   font-weight: 500;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
   text-decoration: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.hero-btn-secondary:hover {
-  border-color: var(--accentColor, #c2a4ff);
-  color: var(--accentColor, #c2a4ff);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(194, 164, 255, 0.22), inset 0 0 12px rgba(194, 164, 255, 0.08);
+.btn-hero-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.hero-btn-glass {
+.btn-sub-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-hero-secondary:hover .btn-sub-icon {
+  opacity: 1;
+  transform: translateY(1px);
+}
+
+/* Ghost Button (Play Chess) */
+.btn-hero-ghost {
   display: inline-flex;
   align-items: center;
   padding: 13px 22px;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 30px;
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.hero-btn-glass:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-/* 7. Micro-Metrics Deck */
-.hero-metrics-deck {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
-  margin-top: 6px;
-}
-
-.metric-box {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.metric-num {
-  font-size: 18px;
-  font-weight: 800;
-  color: #ffffff;
-  background: linear-gradient(135deg, #ffffff 0%, var(--accentColor, #c2a4ff) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
-}
-
-.metric-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.metric-sep {
-  width: 1px;
-  height: 26px;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* ==========================================================================
-   RIGHT COLUMN: Holographic Developer Console & Identity Stage
-   ========================================================================== */
-.hero-right-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-.developer-console-card {
-  width: 100%;
-  max-width: 440px;
-  background: rgba(16, 12, 24, 0.72);
-  border: 1px solid rgba(194, 164, 255, 0.22);
-  border-radius: 24px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.55),
-    inset 0 0 25px rgba(194, 164, 255, 0.06);
-  position: relative;
-  overflow: visible;
-  animation: consoleCardFloat 6s ease-in-out infinite;
-}
-
-@keyframes consoleCardFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-/* Console Titlebar */
-.console-titlebar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 24px 24px 0 0;
-}
-
-.console-dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.console-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot-red {
-  background-color: #ff5f56;
-}
-
-.dot-yellow {
-  background-color: #ffbd2e;
-}
-
-.dot-green {
-  background-color: #27c93f;
-}
-
-.console-title {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11.5px;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.3px;
-}
-
-.console-live-tag {
-  font-size: 9.5px;
-  font-weight: 700;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.14);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  padding: 2px 7px;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 9999px;
-  letter-spacing: 0.8px;
-}
-
-/* Holographic Stage */
-.console-stage {
-  position: relative;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  padding: 20px;
-}
-
-.stage-glow-aura {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(194, 164, 255, 0.28) 0%, rgba(84, 0, 255, 0.08) 55%, transparent 75%);
-  filter: blur(32px);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.stage-rotating-ring {
-  position: absolute;
-  width: 190px;
-  height: 190px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    #c2a4ff 0deg,
-    #fb8dff 90deg,
-    #00f2fe 180deg,
-    #7928ca 270deg,
-    #c2a4ff 360deg
-  );
-  filter: blur(1.5px);
-  opacity: 0.8;
-  animation: stageSpinRing 8s linear infinite;
-  z-index: 1;
-}
-
-@keyframes stageSpinRing {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.stage-dashed-orbit {
-  position: absolute;
-  width: 216px;
-  height: 216px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(194, 164, 255, 0.28);
-  animation: stageRotateOrbit 24s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes stageRotateOrbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.stage-satellite {
-  position: absolute;
-  width: 236px;
-  height: 236px;
-  border-radius: 50%;
-  animation: stageOrbitSatellite 10s linear infinite;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.stage-satellite span {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 13px;
-  color: #fff;
-  text-shadow: 0 0 10px #c2a4ff, 0 0 20px #fb8dff;
-}
-
-@keyframes stageOrbitSatellite {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Main Circular Portrait Frame */
-.stage-portrait-frame {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(24, 18, 38, 0.95) 0%, rgba(10, 7, 16, 0.98) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-  box-shadow: 
-    0 0 45px rgba(194, 164, 255, 0.28),
-    inset 0 0 25px rgba(194, 164, 255, 0.14);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.stage-portrait-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 50%;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
-  transition: transform 0.4s ease;
-}
-
-.stage-portrait-frame:hover .stage-portrait-img {
-  transform: scale(1.08);
-}
-
-.stage-glass-reflection {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: 170px 170px 0 0;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.stage-portrait-text {
-  font-size: 48px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffffff 20%, #c2a4ff 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 2px;
-  filter: drop-shadow(0 0 20px rgba(194, 164, 255, 0.6));
-}
-
-/* Floating Micro-Widgets */
-.stage-widget {
-  position: absolute;
-  background: rgba(18, 14, 28, 0.88);
-  border: 1px solid rgba(194, 164, 255, 0.25);
-  border-radius: 14px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
-  z-index: 5;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.stage-widget:hover {
-  transform: translateY(-4px) scale(1.04);
-  border-color: rgba(194, 164, 255, 0.6);
-  box-shadow: 0 16px 36px rgba(194, 164, 255, 0.24), 0 0 18px rgba(194, 164, 255, 0.15);
-}
-
-/* Widget 1: Core Stack */
-.widget-stack {
-  top: 18px;
-  right: -24px;
-  padding: 8px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  animation: widgetFloat1 5s ease-in-out infinite alternate;
-}
-
-.widget-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.widget-icon {
-  font-size: 13px;
-}
-
-.widget-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.3px;
-}
-
-.widget-chips {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.widget-chips span {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--accentColor, #c2a4ff);
-  background: rgba(194, 164, 255, 0.12);
-  border: 1px solid rgba(194, 164, 255, 0.2);
-  padding: 2px 7px;
-  border-radius: 6px;
-}
-
-/* Widget 2: Current Role */
-.widget-role {
-  bottom: 24px;
-  left: -28px;
-  padding: 8px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: widgetFloat2 5.5s ease-in-out infinite alternate 0.5s;
-}
-
-.widget-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.widget-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.2px;
-}
-
-.widget-subtitle {
-  font-size: 9.5px;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-/* Widget 3: Flagship Project */
-.widget-project {
-  bottom: 12px;
-  right: -20px;
-  padding: 8px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: widgetFloat1 6s ease-in-out infinite alternate 1s;
-}
-
-@keyframes widgetFloat1 {
-  0% {
-    transform: translateY(0px) rotate(-1deg);
-  }
-  100% {
-    transform: translateY(-7px) rotate(1deg);
-  }
-}
-
-@keyframes widgetFloat2 {
-  0% {
-    transform: translateY(0px) rotate(1deg);
-  }
-  100% {
-    transform: translateY(7px) rotate(-1deg);
-  }
-}
-
-/* Console Footer */
-.console-footer {
-  padding: 11px 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 7, 16, 0.6);
-  border-radius: 0 0 24px 24px;
-}
-
-.console-code-snippet {
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.console-code-snippet code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11.5px;
-  color: var(--accentColor, #c2a4ff);
-  opacity: 0.9;
-}
-
-/* ==========================================================================
-   Scroll Down Indicator
-   ========================================================================== */
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  text-decoration: none;
+  transition: all 0.25s ease;
   cursor: pointer;
-  z-index: 10;
-  opacity: 0.75;
-  transition: all 0.3s ease;
 }
 
-.hero-scroll-indicator:hover {
+.btn-hero-ghost:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 6. Minimalist Scroll Indicator */
+.hero-minimal-scroll {
+  position: absolute;
+  bottom: -60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+.hero-minimal-scroll:hover {
   opacity: 1;
-  transform: translateX(-50%) translateY(2px);
+  transform: translateY(2px);
 }
 
-.scroll-text {
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease;
-}
-
-.hero-scroll-indicator:hover .scroll-text {
-  color: var(--accentColor, #c2a4ff);
-}
-
-.scroll-mouse {
+.scroll-pill {
   width: 18px;
   height: 28px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
   display: flex;
   justify-content: center;
   padding-top: 5px;
@@ -880,19 +345,19 @@
   transition: border-color 0.3s ease;
 }
 
-.hero-scroll-indicator:hover .scroll-mouse {
+.hero-minimal-scroll:hover .scroll-pill {
   border-color: var(--accentColor, #c2a4ff);
 }
 
-.scroll-wheel {
+.scroll-pip {
   width: 3px;
   height: 5px;
-  background-color: var(--accentColor, #c2a4ff);
   border-radius: 2px;
-  animation: mouseWheelMove 1.8s ease-in-out infinite;
+  background-color: var(--accentColor, #c2a4ff);
+  animation: heroPipSlide 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-@keyframes mouseWheelMove {
+@keyframes heroPipSlide {
   0% {
     transform: translateY(0);
     opacity: 1;
@@ -907,240 +372,65 @@
   }
 }
 
-.scroll-chevron {
-  width: 14px;
-  height: 14px;
-  color: rgba(255, 255, 255, 0.4);
-  animation: pulseChevron 1.8s ease-in-out infinite;
+.scroll-caption {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.3s ease;
 }
 
-@keyframes pulseChevron {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(3px);
-    opacity: 0.85;
-  }
+.hero-minimal-scroll:hover .scroll-caption {
+  color: var(--accentColor, #c2a4ff);
 }
 
 /* ==========================================================================
-   Responsive Adaptations
+   Responsive Viewport Fine-Tuning
    ========================================================================== */
-
-/* Large Tablets & Small Desktops (<= 1100px) */
-@media screen and (max-width: 1100px) {
-  .hero-editorial-grid {
-    gap: 36px;
-  }
-
-  .widget-stack {
-    right: -12px;
-  }
-
-  .widget-role {
-    left: -14px;
-  }
-
-  .widget-project {
-    right: -10px;
-  }
-}
-
-/* Tablets (<= 960px) - Stack Columns Elegantly */
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 768px) {
   .landing-section {
-    padding: 90px 20px 60px 20px;
-    height: auto;
-    min-height: 100vh;
+    padding: 100px 18px 50px 18px;
   }
 
-  .hero-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
+  .landing-container {
+    gap: 18px;
   }
 
-  .hero-left-column {
-    align-items: center;
-    text-align: center;
+  .hero-status-tag {
+    padding: 6px 14px;
   }
 
-  .hero-meta-strip {
-    justify-content: center;
-  }
-
-  .hero-eyebrow-tag {
-    justify-content: center;
-  }
-
-  .hero-grand-name {
-    font-size: clamp(38px, 8vw, 56px);
-  }
-
-  .hero-mission-pitch {
-    max-width: 600px;
-  }
-
-  .hero-cta-cluster {
-    justify-content: center;
-  }
-
-  .hero-metrics-deck {
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .hero-right-column {
-    margin-top: 10px;
-  }
-
-  .developer-console-card {
-    max-width: 400px;
-  }
-
-  .widget-stack {
-    right: -10px;
-    top: 10px;
-  }
-
-  .widget-role {
-    left: -10px;
-    bottom: 14px;
-  }
-
-  .widget-project {
-    right: -10px;
-    bottom: 8px;
-  }
-
-  .hero-scroll-indicator {
-    position: relative;
-    margin-top: 40px;
-    bottom: auto;
-  }
-}
-
-/* Mobile Devices (<= 640px) */
-@media screen and (max-width: 640px) {
-  .landing-section {
-    padding: 80px 16px 40px 16px;
-  }
-
-  .hero-meta-strip {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .hero-grand-name {
-    font-size: 38px;
-    letter-spacing: -1px;
-  }
-
-  .hero-terminal-role {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 4px;
-    padding: 8px 12px;
-  }
-
-  .terminal-prefix {
+  .status-label {
     font-size: 12px;
   }
 
-  .terminal-value {
-    font-size: 13.5px;
+  .hero-main-title {
+    font-size: 38px;
+    letter-spacing: -0.03em;
   }
 
-  .hero-mission-pitch {
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 0 4px;
+  .hero-description-text {
+    font-size: 14.5px;
+    padding: 0 8px;
   }
 
-  .hero-cta-cluster {
+  .hero-button-row {
     flex-direction: column;
     width: 100%;
     gap: 12px;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
 
-  .hero-btn-primary,
-  .hero-btn-secondary,
-  .hero-btn-glass {
+  .btn-hero-primary,
+  .btn-hero-secondary,
+  .btn-hero-ghost {
     width: 100%;
     justify-content: center;
     box-sizing: border-box;
   }
 
-  .hero-metrics-deck {
-    width: 100%;
-    justify-content: space-around;
-    padding: 10px 12px;
-    gap: 8px;
-    box-sizing: border-box;
-  }
-
-  .metric-num {
-    font-size: 16px;
-  }
-
-  .metric-label {
-    font-size: 9px;
-  }
-
-  /* Compact console card for smaller mobile screens */
-  .developer-console-card {
-    max-width: 100%;
-    border-radius: 18px;
-  }
-
-  .console-stage {
-    height: 300px;
-  }
-
-  .stage-portrait-frame {
-    width: 140px;
-    height: 140px;
-  }
-
-  .stage-rotating-ring {
-    width: 156px;
-    height: 156px;
-  }
-
-  .stage-dashed-orbit {
-    width: 176px;
-    height: 176px;
-  }
-
-  .stage-satellite {
-    width: 192px;
-    height: 192px;
-  }
-
-  /* Micro widgets inside console on mobile */
-  .widget-stack {
-    top: 8px;
-    right: 6px;
-    padding: 6px 10px;
-  }
-
-  .widget-role {
-    left: 6px;
-    bottom: 8px;
-    padding: 6px 10px;
-  }
-
-  .widget-project {
-    display: none; /* Hide 3rd widget on small mobile to avoid cramped overlay */
-  }
-
-  .console-footer {
-    display: none; /* Hide terminal footer on narrow mobile to keep height compact */
-  }
-
-  .hero-scroll-indicator {
-    display: none; /* Save space on small mobile */
+  .hero-minimal-scroll {
+    display: none;
   }
 }
