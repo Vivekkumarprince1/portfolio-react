@@ -76,6 +76,8 @@ const Play = () => {
   const [gameStatus, setGameStatus] = useState("Your turn (White)");
   const [playerColor] = useState("w");
   const [engineThinking, setEngineThinking] = useState(false);
+  const [gameOverResult, setGameOverResult] = useState(null);
+  const [gameOverModal, setGameOverModal] = useState(null);
   const redoxchessRef = useRef(null);
 
   // Audio & Mobile Tab UI state
@@ -105,13 +107,53 @@ const Play = () => {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
       const now = ctx.currentTime;
-      if (type === 'capture') {
+
+      if (type === 'victory') {
+        // Celebratory arpeggio: C5, E5, G5, C6
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.16, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.28);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.28);
+        });
+      } else if (type === 'defeat') {
+        // Minor defeat cadence
+        const notes = [392.00, 311.13, 261.63];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.12, now + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.3);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.3);
+        });
+      } else if (type === 'draw') {
+        // Gentle neutral chime
+        [440.00, 554.37].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.14, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.24);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.24);
+        });
+      } else if (type === 'capture') {
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(360, now);
         osc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
@@ -143,6 +185,10 @@ const Play = () => {
   }, [soundEnabled]);
 
   const updateGameStatus = useCallback((g) => {
+    if (gameOverResult) {
+      setGameStatus(gameOverResult.title);
+      return;
+    }
     if (g.isCheckmate()) {
       setGameStatus(g.turn() === 'w' ? 'Checkmate! Black wins!' : 'Checkmate! You win! 🎉');
     } else if (g.isDraw()) {
@@ -155,7 +201,7 @@ const Play = () => {
     } else {
       setGameStatus(g.turn() === 'w' ? "Your turn (White)" : "Vivek's turn (Black)");
     }
-  }, []);
+  }, [gameOverResult]);
 
   useEffect(() => {
     updateGameStatus(game);
@@ -199,7 +245,69 @@ const Play = () => {
           playSound('move');
         }
 
-        if (gameCopy.isCheck()) {
+        let gameOverData = null;
+        if (gameCopy.isGameOver()) {
+          const movesCount = Math.ceil(gameCopy.history().length / 2);
+
+          if (gameCopy.isCheckmate()) {
+            const isPlayerWin = move.color === 'w';
+            gameOverData = {
+              winner: isPlayerWin ? 'player' : 'engine',
+              title: isPlayerWin ? 'Checkmate! You Won! 🏆' : 'Checkmate! Vivek Won ♟️',
+              subtitle: isPlayerWin
+                ? `You delivered checkmate in ${movesCount} moves!`
+                : `Vivek (AI) delivered checkmate in ${movesCount} moves.`,
+              score: isPlayerWin ? '1 - 0' : '0 - 1',
+              icon: isPlayerWin ? '🏆' : '♟️',
+              reason: 'checkmate'
+            };
+            playSound(isPlayerWin ? 'victory' : 'defeat');
+            setChatMessages(prev => [
+              ...prev,
+              {
+                role: 'assistant',
+                content: isPlayerWin
+                  ? `Spectacular checkmate! 🏆 You found the winning moves in ${movesCount} moves. Outstanding tactical vision! Would you like a rematch?`
+                  : `Checkmate! Good game! I found the mating combination in ${movesCount} moves. That was a great contest! Want to play again? ♟️`
+              }
+            ]);
+          } else if (gameCopy.isDraw()) {
+            let reasonText = 'Draw';
+            let subtitle = 'Game drawn.';
+            if (gameCopy.isStalemate()) {
+              reasonText = 'Stalemate';
+              subtitle = 'Draw by Stalemate — No legal moves available.';
+            } else if (gameCopy.isThreefoldRepetition()) {
+              reasonText = 'Threefold Repetition';
+              subtitle = 'Draw by Threefold Repetition — Position occurred 3 times.';
+            } else if (gameCopy.isInsufficientMaterial()) {
+              reasonText = 'Insufficient Material';
+              subtitle = 'Draw by Insufficient Material — Neither side can force checkmate.';
+            } else {
+              reasonText = '50-Move Rule';
+              subtitle = 'Draw by 50-Move Rule.';
+            }
+            gameOverData = {
+              winner: 'draw',
+              title: 'Match Drawn! ½ - ½ 🤝',
+              subtitle,
+              score: '½ - ½',
+              icon: '🤝',
+              reason: reasonText
+            };
+            playSound('draw');
+            setChatMessages(prev => [
+              ...prev,
+              {
+                role: 'assistant',
+                content: `Good game! The match ended in a draw (${subtitle}). You defended solidly! Ready for another round? 🤝`
+              }
+            ]);
+          }
+          setGameOverResult(gameOverData);
+          setGameOverModal(gameOverData);
+          setGameStatus(gameOverData.title);
+        } else if (gameCopy.isCheck()) {
           playSound('check');
         }
 
@@ -227,12 +335,12 @@ const Play = () => {
   // Trigger engine when it's black's turn
   useEffect(() => {
     let isCancelled = false;
-    if (game.turn() === 'b' && !game.isGameOver() && redoxchessRef.current) {
+    if (game.turn() === 'b' && !game.isGameOver() && !gameOverResult && redoxchessRef.current) {
       setEngineThinking(true);
       redoxchessRef.current.setPosition(game.fen());
       redoxchessRef.current.getBestMove((move) => {
         if (isCancelled) return;
-        if (!move) {
+        if (!move || move === '(none)') {
           setEngineThinking(false);
           return;
         }
@@ -247,14 +355,14 @@ const Play = () => {
       isCancelled = true;
       redoxchessRef.current?.stop();
     };
-  }, [game, makeMove]);
+  }, [game, gameOverResult, makeMove]);
 
   const getPieceAt = (square) => {
     return game.get(square) || null;
   };
 
   const handleSquareClick = (square) => {
-    if (engineThinking || game.turn() !== 'w' || game.isGameOver()) return;
+    if (engineThinking || game.turn() !== 'w' || game.isGameOver() || !!gameOverResult) return;
     const piece = getPieceAt(square);
 
     // If a piece is already selected
@@ -283,6 +391,8 @@ const Play = () => {
       redoxchessRef.current?.stop();
       setEngineThinking(false);
     }
+    setGameOverResult(null);
+    setGameOverModal(null);
     setGame(new Chess());
     setSelectedSquare(null);
     setPossibleMoves([]);
@@ -293,6 +403,26 @@ const Play = () => {
     setGameStatus("Your turn (White)");
   };
 
+  const handleResign = () => {
+    if (game.isGameOver() || !!gameOverResult || moveHistory.length === 0) return;
+    const result = {
+      winner: 'engine',
+      title: 'Vivek (AI) Won ♟️',
+      subtitle: 'You resigned the match.',
+      score: '0 - 1',
+      icon: '🏳️',
+      reason: 'resignation'
+    };
+    setGameOverResult(result);
+    setGameOverModal(result);
+    setGameStatus('Vivek Won (White Resigned)');
+    playSound('defeat');
+    setChatMessages(prev => [
+      ...prev,
+      { role: 'assistant', content: 'Good game! You chose to resign. Would you like to start a fresh rematch? ♟️' }
+    ]);
+  };
+
   const undoMove = () => {
     if (moveHistory.length === 0) return;
 
@@ -300,6 +430,9 @@ const Play = () => {
       redoxchessRef.current?.stop();
       setEngineThinking(false);
     }
+
+    setGameOverResult(null);
+    setGameOverModal(null);
 
     // Undo 2 half-moves if it's currently white's turn, so it returns to white.
     // If it's black's turn (e.g. while engine was thinking), undo 1 move.
@@ -574,6 +707,29 @@ const Play = () => {
 
         {/* Center: Board Section (Always first & prominent on mobile) */}
         <main className="chess-board-section">
+          {/* Game Over In-Board Banner */}
+          {gameOverResult && (
+            <div className={`game-over-banner ${gameOverResult.winner}`}>
+              <div className="banner-left">
+                <span className="banner-icon">{gameOverResult.icon}</span>
+                <div className="banner-details">
+                  <span className="banner-title">{gameOverResult.title}</span>
+                  <span className="banner-sub">{gameOverResult.subtitle}</span>
+                </div>
+              </div>
+              <div className="banner-buttons">
+                <button className="banner-btn rematch" onClick={resetGame} data-cursor="disable">
+                  New Game
+                </button>
+                {!gameOverModal && (
+                  <button className="banner-btn review" onClick={() => setGameOverModal(gameOverResult)} data-cursor="disable">
+                    Details
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Opponent Info - Top of Board */}
           <div className="player-bar opponent-bar">
             <div className="player-meta">
@@ -608,6 +764,8 @@ const Play = () => {
                   const isPossibleMove = possibleMoves.includes(square);
                   const isLastMoveSquare = lastMove && (lastMove.from === square || lastMove.to === square);
                   const isCheck = game.isCheck() && piece?.type === 'k' && piece?.color === game.turn();
+                  const isMated = (game.isCheckmate() || gameOverResult?.reason === 'checkmate') &&
+                    piece?.type === 'k' && piece?.color === (gameOverResult?.winner === 'player' ? 'b' : 'w');
 
                   return (
                     <div
@@ -615,7 +773,7 @@ const Play = () => {
                       className={`chess-square ${isLight ? 'light' : 'dark'} 
                         ${isSelected ? 'selected' : ''} 
                         ${isLastMoveSquare ? 'last-move' : ''}
-                        ${isCheck ? 'in-check' : ''}`}
+                        ${isMated ? 'in-checkmate' : isCheck ? 'in-check' : ''}`}
                       onClick={() => handleSquareClick(square)}
                       data-square={square}
                       data-cursor="disable"
@@ -666,7 +824,7 @@ const Play = () => {
 
           {/* Board Action Bar: Status & Quick Controls */}
           <div className="board-controls-bar">
-            <div className={`status-pill ${game.isCheck() ? 'check-active' : ''} ${game.isGameOver() ? 'game-over' : ''}`}>
+            <div className={`status-pill ${game.isCheck() ? 'check-active' : ''} ${(game.isGameOver() || gameOverResult) ? 'game-over' : ''}`}>
               <span className={`status-dot ${engineThinking ? 'pulsing' : ''}`} />
               <span className="status-text">{gameStatus}</span>
             </div>
@@ -680,6 +838,15 @@ const Play = () => {
                 data-cursor="disable"
               >
                 Undo
+              </button>
+              <button
+                className="game-action-btn resign-btn"
+                onClick={handleResign}
+                disabled={game.isGameOver() || !!gameOverResult || moveHistory.length === 0}
+                title="Resign"
+                data-cursor="disable"
+              >
+                Resign
               </button>
               <button
                 className="game-action-btn"
@@ -755,6 +922,14 @@ const Play = () => {
             <button onClick={resetGame} className="desktop-btn" data-cursor="disable">
               New Game
             </button>
+            <button
+              onClick={handleResign}
+              className="desktop-btn resign-btn"
+              disabled={game.isGameOver() || !!gameOverResult || moveHistory.length === 0}
+              data-cursor="disable"
+            >
+              Resign
+            </button>
             <button onClick={flipBoard} className="desktop-btn" data-cursor="disable">
               Flip Board
             </button>
@@ -769,6 +944,55 @@ const Play = () => {
           </div>
         </aside>
       </div>
+
+      {/* Prominent Game Over Declaration Modal */}
+      {gameOverModal && (
+        <div className="game-over-modal-backdrop" onClick={() => setGameOverModal(null)}>
+          <div className="game-over-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="modal-close-btn"
+              onClick={() => setGameOverModal(null)}
+              title="Close modal"
+              data-cursor="disable"
+            >
+              ✕
+            </button>
+
+            <div className={`modal-icon-badge ${gameOverModal.winner}`}>
+              <span>{gameOverModal.icon}</span>
+            </div>
+
+            <div className="modal-score-pill">{gameOverModal.score}</div>
+
+            <h2 className="modal-headline">{gameOverModal.title}</h2>
+            <p className="modal-subtext">{gameOverModal.subtitle}</p>
+
+            <div className="modal-stats-row">
+              <div className="modal-stat-box">
+                <span className="stat-val">{Math.ceil(moveHistory.length / 2)}</span>
+                <span className="stat-lbl">Moves</span>
+              </div>
+              <div className="modal-stat-box">
+                <span className="stat-val">{capturedBlack.length}</span>
+                <span className="stat-lbl">White Captures</span>
+              </div>
+              <div className="modal-stat-box">
+                <span className="stat-val">{capturedWhite.length}</span>
+                <span className="stat-lbl">Black Captures</span>
+              </div>
+            </div>
+
+            <div className="modal-action-buttons">
+              <button className="modal-btn-primary" onClick={resetGame} data-cursor="disable">
+                Play Again ♟️
+              </button>
+              <button className="modal-btn-secondary" onClick={() => setGameOverModal(null)} data-cursor="disable">
+                Review Board 👁️
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
