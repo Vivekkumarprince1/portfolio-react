@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoadingProvider } from "./context/LoadingProvider";
 import MainContainer from "./components/MainContainer";
+import FluidBackground from "./components/FluidBackground";
 import "./App.css";
 import { Agentation } from "agentation";
 
@@ -18,6 +19,7 @@ const PageFallback = ({ label = "Loading..." }) => (
 const App = () => {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <FluidBackground />
       <Routes>
         <Route
           path="/"
