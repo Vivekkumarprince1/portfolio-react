@@ -3,8 +3,36 @@ import "./styles/Landing.css";
 import { config } from "../config";
 import { Link } from "react-router-dom";
 
+const PORTRAITS = [
+  {
+    id: "suit-portrait",
+    label: "Executive",
+    src: "/images/vivek_suit_portrait.jpg",
+    type: "framed",
+  },
+  {
+    id: "suit-medium",
+    label: "Navy Suit",
+    src: "/images/vivek_suit_medium.jpg",
+    type: "framed",
+  },
+  {
+    id: "cutout",
+    label: "Cutout",
+    src: "/images/mypicnbg.png",
+    type: "cutout",
+  },
+  {
+    id: "suit-full",
+    label: "Full Body",
+    src: "/images/vivek_suit_full.jpg",
+    type: "framed",
+  },
+];
+
 const Landing = () => {
   const fullName = config.developer.fullName || "Vivek Kumar";
+  const [activePhoto, setActivePhoto] = useState(PORTRAITS[0]);
   const [imgError, setImgError] = useState(false);
 
   return (
@@ -44,13 +72,13 @@ const Landing = () => {
             ENGINEER
           </div>
 
-          {/* Layer 2: Center Cutout Portrait Rising in Foreground */}
-          <div className="hero-portrait-frame">
+          {/* Layer 2: Center Portrait (Framed Arch or Cutout) */}
+          <div className={`hero-portrait-frame ${activePhoto.type === "framed" ? "frame-arched" : "frame-cutout"}`}>
             {!imgError ? (
               <img
-                src="/images/mypicnbg.png"
+                src={activePhoto.src}
                 alt={fullName}
-                className="hero-natural-cutout"
+                className={activePhoto.type === "framed" ? "hero-framed-img" : "hero-natural-cutout"}
                 onError={() => setImgError(true)}
               />
             ) : (
@@ -63,6 +91,25 @@ const Landing = () => {
           <div className="hero-role-callout">
             <span className="callout-sub">FULL-STACK</span>
             <span className="callout-main">SOFTWARE ENGINEER</span>
+          </div>
+
+          {/* Interactive Photo Switcher Pills */}
+          <div className="hero-photo-switcher">
+            {PORTRAITS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                className={`photo-switch-btn ${activePhoto.id === p.id ? "active-photo" : ""}`}
+                onClick={() => {
+                  setImgError(false);
+                  setActivePhoto(p);
+                }}
+                data-cursor="disable"
+              >
+                <span className="switch-dot"></span>
+                <span>{p.label}</span>
+              </button>
+            ))}
           </div>
         </div>
 
