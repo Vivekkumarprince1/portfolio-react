@@ -9,26 +9,31 @@ const Loading = ({ percent }) => {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    if (percent >= 100 && !clicked) {
-      setLoaded(true);
-      const timer = setTimeout(() => {
-        setClicked(true);
-        setTimeout(() => {
-          import("./utils/initialFX").then((module) => {
-            if (module.initialFX) {
-              module.initialFX();
-            }
-            setIsLoading(false);
-          });
-        }, 400);
-      }, 250);
-      return () => clearTimeout(timer);
+    if (percent >= 100) {
+      setTimeout(() => {
+        setLoaded(true);
+      }, 400);
     }
-  }, [percent, clicked, setIsLoading]);
+  }, [percent]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        handleEnterClick();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [loaded, clicked]);
 
   const handleEnterClick = () => {
-    if (clicked) return;
+    if (!loaded || clicked) return;
     setClicked(true);
+
+    // Trigger massive fluid splash "eject"
+    if (window.fluidAnimationRef) {
+      window.fluidAnimationRef.addRandomSplats(40);
+    }
 
     setTimeout(() => {
       import("./utils/initialFX").then((module) => {
@@ -37,7 +42,7 @@ const Loading = ({ percent }) => {
         }
         setIsLoading(false);
       });
-    }, 400);
+    }, 900);
   };
 
   function handleMouseMove(e) {
