@@ -25,24 +25,17 @@ export function initialFX() {
 
   tl.fromTo(
     [
-      ".hero-status-ribbon",
-      ".hero-badge-architect",
-      ".hero-main-title",
-      ".hero-lead-narrative",
-      ".hero-specialization-tags",
-      ".hero-action-row",
-      ".hero-metrics-strip"
+      ".hero-horizon-ribbon",
+      ".hero-discipline-pill",
+      ".hero-display-title",
+      ".hero-kinetic-cycler",
+      ".telemetry-glass-console",
+      ".hero-bottom-deck",
+      ".hero-scroll-beacon"
     ],
-    { y: 25, opacity: 0 },
+    { y: 24, opacity: 0 },
     { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
     "-=0.5"
-  );
-
-  tl.fromTo(
-    ".hero-card-stage",
-    { scale: 0.92, opacity: 0, y: 30 },
-    { scale: 1, opacity: 1, y: 0, duration: 1, ease: "power3.out" },
-    "-=0.7"
   );
 }
 
