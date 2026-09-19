@@ -1,337 +1,239 @@
 /* ==========================================================================
-   MINIMALIST EDITORIAL HERO (UNCLUTTERED, AIRY & SPACIOUS)
-   Pure Reference Aesthetic: Negative space, clean depth, and zero clutter.
+   ULTRA-MINIMALIST HERO SECTION
+   Pure typography, maximum breathing room, dark luxury aesthetic (#0b080c).
    ========================================================================== */
 
 .landing-section {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: var(--vh, 100vh);
+  min-height: calc(100vh - 90px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  background-color: transparent;
-  overflow-x: hidden;
   box-sizing: border-box;
-  padding: 80px 48px 32px 48px;
+  padding: 110px 24px 60px 24px;
   z-index: 1;
 }
 
-.hero-clean-wrapper {
+.hero-clean-container {
   width: 100%;
-  max-width: 1360px;
+  max-width: 900px;
   margin: 0 auto;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
   position: relative;
   z-index: 2;
-  box-sizing: border-box;
-  flex-grow: 1;
 }
 
-/* ==========================================================================
-   1. TOP HEADER ROW (Spacious & Refined)
-   ========================================================================== */
-.hero-top-row {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  box-sizing: border-box;
-  padding-top: 8px;
-}
-
-.hero-author-block {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: left;
-}
-
-.hero-clean-name {
-  font-size: clamp(22px, 2.8vw, 34px);
-  font-weight: 800;
-  color: #e2c992;
-  letter-spacing: 0.5px;
-  margin: 0;
-  line-height: 1.1;
-  text-shadow: 0 2px 16px rgba(226, 201, 146, 0.2);
-}
-
-.hero-clean-sub {
-  font-size: clamp(12px, 1.2vw, 14px);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.65);
-  margin: 0;
-  letter-spacing: 0.3px;
-}
-
-.hero-motto-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  gap: 2px;
-}
-
-.hero-motto-block span {
-  font-size: clamp(12px, 1.15vw, 13.5px);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.4px;
-}
-
-/* ==========================================================================
-   2. CENTER DEPTH STAGE (Airy Negative Space & Bold Depth Layering)
-   ========================================================================== */
-.hero-depth-center {
-  position: relative;
-  width: 100%;
-  height: clamp(380px, 52vh, 600px);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin: auto 0;
-  overflow: visible;
-}
-
-/* Soft, elegant giant backdrop word */
-.hero-giant-word {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(70px, 15.5vw, 210px);
-  font-weight: 900;
-  letter-spacing: clamp(6px, 2vw, 28px);
-  color: rgba(203, 178, 121, 0.38);
-  text-transform: uppercase;
-  white-space: nowrap;
-  user-select: none;
-  pointer-events: none;
-  z-index: 1;
-  line-height: 1;
-  text-shadow: 0 0 60px rgba(203, 178, 121, 0.1);
-}
-
-/* Foreground Portrait */
-.hero-portrait-wrap {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.hero-clean-cutout {
-  height: 100%;
-  width: auto;
-  max-width: 85vw;
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
-  transition: transform 0.4s ease;
-}
-
-.hero-portrait-wrap:hover .hero-clean-cutout {
-  transform: scale(1.015);
-}
-
-.hero-fallback-initials {
-  font-size: 84px;
-  font-weight: 900;
-  color: #e2c992;
-  margin-bottom: 60px;
-}
-
-.hero-bottom-blend {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(180deg, transparent 0%, rgba(11, 8, 12, 0.95) 100%);
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Minimalist Right Callout */
-.hero-clean-callout {
-  position: absolute;
-  right: 4%;
-  bottom: 15%;
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  pointer-events: none;
-}
-
-.callout-tag {
-  font-size: clamp(11px, 1.1vw, 12.5px);
-  font-weight: 700;
-  color: #e2c992;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-}
-
-.callout-title {
-  font-size: clamp(20px, 3vw, 40px);
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -0.5px;
-  line-height: 1.05;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-  text-transform: uppercase;
-}
-
-/* ==========================================================================
-   3. BOTTOM BASELINE (Lightweight, Subtle & Breathing)
-   ========================================================================== */
-.hero-bottom-baseline {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  z-index: 5;
-  box-sizing: border-box;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.hero-social-pills {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.clean-pill {
+/* 1. Status Pill */
+.hero-status-pill {
   display: inline-flex;
   align-items: center;
-  padding: 5px 14px;
+  gap: 8px;
+  padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.status-dot-wrapper {
+  position: relative;
+  display: flex;
+  width: 8px;
+  height: 8px;
+}
+
+.status-dot-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: #34d399;
+  opacity: 0.75;
+  animation: heroPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.status-dot-core {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+}
+
+.status-pill-text {
   font-size: 11.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  transition: all 0.25s ease;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #a7f3d0;
+  text-transform: uppercase;
+  font-family: monospace;
 }
 
-.clean-pill:hover {
-  background: rgba(203, 178, 121, 0.12);
-  border-color: rgba(203, 178, 121, 0.4);
-  color: #e2c992;
-  transform: translateY(-1px);
+@keyframes heroPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
 }
 
-.hero-clean-manifesto {
-  font-size: clamp(12px, 1.1vw, 13.5px);
-  font-weight: 300;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.55);
-  max-width: 720px;
+/* 2. Ultra Minimal Typography */
+.hero-content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 800px;
+}
+
+.hero-main-name {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  background: linear-gradient(135deg, #ffffff 30%, #c2a4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
-  text-align: right;
-  letter-spacing: 0.2px;
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN (Tablets & Mobile)
-   ========================================================================== */
-@media screen and (max-width: 960px) {
-  .landing-section {
-    padding: 80px 24px 30px 24px;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .hero-depth-center {
-    height: clamp(340px, 45vh, 440px);
-    margin: 20px 0;
-  }
-
-  .hero-bottom-baseline {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 14px;
-    border-top: none;
-  }
-
-  .hero-clean-manifesto {
-    text-align: center;
-    max-width: 600px;
-  }
+.hero-role-title {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: #c2a4ff;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
-@media screen and (max-width: 640px) {
+.hero-tagline {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.6;
+  color: #a1a1aa;
+  max-width: 580px;
+  margin: 4px 0 0 0;
+  font-weight: 400;
+}
+
+/* 3. Action Buttons */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.btn-primary-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0b080c;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.btn-primary-hero:hover {
+  background: #c2a4ff;
+  color: #0b080c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(194, 164, 255, 0.35);
+}
+
+.btn-secondary-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+}
+
+.btn-secondary-hero:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.btn-icon-svg {
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary-hero:hover .btn-icon-svg {
+  transform: translateY(2px);
+}
+
+/* 4. Minimal Scroll cue */
+.hero-clean-scroll {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.hero-clean-scroll:hover {
+  opacity: 1;
+}
+
+.scroll-text {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #71717a;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(to bottom, #71717a, transparent);
+  animation: scrollLineDrop 1.8s infinite;
+}
+
+@keyframes scrollLineDrop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  50.1% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@media (max-width: 640px) {
   .landing-section {
-    padding: 75px 16px 24px 16px;
+    padding-top: 80px;
+    padding-bottom: 40px;
   }
-
-  .hero-top-row {
+  .hero-cta-group {
+    width: 100%;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
+    gap: 10px;
   }
-
-  .hero-author-block {
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-motto-block {
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-depth-center {
-    height: clamp(290px, 40vh, 360px);
-    margin: 16px 0;
-  }
-
-  .hero-giant-word {
-    font-size: clamp(52px, 18vw, 90px);
-    letter-spacing: 4px;
-  }
-
-  .hero-clean-callout {
-    position: static;
-    margin-top: 10px;
-    align-items: center;
-    text-align: center;
-  }
-
-  .callout-title {
-    font-size: 22px;
-  }
-
-  .hero-social-pills {
+  .btn-primary-hero, .btn-secondary-hero {
+    width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .clean-pill {
-    padding: 4px 12px;
-    font-size: 11px;
-  }
-
-  .hero-clean-manifesto {
-    font-size: 12px;
-    line-height: 1.55;
-    padding: 0 4px;
   }
 }

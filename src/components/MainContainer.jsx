@@ -1,9 +1,9 @@
 import { useEffect } from "react";
+import Landing from "./Landing";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
 import Cursor from "./Cursor";
-import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
